@@ -2,9 +2,7 @@ const admin = require("firebase-admin");
 
 function isAuthenticated(req, res, next) {
   const authHeader = req.headers.authorization;
-
-  const idToken = authHeader.split("authorization ")[1];
-  console.log(idToken);
+  const idToken = authHeader;
 
   admin
     .auth()

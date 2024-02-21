@@ -21,6 +21,24 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+
+  applied_projects: [
+    {
+      _id: false,
+      project_id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+      proposal: {
+        type: String,
+      },
+    },
+  ],
+
+  selected_projects: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
 });
 
 const UserModel = mongoose.model("Users", UserSchema);

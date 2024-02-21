@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const ProjectSchema = mongoose.Schema({
   alumni_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Alumni",
   },
   pay: {
     type: Number,
@@ -18,6 +17,11 @@ const ProjectSchema = mongoose.Schema({
     type: String,
     require: true,
   },
+  skills: [
+    {
+      type: String,
+    },
+  ],
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

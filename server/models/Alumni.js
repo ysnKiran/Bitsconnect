@@ -13,7 +13,7 @@ const AlumniSchema = mongoose.Schema({
     type: String,
     require: true,
   },
-  curret_position: {
+  current_position: {
     type: String,
     require: true,
   },

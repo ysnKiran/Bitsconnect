@@ -10,6 +10,7 @@ const authRoutes = require("./routes/authRoutes");
 const isAuthenticated = require("./middleware/auth");
 const serviceAccount = require("./auth.json");
 const userRoutes = require("./routes/userRoutes");
+const projRoutes = require("./routes/projectRoutes");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -25,4 +26,4 @@ app.listen(process.env.PORT, () => {
 
 app.use("/", authRoutes);
 app.use("/", isAuthenticated, userRoutes);
-
+app.use("/", isAuthenticated, projRoutes);
