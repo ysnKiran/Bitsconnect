@@ -1,4 +1,4 @@
-Welcome to readme section.
+Welcome to the readme section. (Not gonna write a markdown file cus I am lazy).
 
 1) Run client:
     -> cd client
