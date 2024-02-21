@@ -18,10 +18,10 @@ Server Background:
 Main File in server:
 index.js:
 
--> We use app.use() methods with isAuthorized middleware to call the api Routes mentioned.
+-> We use app.use() methods with isAuthenticated middleware to call the api Routes mentioned.
 
 To Test Backend:
-1) Either install Thunder Client extension or Postman extension of VSCode.
+1) Either install Thunder Client extension or Postman extension on VSCode.
 2) If the route does not require authorization:(no isAuthenticated middleware in index.js)
     -> Enter http://localhost:3001/<api-call> (Please check type of request (GET/POST etc))
     -> Hit send
@@ -33,8 +33,8 @@ To Test Backend:
     -> On successful sign in, you will be directed to home page
     -> Open Console (Cntl+Shift+I)
     -> Copy the idToken
-    -> To run authorized calls, go to headers section
-    -> Key: "authorization" (Should be THIS ONLY without quotes)
+    -> To run authorized calls, go to headers section (in Thunder Client / VSCode)
+    -> Key: "authorization" (Should be THIS ONLY without quotes and spaces)
     -> Value: Paste the ID token.
     -> Enter the api call route as done previously.
     -> If method is a POST method, enter relevant values in the BODY in JSON Format 
@@ -43,7 +43,7 @@ To Test Backend:
                 "user_name":"..." or anything else (Don't try to be oversmart)
     -> If you did everything right:
             --> Voila, it works
-    -> If you have any issure with the authentication part, remove the middle ware isAuthenticated from index.js 
+    -> If you have any issue with the authentication part, remove the middleware isAuthenticated from index.js 
         for that particular function, and try again.
 
 You have reached the end of Readme section, congrats.
