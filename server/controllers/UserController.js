@@ -93,8 +93,12 @@ exports.applyForProject = async (req, res) => {
 
 exports.updateDetails = async (req, res) => {
   try {
-    const { name, user_id, batch_year, resume_link } = req.body;
-    const user = await User.findOne({ _id: user_id });
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    const { name, batch_year} = req.body;
+
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }

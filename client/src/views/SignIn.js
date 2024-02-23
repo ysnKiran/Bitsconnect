@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from "../components/config";
 import { signInWithPopup } from "firebase/auth";
-import Home from "./HomePage";
+import axios from 'axios'; 
+import { useNavigate } from 'react-router-dom';
 
 
 function SignIn() {
-  const [value, setValue] = useState("");
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const email = localStorage.getItem("email");
+    if (email) {
+      setUser(email);
+      navigate('/home');
+    }
+  }, []);
 
   const handleClick = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         const user = result.user;
-        // Get user's name and email
         const { displayName, email } = user;
-
-        // Get ID token
         user.getIdToken().then((idToken) => {
-          console.log(idToken);
-          // Send name, email, and ID token to backend
+          localStorage.setItem("idToken",idToken);
           sendUserDataToBackend(displayName, email, idToken);
         });
-
-        setValue(email);
+        setUser(email);
         localStorage.setItem("email", email);
+        // localStorage.setItem("idToken",id);
       })
       .catch((error) => {
         console.error("Sign-in failed:", error);
@@ -30,45 +36,39 @@ function SignIn() {
   };
 
   const sendUserDataToBackend = (name, email, idToken) => {
-    // Make HTTP request to your backend API to send user data
-    // Include the ID token in the request headers
-    fetch("http://localhost:3001/auth", {
-      method: "POST",
+    axios.post("http://localhost:3001/auth", {
+      name,
+      email,
+      idToken
+    }, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${idToken}`, // Include the ID token in the Authorization header
+        "Authorization": `Bearer ${idToken}`
       },
-      body: JSON.stringify({ name, email }),
-      mode: "cors",
+      mode: "cors"
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to send user data to backend");
-        }
-        console.log("User data sent to backend successfully");
-      })
-      .catch((error) => {
-        console.error("Error sending user data to backend:", error);
-      });
+    .then((response) => {
+      if (response.status === 200) {
+        navigate('/home'); // Use history.push to redirect
+      } else if (response.status === 201) {
+        navigate('/register'); // Use history.push to redirect
+      }
+      console.log("User data sent to backend successfully");
+    })
+    .catch((error) => {
+      console.error("Error sending user data to backend:", error);
+    });
   };
 
-  useEffect(() => {
-    setValue(localStorage.getItem("email"));
-  }, []);
-
   return (
-    <>
-      {value ? (
-        <Home />
+    <div>
+      {user ? (
+        <></>
       ) : (
-        // Adding login Page specific styles
-        <div>
-        
         <button onClick={handleClick}>Sign in With Google</button>
-        </div>
       )}
-    </>
+    </div>
   );
-}
+      }
 
 export default SignIn;
