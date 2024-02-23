@@ -3,6 +3,7 @@ import { auth, provider } from "../components/config";
 import { signInWithPopup } from "firebase/auth";
 import Home from "./HomePage";
 
+
 function SignIn() {
   const [value, setValue] = useState("");
 
@@ -56,13 +57,17 @@ function SignIn() {
   }, []);
 
   return (
-    <div>
+    <>
       {value ? (
         <Home />
       ) : (
+        // Adding login Page specific styles
+        <div>
+        
         <button onClick={handleClick}>Sign in With Google</button>
+        </div>
       )}
-    </div>
+    </>
   );
 }
 
