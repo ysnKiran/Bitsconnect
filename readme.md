@@ -1,4 +1,6 @@
-Welcome to the readme section. (Not gonna write a markdown file cus I am lazy).
+# Welcome to the readme section.
+
+**First things first**
 
 1) Run client:
     -> cd client
@@ -20,7 +22,7 @@ index.js:
 
 -> We use app.use() methods with isAuthenticated middleware to call the api Routes mentioned.
 
-To Test Backend:
+### To Test Backend:
 1) Either install Thunder Client extension or Postman extension on VSCode.
 2) If the route does not require authorization:(no isAuthenticated middleware in index.js)
     -> Enter http://localhost:3001/<api-call> (Please check type of request (GET/POST etc))
