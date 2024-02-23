@@ -8,9 +8,15 @@ function Home() {
     localStorage.clear();
     navigate("/");
   };
+
+  const CreateOpening =() =>{
+    navigate("/create");
+  }
+
   return (
     <div>
       <h1>Home Page</h1>
+      <button onClick={CreateOpening}>Create Opening</button>
       <button onClick={logout}>Logout</button>
     </div>
   );
