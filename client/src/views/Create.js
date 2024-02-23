@@ -84,9 +84,15 @@ const Create = () => {
       navigate('/home');
     };
 
+    const logout = () => {
+      localStorage.clear();
+      navigate("/");
+    };
+
   return (
     <div>
     <button onClick={goBack}>Back Button</button>
+    <button onClick={logout}>Logout</button>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Pay:</label>
