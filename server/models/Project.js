@@ -19,7 +19,20 @@ const ProjectSchema = mongoose.Schema({
   },
   skills: [
     {
+      _id: false,
       type: String,
+    },
+  ],
+  applied_users: [
+    {
+      _id: false,
+      type: mongoose.Schema.Types.ObjectId,
+    },
+  ],
+  selected_users: [
+    {
+      _id: false,
+      type: mongoose.Schema.Types.ObjectId,
     },
   ],
 });

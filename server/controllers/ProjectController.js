@@ -24,7 +24,16 @@ exports.createProject = async (req, res) => {
       const user = await Alumni.findOne({ email: email });
       if (user) {
         const alumni_id = user._id;
-        const project = new Project({ alumni_id, pay, duration, description });
+        const applied_users = [];
+        const selected_users = [];
+        const project = new Project({
+          alumni_id,
+          pay,
+          duration,
+          description,
+          applied_users,
+          selected_users,
+        });
         await project.save();
       } else {
         res.status(400).json({ message: "Alumni Not Found" });
