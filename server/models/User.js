@@ -36,6 +36,7 @@ const UserSchema = mongoose.Schema({
 
   selected_projects: [
     {
+      _id: false,
       type: mongoose.Schema.Types.ObjectId,
     },
   ],
