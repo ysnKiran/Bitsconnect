@@ -24,10 +24,10 @@ function SignIn() {
         const { displayName, email } = user;
         user.getIdToken().then((idToken) => {
           localStorage.setItem("idToken",idToken);
+          setUser(email);
+          localStorage.setItem("email", email);
           sendUserDataToBackend(displayName, email, idToken);
         });
-        setUser(email);
-        localStorage.setItem("email", email);
         // localStorage.setItem("idToken",id);
       })
       .catch((error) => {
