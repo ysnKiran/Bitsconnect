@@ -4,6 +4,7 @@ import Home from './views/HomePage';
 import Register from './views/Register';
 import SignIn from './views/SignIn';
 import Create from './views/Create';
+import Apply from './views/Apply';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Route exact path='/home' element={<Home/>} />
         <Route exact path='/register' element={<Register/>} />
         <Route exact path='/create' element={<Create/>} />
+        <Route exact path='/apply/:id' element={<Apply/>} />
         {/* Other routes */}
       </Routes>
     

@@ -79,7 +79,6 @@ const Create = () => {
       setDuration('');
       setDesc('');
       setSkills([]);      
-
     };
 
     const goBack = ()=>{

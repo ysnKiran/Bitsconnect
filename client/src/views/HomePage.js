@@ -50,6 +50,8 @@ function Home() {
 
   const apply =(id)=>{
     console.log('Id clicked: ',id);
+    // navigate to Apply page with Id as params 
+    navigate(`/apply/${id}`);
   }
 
   return (
@@ -58,7 +60,7 @@ function Home() {
       <button onClick={CreateOpening}>Create Opening</button>
       <button onClick={logout}>Logout</button>
 
-      <div className="projects-list">
+      <div>
         {
           projects.length>0 ?
           projects.map((prj)=>(
