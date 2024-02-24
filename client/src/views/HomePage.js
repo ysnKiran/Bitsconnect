@@ -54,10 +54,30 @@ function Home() {
     navigate(`/apply/${id}`);
   }
 
+  
+
+  const ViewApplications=()=>{
+    console.log('View Applications clicked');
+    navigate('/applications');
+  }
+
+  const ViewAppliedProjects=()=>{
+    console.log('View Applied Projects clicked');
+    navigate('/applied-projects');
+  }
+
+  const ViewSelectedProjects=()=>{
+    console.log('View Selected Projects clicked');
+    navigate('/selected-projects');
+  }
+
   return (
     <div>
       <h1>Home Page</h1>
       <button onClick={CreateOpening}>Create Opening</button>
+      <button onClick={ViewApplications}>Owned Project's Applications</button>
+      <button onClick={ViewAppliedProjects}>Applied Projects</button>
+      <button onClick={ViewSelectedProjects}>Projects Selected For</button>
       <button onClick={logout}>Logout</button>
 
       <div>
