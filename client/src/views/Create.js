@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Create = () => {
 
     const navigate = useNavigate();
+    const [title,setTitle]= useState('')
     const [pay,setPay] =useState('')
     const [duration,setDuration] =useState('')
     const [desc,setDesc] =useState('')
@@ -63,10 +64,15 @@ const Create = () => {
     const handleSubmit = (e) => {
       e.preventDefault();
       // Filter out empty skills
+      if(!title)
+      {
+        alert('Please add title');
+        return;
+      }
       const filteredSkills = skills.filter(skill => skill.trim() !== '');
 
       // Handle form submission here
-      console.log({ pay, duration, desc, skills: filteredSkills });
+      console.log({ title, pay, duration, desc, skills: filteredSkills });
       alert('Project Posted');
 
       setPay('');
@@ -95,16 +101,20 @@ const Create = () => {
     <button onClick={logout}>Logout</button>
     <form onSubmit={handleSubmit}>
       <div>
+        <label>Title:</label>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+      </div>
+      <div>
+        <label>Description:</label>
+        <textarea value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
+      </div>
+      <div>
         <label>Pay:</label>
         <input type="text" value={pay} onChange={(e) => setPay(e.target.value)} />
       </div>
       <div>
         <label>Duration:</label>
         <input type="text" value={duration} onChange={(e) => setDuration(e.target.value)} />
-      </div>
-      <div>
-        <label>Description:</label>
-        <textarea value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
       </div>
       <div>
         <label>Skills:</label>
