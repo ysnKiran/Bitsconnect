@@ -5,7 +5,13 @@ const User = require("../models/User");
 
 exports.getAllProjects = async (req, res) => {
   try {
-    const projects = await Project.find({});
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    const user_id = user._id;
+    console.log(user_id);
+    const projects = await Project.find({ alumni_id: { $ne: user_id } });
     res.status(200).json(projects);
   } catch (err) {
     res.status(400).json({ message: err });
@@ -18,7 +24,7 @@ exports.createProject = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
     var position = email.search("alumni");
-    const { pay, duration, description, skills } = req.body;
+    const { pay, duration, description, skills, title } = req.body;
 
     if (position >= 0) {
       const user = await Alumni.findOne({ email: email });
@@ -28,6 +34,7 @@ exports.createProject = async (req, res) => {
         const selected_users = [];
         const project = new Project({
           alumni_id,
+          title,
           pay,
           duration,
           description,
@@ -43,12 +50,17 @@ exports.createProject = async (req, res) => {
       const user = await User.findOne({ email: email });
       if (user) {
         const alumni_id = user._id;
+        const applied_users = [];
+        const selected_users = [];
         const project = new Project({
           alumni_id,
+          title,
           pay,
           duration,
           description,
           skills,
+          applied_users,
+          selected_users,
         });
         await project.save();
       } else {
@@ -79,5 +91,3 @@ exports.getProjectsByUser = async (req, res) => {
     res.status(400).json({ message: err });
   }
 };
-
-
