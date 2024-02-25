@@ -20,6 +20,7 @@ mongoose.connect(process.env.DATABASE_URL);
 
 app.listen(process.env.PORT, () => {
   console.log("Server running...");
+  console.log(process.env.PORT);
 });
 
 // ROUTES

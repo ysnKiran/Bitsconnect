@@ -31,8 +31,16 @@ exports.getAppliedProjects = async (req, res) => {
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
     if (user) {
-      const applied_projects = user.applied_projects;
-      res.status(200).json(applied_projects);
+      const appliedProjectIds = user.applied_projects.map(
+        (appliedProject) => appliedProject.project_id
+      );
+      console.log(appliedProjectIds);
+
+      // Fetch the project details based on the project IDs
+      const projects = await Project.find({ _id: { $in: appliedProjectIds } });
+
+      // Send the project details to the client
+      res.status(200).json(projects);
     } else {
       res.status(400).json({ message: "User not found" });
     }
@@ -48,8 +56,16 @@ exports.getSelectedProjects = async (req, res) => {
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
     if (user) {
-      const selected_projects = user.selected_projects;
-      res.status(200).json(selected_projects);
+      const selectedProjectIds = user.selected_projects.map(
+        (selectedProject) => selectedProject.project_id
+      );
+      console.log(selectedProjectIds);
+
+      // Fetch the project details based on the project IDs
+      const projects = await Project.find({ _id: { $in: selectedProjectIds } });
+
+      // Send the project details to the client
+      res.status(200).json(projects);
     } else {
       res.status(400).json({ message: "User not found" });
     }

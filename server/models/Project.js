@@ -29,13 +29,17 @@ const ProjectSchema = mongoose.Schema({
   applied_users: [
     {
       _id: false,
-      type: mongoose.Schema.Types.ObjectId,
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
     },
   ],
   selected_users: [
     {
       _id: false,
-      type: mongoose.Schema.Types.ObjectId,
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
     },
   ],
 });

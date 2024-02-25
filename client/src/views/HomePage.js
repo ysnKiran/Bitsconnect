@@ -35,10 +35,10 @@ function Home() {
     navigate("/create");
   };
 
-  const apply = (id) => {
-    console.log("Id clicked: ", id);
+  const apply = (id,title) => {
+    console.log("Title clicked: ", title);
     // navigate to Apply page with Id as params
-    navigate(`/apply/${id}`);
+    navigate(`/apply/${id}/${title}`);
   };
 
   const ViewApplications = () => {
@@ -80,7 +80,7 @@ function Home() {
                       <p key={index}>{skill} </p>
                     ))
                   : "No specific skill-requirement"}
-                <button onClick={() => apply(prj.id)}>Apply!</button>
+                <button onClick={() => apply(prj._id,prj.title)}>Apply!</button>
               </div>
             ))
           : "No Projects Available"}
