@@ -13,8 +13,10 @@ exports.getAllUsers = async (req, res) => {
 
 exports.getUserById = async (req, res) => {
   try {
-    const { user_id } = req.body;
-    const user = await User.findOne({ _id: user_id });
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });  
     if (!user) {
       return res.status(400).json({ message: "User Not Found" });
     }
@@ -34,12 +36,9 @@ exports.getAppliedProjects = async (req, res) => {
       const appliedProjectIds = user.applied_projects.map(
         (appliedProject) => appliedProject.project_id
       );
-      console.log(appliedProjectIds);
 
-      // Fetch the project details based on the project IDs
       const projects = await Project.find({ _id: { $in: appliedProjectIds } });
 
-      // Send the project details to the client
       res.status(200).json(projects);
     } else {
       res.status(400).json({ message: "User not found" });
@@ -59,12 +58,9 @@ exports.getSelectedProjects = async (req, res) => {
       const selectedProjectIds = user.selected_projects.map(
         (selectedProject) => selectedProject.project_id
       );
-      console.log(selectedProjectIds);
 
-      // Fetch the project details based on the project IDs
       const projects = await Project.find({ _id: { $in: selectedProjectIds } });
 
-      // Send the project details to the client
       res.status(200).json(projects);
     } else {
       res.status(400).json({ message: "User not found" });
@@ -95,8 +91,8 @@ exports.applyForProject = async (req, res) => {
       }
 
       user.applied_projects.push({ project_id, proposal });
-      await user.save(); // Save the updated user document
-      project.applied_users.push(user._id);
+      await user.save(); 
+      project.applied_users.push({user_id:user._id});
       await project.save();
       return res.status(200).json({ message: "Applied Successfully" });
     } else {
@@ -113,12 +109,12 @@ exports.updateDetails = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
-    const { name, batch_year } = req.body;
+    const { name,resume_link } = req.body;
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
     user.name = name;
-    user.batch_year = batch_year;
+    user.resume_link = resume_link;
     await user.save();
     res.status(200).json(user);
   } catch (err) {

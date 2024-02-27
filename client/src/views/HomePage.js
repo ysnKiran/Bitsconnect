@@ -56,6 +56,11 @@ function Home() {
     navigate("/selected-projects");
   };
 
+  const Profile = () =>{
+    console.log("View Profile");
+    navigate("/profile");
+  }
+
   return (
     <div>
       <h1>Home Page</h1>
@@ -63,6 +68,7 @@ function Home() {
       <button onClick={ViewApplications}>Owned Project's Applications</button>
       <button onClick={ViewAppliedProjects}>Applied Projects</button>
       <button onClick={ViewSelectedProjects}>Projects Selected For</button>
+      <button onClick={Profile}>Your Profile</button>
       <button onClick={logout}>Logout</button>
 
       <div>

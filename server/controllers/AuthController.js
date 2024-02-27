@@ -6,8 +6,8 @@ exports.Auth = async (req, res) => {
     let user = await User.findOne({ email });
     if (!user) {
       console.log("No User found");
-      batch_year = 2020;
-      resume_link = "hello";
+      batch_year = 0;
+      resume_link = "";
       const applied_projects = [];
       const selected_projects = [];
       user = new User({

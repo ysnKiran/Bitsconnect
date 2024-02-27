@@ -8,6 +8,7 @@ import Apply from './views/Apply';
 import Applications from './views/Applications';
 import ViewMyAppliedProjects from './views/ViewMyAppliedProjects';
 import ViewMySelectedProjects from './views/ViewMySelectedProjects';
+import Profile from './views/Profile';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route exact path='/applications' element={<Applications/>}/>
         <Route exact path='/applied-projects' element={<ViewMyAppliedProjects/>}/>
         <Route exact path='/selected-projects' element={<ViewMySelectedProjects/>} />
+        <Route exact path='/profile' element={<Profile/>}/>
         {/* Other routes */}
       </Routes>
     
