@@ -1,23 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Upload from '../components/Upload';
 
 const Register = () => {
   const navigate = useNavigate();
   const [name, setName] = useState("");
-  const [gradYear, setYear] = useState("");
-  const [res_link, setResume] = useState("resume_link");
+  const [res_link, setResume] = useState("");
+  const [Save_active,setDisable] =useState(false);
+
+  const handleUpload = (url) => {
+    setResume(url);
+  };
 
   const onSubmit = (e) => {
+    setDisable(true);
     console.log("Submit pressed");
     e.preventDefault();
 
-    if (!setYear) {
-      alert("Please add a Graduation year");
-      return;
-    }
-
-    // Handle format issues for batch year
 
     const id = localStorage.getItem("idToken");
     console.log(id);
@@ -26,7 +26,7 @@ const Register = () => {
       axios
         .put(
           "http://localhost:3001/updateDetails",
-          { name: name, batch_year: gradYear },
+          { name: name,resume_link: res_link },
           {
             headers: {
               authorization: `${id}`,
@@ -39,19 +39,21 @@ const Register = () => {
         })
         .catch((error) => {
           console.error("Error fetching data:", error);
+          setDisable(false);
         });
     } else {
       console.error("idToken is null or undefined");
+      setDisable(false);
     }
 
     setName("");
-    setYear("");
+    setDisable(false);
   };
 
   return (
-    <form className="add-form form-Padding" onSubmit={onSubmit}>
+    <div className="add-form form-Padding">
       <div className="form-control">
-        <label>Your description</label>
+        <label>Your Name: </label>
         <input
           type="text"
           placeholder="Your Name"
@@ -60,16 +62,10 @@ const Register = () => {
         />
       </div>
       <div className="form-control">
-        <label>Graduation Year</label>
-        <input
-          type="number"
-          placeholder="XXXX"
-          value={gradYear}
-          onChange={(e) => setYear(e.target.value)}
-        />
+        <Upload handleUpload={handleUpload} saveBtn_State={setDisable}/>
       </div>
-      <input type="submit" value="Save Details" className="btn btn-block" />
-    </form>
+      <button onClick={onSubmit} value="Save Details" className="btn btn-block" disabled={Save_active}>Submit</button>
+    </div>
   );
 };
 

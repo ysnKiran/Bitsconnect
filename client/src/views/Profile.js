@@ -8,6 +8,7 @@ const Profile = () => {
     const [userData, setUserData] = useState([]);
     const [tempUserData, setTempUserData] = useState({});
     const [newResumeUrl, setNewResumeUrl] = useState('');
+    const [Save_active,setDisable] =useState(false);
       const navigate = useNavigate();
 
       useEffect(() => {
@@ -57,6 +58,10 @@ const Profile = () => {
       };
       
       const handleSave = () => {
+
+        // Disable Save Button
+        setDisable(true);
+
         console.log(tempUserData);
         const id=localStorage.getItem("idToken");
         axios
@@ -78,6 +83,9 @@ const Profile = () => {
         .catch((error) => {
           console.error("Error fetching data:", error);
         });
+
+        // Enable Save Button
+        setDisable(false);
         
       };
 
@@ -134,8 +142,7 @@ const Profile = () => {
       
         {editMode ? (
             <span>
-            <label>Upload Resume: </label>
-            <Upload handleUpload={handleUpload}/>
+            <Upload handleUpload={handleUpload} saveBtn_State={setDisable}/>
           </span>
         ) : (
             <button onClick={() => window.open(userData.resume_link, '_blank')}>Resume</button>
@@ -144,7 +151,7 @@ const Profile = () => {
       {/* Add more fields here */}
       {editMode ? (
         <div>
-          <button onClick={handleSave}>Save</button>
+          <button onClick={handleSave} disabled={Save_active}>Save</button>
           <button onClick={handleCancel}>Cancel</button>
         </div>
       ) : (

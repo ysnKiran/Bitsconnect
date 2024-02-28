@@ -114,6 +114,10 @@ exports.updateDetails = async (req, res) => {
       return res.status(400).json({ message: "User not found" });
     }
     user.name = name;
+
+    // Added for Batch year calculation
+    user.batch_year=email.substring(1, 5);
+    
     user.resume_link = resume_link;
     await user.save();
     res.status(200).json(user);

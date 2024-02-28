@@ -3,11 +3,12 @@ import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/
 import app from '../firebase';
 import axios from 'axios';
 
-const Upload = ({ handleUpload }) => {
+const Upload = ({ handleUpload ,saveBtn_State}) => {
   const [pdf, setPdf] = useState(undefined);
   const [pdfPerc, setPdfPerc] = useState(0);
 
   const uploadFile = async (file) => {
+    saveBtn_State(true);
     const storage = getStorage();
     const folder = 'pdf/';
     const fileName = new Date().getTime() + file.name;
@@ -33,12 +34,14 @@ const Upload = ({ handleUpload }) => {
       },
       (error) => {
         console.error('Error uploading file:', error);
+        saveBtn_State(false);
       },
       () => {
         // Upload completed successfully, now we can get the download URL
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
           console.log('Download URL:', downloadURL);
           handleUpload(downloadURL); // Pass the download URL to the parent component
+          saveBtn_State(false);
         });
       }
     );
@@ -56,7 +59,7 @@ const Upload = ({ handleUpload }) => {
   return (
     <div className="upload">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="pdf">Upload PDF File:</label> {pdfPerc > 0 && pdfPerc < 100 && 'Uploading: ' + pdfPerc + '%'}
+        <label htmlFor="pdf">Upload Resume:</label> {pdfPerc > 0 && pdfPerc < 100 && 'Uploading: ' + pdfPerc + '%'}
         <br />
         <input
           type="file"
