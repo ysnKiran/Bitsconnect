@@ -114,38 +114,39 @@ exports.changeSelectToApply = async (req, res) => {
     const project = await Project.findOne({ _id: project_id });
     const user = await User.findOne({ _id: user_id });
 
-    const isUserSelected = project.selected_users.some(selectedUser => selectedUser.user_id.equals(user_id));
-    const isProjectApplied = user.selected_projects.some(appliedProject => appliedProject.project_id.equals(project_id));
+    const isUserSelected = project.selected_users.some((selectedUser) =>
+      selectedUser.user_id.equals(user_id)
+    );
+    const isProjectApplied = user.selected_projects.some((appliedProject) =>
+      appliedProject.project_id.equals(project_id)
+    );
 
     if (!isUserSelected && !isProjectApplied) {
       await Project.findOneAndUpdate(
         { _id: project_id },
         {
-          $pull: { applied_users: { user_id: user_id } }, 
-          $addToSet: { selected_users: { user_id: user_id } }
+          $pull: { applied_users: { user_id: user_id } },
+          $addToSet: { selected_users: { user_id: user_id } },
         },
-        { new: true } 
+        { new: true }
       );
 
-      
       await User.findOneAndUpdate(
         { _id: user_id },
         {
-          $pull: { applied_projects: { project_id: project_id } }, 
-          $addToSet: { selected_projects: { project_id: project_id } } 
+          $pull: { applied_projects: { project_id: project_id } },
+          $addToSet: { selected_projects: { project_id: project_id } },
         },
-        { new: true } 
+        { new: true }
       );
 
       res.status(200).json({ message: "User selected successfully" });
     } else {
-      res.status(400).json({ message: "User or project is already selected or applied" });
+      res
+        .status(400)
+        .json({ message: "User or project is already selected or applied" });
     }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
-
-
-
-

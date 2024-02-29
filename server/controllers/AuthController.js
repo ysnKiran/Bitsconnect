@@ -7,7 +7,7 @@ exports.Auth = async (req, res) => {
     if (!user) {
       console.log("No User found");
       batch_year = 0;
-      resume_link = "";
+      resume_link = "hello";
       const applied_projects = [];
       const selected_projects = [];
       user = new User({

@@ -16,7 +16,7 @@ exports.getUserById = async (req, res) => {
     const authHeader = req.headers.authorization;
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
-    const user = await User.findOne({ email: email });  
+    const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(400).json({ message: "User Not Found" });
     }
@@ -84,15 +84,18 @@ exports.applyForProject = async (req, res) => {
         (appliedProject) => appliedProject.project_id.toString() === project_id
       );
 
-      if (alreadyApplied) {
-        return res
-          .status(400)
-          .json({ message: "You have already applied for this project." });
+      const alreadySelected = user.selected_projects.some(
+        (selectedProject) =>
+          selectedProject.project_id.toString() === project_id
+      );
+
+      if (alreadyApplied || alreadySelected) {
+        return res.status(400).json({ message: "Applied or selected" });
       }
 
       user.applied_projects.push({ project_id, proposal });
-      await user.save(); 
-      project.applied_users.push({user_id:user._id});
+      await user.save();
+      project.applied_users.push({ user_id: user._id });
       await project.save();
       return res.status(200).json({ message: "Applied Successfully" });
     } else {
@@ -109,15 +112,15 @@ exports.updateDetails = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
-    const { name,resume_link } = req.body;
+    const { name, resume_link } = req.body;
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
     user.name = name;
 
     // Added for Batch year calculation
-    user.batch_year=email.substring(1, 5);
-    
+    user.batch_year = email.substring(1, 5);
+
     user.resume_link = resume_link;
     await user.save();
     res.status(200).json(user);
@@ -133,19 +136,43 @@ exports.removeProject = async (req, res) => {
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
     const { project_id } = req.body;
+
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
+
     const applied_projects = user.applied_projects;
     const index = applied_projects.findIndex(
       (project) => project.project_id.toString() === project_id
     );
+
     if (index > -1) {
       applied_projects.splice(index, 1);
       await user.save();
+      //console.log(user._id);
+
+      // Remove user from the applied_users array of the project
+      const project = await Project.findOne({ _id: project_id });
+      // console.log(project);
+      if (!project) {
+        return res.status(400).json({ message: "Project not found" });
+      }
+
+      const appliedUsersIndex = project.applied_users.findIndex(
+        (appliedUser) => appliedUser.user_id.toString() === user._id.toString()
+      );
+
+      // console.log(appliedUsersIndex);
+      if (appliedUsersIndex > -1) {
+        project.applied_users.splice(appliedUsersIndex, 1);
+        await project.save();
+      }
+
       return res.status(200).json(user);
     } else {
-      return res.status(400).json({ message: err });
+      return res
+        .status(400)
+        .json({ message: "Project not found in applied projects" });
     }
   } catch (err) {
     res.status(400).json({ message: err });
