@@ -1,6 +1,8 @@
 import React,{useState} from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { BsChevronLeft } from "react-icons/bs";
+
 
 const Apply = () => {
     const {prj_id,title} = useParams();
@@ -60,18 +62,34 @@ const Apply = () => {
       }
 
   return (
-    <div>
-    <button onClick={goBack}>Back Button</button>
-    <button onClick={logout}>Logout</button>
-    <form onSubmit={handleSubmit}>
-      
-      <h1> Are you sure you want to apply for Project: {title}</h1>
-      <div>
-        <label>SOP: Your Proposal to help your candidature :</label>
-        <textarea value={proposal} onChange={(e) => setProposal(e.target.value)}></textarea>
+    <div className="container mt-3">
+    <div className="row justify-content-between align-items-center mb-3">
+        <div className="col-auto">
+          <button className="btn btn-link" onClick={goBack}>
+            <BsChevronLeft size={24} />
+          </button>
+        </div>
+        <div className="col-auto">
+          <button className="btn btn-danger" onClick={logout}>
+            Logout
+          </button>
+        </div>
       </div>
-      <button type="submit">Submit</button>
-    </form>
+      <form onSubmit={handleSubmit} className="apply-form">
+  <h1>Apply for the Project {title}</h1>
+  <div className="form-group">
+    <label className="form-label">SOP: Your Proposal to help your candidature:</label>
+    <textarea
+      value={proposal}
+      onChange={(e) => setProposal(e.target.value)}
+      className="form-control"
+    ></textarea>
+  </div>
+  <button type="submit" className="btn btn-submit">
+    Submit
+  </button>
+</form>
+
     </div>
   )
 }

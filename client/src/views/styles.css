@@ -1,0 +1,118 @@
+/* styles.css */
+
+.profile-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%; /* Makes the button circular */
+  border: 2px solid transparent; /* Initially transparent border */
+  transition: border-color 0.3s; /* Transition effect for border color change */
+}
+
+.profile-button:hover {
+  background-color: transparent;
+  border-color: white; /* Remove blue fill on hover */
+}
+
+
+body {
+  font-family: 'Gilroy', sans-serif; 
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Gilroy-Bold', sans-serif; /* Apply Gilroy font to all headings */
+}
+
+/* Form Heading */
+.form-heading {
+  font-family: 'Gilroy-SemiBold', sans-serif;
+  font-size: 1.5rem; /* Adjust as needed */
+  margin-bottom: 1rem;
+}
+
+/* Form Fields */
+.form-control {
+  background-color: #E7EEF3;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  font-family: inherit;
+  font-size: 1rem; /* Adjust as needed */
+  width: 100%; /* Ensure fields take up full width */
+  box-sizing: border-box; /* Ensure padding and border are included in width */
+}
+
+/* Adjustments for Textarea */
+textarea.form-control {
+  height: 12
+0px; /* Adjust height for textarea */
+  resize: vertical; /* Allow vertical resizing */
+}
+
+/* Adjustments for Button */
+button.btn-submit {
+  background-color: #4CAF50; /* Green */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+button.btn-submit:hover {
+  background-color: #a04592; /* apply */
+}
+
+/* Optional: Add additional styles for focus, hover, etc. */
+
+
+
+
+.apply-form {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
+
+.apply-form h1 {
+  font-family: 'Gilroy-Bold', sans-serif;
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-family: 'Gilroy-SemiBold', sans-serif;
+  font-size: 18px;
+}
+
+.form-control {
+  width: 100%;
+  height: 150px;
+  padding: 60px;
+  background: #E7EEF3;
+  border-radius: 16px;
+  border: none;
+  resize: vertical;
+}
+
+.btn-submit {
+  width: 200px;
+  height: 50px;
+  background-color: #0095E7;
+  color: #FFFFFF;
+  font-family: 'Gilroy-Bold', sans-serif;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background-color: #a08e45;
+}

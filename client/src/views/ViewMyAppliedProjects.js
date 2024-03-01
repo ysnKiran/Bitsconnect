@@ -1,70 +1,98 @@
 import axios from 'axios';
-import React,{useEffect,useState} from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BsChevronLeft } from "react-icons/bs";
+import '../views/view_applied.css';
 
 const ViewMyAppliedProjects = () => {
-    // View all my applied projects
+  const navigate = useNavigate();
+  const id = localStorage.getItem('idToken');
+  const [projects, setProjects] = useState([]);
 
-    ////REQUIREMENTS: We need to show proposal submitted as well
-    const navigate = useNavigate();
-    const id=localStorage.getItem('idToken');
-    const [projects, setProjects] = useState([]);
+  const goBack = () => {
+    navigate('/home');
+  };
 
-    const goBack = ()=>{ 
-        navigate('/home');
-      };
-  
-      const logout = () => {
-        localStorage.clear();
-        navigate("/");
-      };
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
-
-      useEffect(() => {
-        // Fetch projects when the component mounts
-        axios
-          .get("http://localhost:3001/myAppliedProjects", {
-            headers: {
-              authorization: `${id}`,
-            },
-          })
-          .then((response) => {
-            console.log(response.data);
-            // Set the fetched projects to state
-            setProjects(response.data);
-          })
-          .catch((error) => {
-            console.error("Error fetching projects:", error);
-          });
-      }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/myAppliedProjects", {
+        headers: {
+          authorization: `${id}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching projects:", error);
+      });
+  }, []);
 
   return (
     <div>
-      <button onClick={goBack}>Back Button</button>
-      <button onClick={logout}>Logout</button>
+      <div className="row justify-content-between align-items-center mb-5 left-margin">
+        <div className="col-auto">
+          <button className="btn btn-link" onClick={goBack}>
+            <BsChevronLeft size={24} />
+          </button>
+        </div>
+        {/* <div className="col-auto">
+          <button className="btn btn-danger" onClick={logout}>
+            Logout
+          </button>
+        </div> */}
+      </div>
+
       <h1>Your Applied Projects</h1>
 
-      <div>
-      {projects.length > 0
-          ? projects.map((prj) => (
-              <div key={prj._id}>
+      <div className="container">
+        {projects.length > 0 ? (
+          projects.map((prj) => (
+            <div key={prj._id} className="project-item1">
+              <div className="project-item-content1">
                 <h3>{prj.title}</h3>
                 <p>{prj.description}</p>
                 <p>
                   <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration}
                 </p>
 
-                {prj.skills.length > 0
-                  ? prj.skills.map((skill, index) => (
-                      <p key={index}>{skill} </p>
-                    ))
-                  : "No specific skill-requirement"}
+                {prj.skills.length > 0 ? (
+                  <div className="skills">
+                    {prj.skills.map((skill, index) => (
+                      <p
+                        key={index}
+                        className="badge"
+                        style={{
+                          backgroundColor: '#F5F2F7',
+                          borderRadius: '30px',
+                          color: '#64556D',
+                          fontSize: '1.5rem',
+                          fontWeight: 'lighter',
+                          display: 'inline-block'
+                        }}
+                      >
+                        {skill}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  "No specific skill requirement"
+                )}
               </div>
-            ))
-          : "You have not applied in any projects yet. Keep searching for your passion :)"}
+            </div>
+          ))
+        ) : (
+          <p>You have not applied to any projects yet. Keep searching for your passion :)</p>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ViewMyAppliedProjects
+export default ViewMyAppliedProjects;

@@ -1,0 +1,261 @@
+/* HomePage.css */
+.view-projects-button {
+    display: inline-block;
+    margin-top: 600px; /* Adjust margin-top as needed */
+    padding: 10px 20px;
+    color: #fff; /* White text color */
+    border-radius: 35px;
+    text-decoration:none; /* Remove default underline */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add transition for hover effect */
+    font-family: 'Clash Display Variable';
+    font-size: medium;
+    border: 1px solid #ccc;
+    background-color:transparent;
+
+  }
+  
+  .view-projects-button:hover {
+
+color: #ffffff; /* White text color */
+box-shadow: 0 5px 15px rgba(211, 182, 255, 0.353);
+border: 1px solid #80fff2;
+
+
+}
+
+
+.hero-container {
+    /* background-color: #8567FF; */
+    position: relative;
+    width: 100%; /* Adjust width as needed */
+    max-width: 100%; /* Set a max-width to prevent the hero section from becoming too wide */
+    height: 100vh; /* Adjust height as needed */
+    margin: 0 auto;
+    background-image: url('../assets/bg.svg');
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    top: 0px;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+  .hero-overlay {
+    position: absolute;
+    width: 80%; /* Adjust width as needed */
+    height: 60vh; /* Adjust height as needed */
+    background: linear-gradient(180deg, #8c69d830 0%, rgba(14, 1, 42, 0) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(42, 3, 47, 0));
+    border-radius:30px; /* Adjust border-radius as needed */
+    animation: fadeIn 1s ease forwards;
+    top: 50%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    transform: translate(-50%, -50%); /* Center the overlay */
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 576px) {
+    .hero-overlay {
+        width: 75%;
+        height: 75%;
+        border-radius: 8%;
+    }
+
+    .hero-heading {
+        font-size: 36px;
+      }
+    
+      .view-projects-button {
+        font-size: 16px;
+      }
+  }
+  
+  /* Media query for medium screens */
+  @media (min-width: 577px) and (max-width: 992px) {
+    .hero-overlay {
+      width: 75%;
+      height: 75%;
+      border-radius: 8%;
+   
+    }
+
+    .hero-heading {
+        font-size: 64px;
+      }
+    
+      .view-projects-button {
+        font-size: 16px;
+      }
+  }
+  
+  /* Media query for large screens */
+  @media (min-width: 993px) {
+    .hero-overlay {
+      width: 75%;
+      height: 75%;
+      border-radius: 60px;
+    }
+    .hero-heading {
+        font-size: 96px;
+      }
+    
+      .view-projects-button {
+        font-size: 24px;
+      }
+  }
+  
+
+
+
+  
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+
+  }
+  
+  .hero-heading {
+    font-family: 'Clash Display Variable';
+font-style: normal;
+line-height: 110%;
+text-align: center;
+text-transform: uppercase;
+font-size: 6vw; /* Adjust font size responsively */
+
+    background: linear-gradient(180deg, #ba65ff 0%, rgb(204, 188, 255) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+text-fill-color: transparent;
+animation: fadeIn 1s ease forwards;
+position: fixed; /* Ensure content stays fixed during animation */
+top: 50%; /* Adjust vertical position */
+left: 50%; /* Adjust horizontal position */
+transform: translate(-50%, -50%); /* Center the content */
+
+  }
+  
+
+
+  
+ 
+
+  
+  .navbar {
+    background-color: #130525;
+    transition: top 0.3s; /* Add transition effect for smoother appearance */
+  }
+  
+/* Project List */
+.project-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .project-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 0 0 calc(50% - 1rem); /* Two cards per row */
+    background-color: #ffffff;
+    border: 1px solid #2d0064;
+    border-radius: 30px;
+    margin-bottom: 2rem; /* Adjust bottom margin as needed */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+  
+  /* Media query for responsiveness */
+  @media (max-width: 768px) {
+    .project-item {
+      flex-basis: calc(100% - 1rem); /* One card per row on smaller screens */
+    }
+  }
+  
+  .project-item-content {
+    flex: 1;
+    padding-right: 1rem;
+    padding: 3rem;
+    text-align: left;
+    font-size: 2rem;
+    font-weight:regular;
+    color: #21003a;
+
+
+    /* size of project box */
+  }
+
+
+  .project-item h3 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .project-item p {
+    margin: 1rem 0;
+  }
+  
+  .project-item .skills {
+    display: flex;
+  }
+  
+  .project-item .skills .badge {
+    margin-right: 0.5rem;
+  }
+  
+  .apply-btn-container {
+    align-self: flex-start;
+    margin-top: auto;/* Align the button to the bottom */
+  }
+  
+  .apply-btn1 {
+    background-color: #44008d;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 45px;
+    padding: 1.5rem 4rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+  }
+  
+  
+ 
+  
+    @media (max-width: 768px) {
+        .project-item {
+          flex-basis: 100%; /* Single card per row on smaller screens */
+          margin-left: 0; /* Reset margin on smaller screens */
+          margin-bottom: 2rem; /* Reduce bottom margin on smaller screens */
+        }
+      }
+    
+
+

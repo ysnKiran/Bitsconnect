@@ -3,6 +3,10 @@ import { auth, provider } from "../components/config";
 import { signInWithPopup } from "firebase/auth";
 import axios from 'axios'; 
 import { useNavigate } from 'react-router-dom';
+import '../views/SignIn.css';
+import blogo from '../assets/bg2.svg'
+import glogo from '../assets/glogo.png'
+
 
 
 function SignIn() {
@@ -61,14 +65,18 @@ function SignIn() {
   };
 
   return (
-    <div>
-      {user ? (
-        <></>
-      ) : (
-        <button onClick={handleClick}>Sign in With Google</button>
-      )}
+    <div className="signin-container">
+      <div className="signin-content">
+      <img src={blogo} alt="Logo" className="logo"/>
+        <button onClick={handleClick} className="google-button">
+          <img src={glogo} alt="Google Icon"/>
+          Sign in with Google
+        </button>
+       
+
+      </div>
     </div>
   );
-      }
+}
 
 export default SignIn;

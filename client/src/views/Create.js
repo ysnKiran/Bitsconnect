@@ -2,6 +2,11 @@ import React from "react";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BsChevronLeft } from "react-icons/bs";
+import '../views/create.css';
+
+
+
 
 const Create = () => {
   const navigate = useNavigate();
@@ -113,63 +118,90 @@ const Create = () => {
     navigate("/");
   };
 
-  return (
-    <div>
-      <button onClick={goBack}>Back Button</button>
-      <button onClick={logout}>Logout</button>
-      <form onSubmit={handleSubmit}>
+return (
+ 
         <div>
-          <label>Title:</label>
+      <div className="row justify-content-between align-items-center mb-3">
+        <div className="col-auto">
+          <button className="btn btn-link" onClick={goBack}>
+            <BsChevronLeft size={24} />
+          </button>
+        </div>
+        {/* <div className="col-auto">
+          <button className="btn btn-danger" onClick={logout}>
+            Logout
+          </button>
+        </div> */}
+      </div>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label className="form-label">Title:</label>
           <input
             type="text"
+            className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
-        <div>
-          <label>Description:</label>
+        <div className="mb-3">
+          <label className="form-label">Description:</label>
           <textarea
+            className="form-control"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
-        <div>
-          <label>Pay:</label>
+        <div className="mb-3">
+          <label className="form-label">Pay:</label>
           <input
             type="number"
+            className="form-control"
             value={pay}
             onChange={(e) => setPay(e.target.value)}
           />
         </div>
-        <div>
-          <label>Duration:</label>
+        <div className="mb-3">
+          <label className="form-label">Duration:</label>
           <input
             type="number"
+            className="form-control"
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
           />
         </div>
-        <div>
-          <label>Skills:</label>
+        <div className="mb-3">
+          <label className="form-label">Skills:</label>
           {skills.map((skill, index) => (
-            <div key={index}>
+            <div key={index} className="d-flex align-items-center mb-2">
               <input
                 type="text"
+                className="form-control me-2"
                 value={skill}
                 onChange={(e) => handleSkillChange(index, e.target.value)}
               />
-              <button type="button" onClick={() => handleRemoveSkill(index)}>
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                onClick={() => handleRemoveSkill(index)}
+              >
                 Remove
               </button>
             </div>
           ))}
-          <button type="button" onClick={handleAddSkill}>
+          <button
+            type="button"
+            className="btn btn-outline-primary"
+            onClick={handleAddSkill}
+          >
             Add Skill
           </button>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     </div>
+    
   );
 };
 

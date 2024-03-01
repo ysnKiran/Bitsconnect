@@ -1,6 +1,10 @@
 import axios from 'axios';
 import React,{useEffect,useState} from 'react'
 import { useNavigate } from 'react-router-dom';
+import '../views/view_selected.css';
+import { BsChevronLeft } from "react-icons/bs";
+
+
 
 const ViewMySelectedProjects = () => {
     // View all the projects that I got selected for
@@ -36,31 +40,62 @@ const ViewMySelectedProjects = () => {
       };
 
   return (
-    <div>
-        <button onClick={goBack}>Back Button</button>
-        <button onClick={logout}>Logout</button>
-        <h1>Your Current Projects</h1>
-        <div>
-          {projects.length > 0
-              ? projects.map((prj) => (
-                  <div key={prj._id}>
-                    <h3>{prj.title}</h3>
-                    <p>{prj.description}</p>
-                    <p>
-                      <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration}
-                    </p>
-              
-                    {prj.skills.length > 0
-                      ? prj.skills.map((skill, index) => (
-                          <p key={index}>{skill} </p>
-                        ))
-                      : "No specific skill-requirement"}
+<div>
+<div className="row justify-content-between align-items-center mb-5 left-margin">
+        <div className="col-auto">
+          <button className="btn btn-link" onClick={goBack}>
+            <BsChevronLeft size={24} />
+          </button>
+        </div>
+        </div>    
+        
+          <h1 className="left-margin">Your Current Projects</h1>
+      <div>
+        {projects.length > 0 ? (
+          projects.map((prj) => (
+            <div key={prj._id} className="project-item2">
+              <div className="project-item-content2">
+                <h3>{prj.title}</h3>
+                <p>{prj.description}</p>
+                <p>
+                  <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration}
+                </p>
+                {prj.skills.length > 0 ? (
+                  <div className="skills">
+                    {prj.skills.map((skill, index) => (
+                      <p
+                        key={index}
+                        className="badge"
+                        style={{
+                          backgroundColor: '#F5F2F7',
+                          borderRadius: '30px',
+                          color: '#64556D',
+                          fontSize: '1.5rem',
+                          fontWeight: 'lighter',
+                          display: 'inline-block',
+                          marginRight: '0.5rem',
+                        }}
+                      >
+                        {skill}
+                      </p>
+                    ))}
                   </div>
-                ))
-              : "Sorry ! You have not been spotted yet."}
-          </div>
+                ) : (
+                  "No specific skill requirement"
+                )}
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>Sorry! You have not been spotted yet.</p>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default ViewMySelectedProjects
+export default ViewMySelectedProjects;
+
+
+
+

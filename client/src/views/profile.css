@@ -1,0 +1,137 @@
+
+
+
+.profile-container {
+    font-family: 'Gilroy', sans-serif; 
+    font-size: medium;
+    padding: 80px;
+    max-width: 1000px;
+    margin: 0 auto;
+    position: absolute;
+    width: 100%; /* Adjust width as needed */
+    height: 80vh; /* Adjust height as needed */
+    background: linear-gradient(180deg, #4f24ac30 0%, rgba(14, 1, 42, 0) 100%);
+    filter: drop-shadow(0px 4px 4px rgba(42, 3, 47, 0));
+    border-radius:60px; /* Adjust border-radius as needed */
+    animation: fadeIn 1s ease forwards;
+    top: 50%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    transform: translate(-50%, -50%); /* Center the overlay */
+
+  }
+  
+
+  .profile-container h2 {
+    font-size: 64px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #2c0157;
+
+  }
+  
+  .profile-container label {
+    font-family: 'Gilroy', sans-serif; 
+
+    font-size: 36px;
+     font-weight:600;
+    margin-right: 10px;
+    color: #412c56;
+  }
+  
+  .profile-container input[type="text"] {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+    border: 1px solid #190134;
+    border-radius: 24px;
+  }
+  
+  .profile-container span {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size:36px;
+    color: #76608d;  }
+
+
+  
+  .profile-container button {
+    padding: 16px 32px;
+    margin-right: 40px;
+    background-color: #8b4cff;
+    color: #fff;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+    margin-top: 30px;
+    font-size: 24px;
+  }
+  
+  .profile-container button:hover {
+    background-color: #5100a2;
+  }
+  
+
+ 
+
+/* CSS for upload button */
+.file-input-container {
+    display: flex;
+    position: relative;
+    margin-bottom: 20px;
+    align-items: center;
+  }
+  .choose-file-button {
+    margin-right: 10px; /* Adjust spacing between elements */
+  }
+  
+  .file-name-textarea {
+    flex: 1; /* Allow the textarea to expand and take up remaining space */
+  }
+  
+  .file-input {
+    display: none; 
+    padding: 16px 32px;
+    margin-right: 40px;
+    background-color: #bebebe;
+
+    color: #2b0045;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+    margin-top: 30px;
+    font-size: 24px;
+  
+
+  }
+
+  
+  
+  .resume-button {
+    color: #FFFFFF;
+    border:1px #2c0157;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* CSS for file name text area */
+  .file-name-textarea {
+    display: none; /* Hide the file input */
+  }
+  
+ 
+  
+  /* Styling for the upload success message */
+  .upload-success-message {
+    color: rgb(141, 249, 141);
+    margin-top: 10px;
+  }
+  
+
+
+  
