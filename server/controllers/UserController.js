@@ -108,6 +108,7 @@ exports.applyForProject = async (req, res) => {
 
 exports.updateDetails = async (req, res) => {
   try {
+    console.log(req);
     const authHeader = req.headers.authorization;
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;

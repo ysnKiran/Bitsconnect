@@ -27,6 +27,12 @@ const Applications = () => {
         setProjects(response.data);
       })
       .catch((error) => {
+        if(error.response.status===401)
+                {
+                    console.log("Unauth")
+                    localStorage.clear();
+                    navigate("/");
+                }
         console.error("Error fetching projects:", error);
       });
   }, []);
@@ -56,6 +62,12 @@ const Applications = () => {
         setProposals(response.data);
       })
       .catch((error) => {
+        if(error.response.status===401)
+                {
+                    console.log("Unauth")
+                    localStorage.clear();
+                    navigate("/");
+                }
         console.error("Error fetching projects:", error);
       });
 
@@ -69,6 +81,12 @@ const Applications = () => {
         setSelectedProposals(response.data);
       })
       .catch((error) => {
+        if(error.response.status===401)
+                {
+                    console.log("Unauth")
+                    localStorage.clear();
+                    navigate("/");
+                }
         console.error("Error fetching projects:", error);
       });
   };

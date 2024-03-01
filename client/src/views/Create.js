@@ -92,6 +92,12 @@ const Create = () => {
           navigate("/home");
         })
         .catch((error) => {
+          if(error.response.status===401)
+                {
+                    console.log("Unauth")
+                    localStorage.clear();
+                    navigate("/");
+                }
           console.error("Error fetching data:", error);
         });
     } else {

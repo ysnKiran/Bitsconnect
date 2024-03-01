@@ -28,6 +28,12 @@ function Home() {
         setProjects(response.data);
       })
       .catch((error) => {
+        if(error.response.status===401)
+                {
+                    console.log("Unauth")
+                    localStorage.clear();
+                    navigate("/");
+                }
         console.error("Error fetching projects:", error);
       });
   }, []);
@@ -86,7 +92,7 @@ function Home() {
       <div className="hero-container">
         <div className="hero-overlay"></div>
         <div className="hero-content">
-          <div h1 className="hero-heading">
+          <div className="hero-heading" as="h1">
           <span style={{ fontWeight: 400 }}>UNLOCKING</span> 
           <span style={{ display: 'block' ,fontWeight: 600, }}>OPPORTUNITIES</span> 
           <span style={{fontWeight: 400 }}>BUILDING</span> 
