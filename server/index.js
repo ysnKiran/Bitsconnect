@@ -25,6 +25,10 @@ app.listen(process.env.PORT, () => {
 
 // ROUTES
 
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
+
 app.use("/", authRoutes);
 app.use("/", isAuthenticated, userRoutes);
 app.use("/", isAuthenticated, projRoutes);
