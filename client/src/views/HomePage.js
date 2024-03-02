@@ -107,7 +107,7 @@ function Home() {
 
       <div className="container mt-4 text-center" id="projects-section" style={{ margin: 'auto', maxWidth: '1200px' }}>
       <div className="projects-heading-container" style={{ padding: '40px' }}>
-  <h1 style={{ fontWeight: 600, fontFamily: 'Clash Display Variable', fontSize: '60px' }}>PROJECTS</h1>
+  <h1 style={{ fontWeight: 600, fontFamily: 'ClashDisplay-Variable', fontSize: '60px' }}>PROJECTS</h1>
 </div>
   <div className="project-container"> 
     <ul className="project-list">
