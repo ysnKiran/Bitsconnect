@@ -68,35 +68,36 @@ const Apply = () => {
       }
 
   return (
-    <div className="container mt-3">
-    <div className="row justify-content-between align-items-center mb-3">
+    <div className="apply-form">
+    <div className="d-flex justify-content-between align-items-left mb-3">
         <div className="col-auto">
           <button className="btn btn-link" onClick={goBack}>
             <BsChevronLeft size={24} />
           </button>
         </div>
-        <div className="col-auto">
+        {/* <div className="col-auto">
           <button className="btn btn-danger" onClick={logout}>
             Logout
           </button>
-        </div>
-      </div>
-      <form onSubmit={handleSubmit} className="apply-form">
+        </div>*/}
+      </div> 
+      <form onSubmit={handleSubmit} className="apply-form2">
   <h1>Apply for the Project {title}</h1>
-  <div className="form-group">
-    <label className="form-label">SOP: Your Proposal to help your candidature:</label>
+  <div>
+    <label className="form-label2">SOP: Your Proposal to help your candidature:</label>
     <textarea
       value={proposal}
       onChange={(e) => setProposal(e.target.value)}
-      className="form-control"
+      className="form-control2"
     ></textarea>
   </div>
-  <button type="submit" className="btn btn-submit">
+  <button type="submit" className="btn2">
     Submit
   </button>
 </form>
 
     </div>
+
   )
 }
 
