@@ -152,16 +152,15 @@ const Applications = () => {
   return (
     <div>
       <Navbar/>
-  <div className="apply-form3">
+    <div className="apply-form3">
       <div className="d-flex justify-content-between align-items-left mb-3">
         <button className="btn btn-link" onClick={goBack}>
           <BsChevronLeft size={24} />
         </button>
         {/* <button className="btn btn-danger" onClick={logout}>Logout</button> */}
       </div>
-      <div className="with-margin1">
-        <h1>Applications Page</h1>
-      </div>
+        <h1 className="with-margin1">Applications Page</h1>
+      
       {projects.length > 0 ? (
         <div className="select-container">
           <div>
@@ -191,7 +190,7 @@ const Applications = () => {
                   ))}
                 </div>
               ) : (
-                <p>No Selected Applications Found</p>
+                <p className="c">No Selected Applications Found</p>
               )}
             </div>
             <div className="sel">
@@ -201,15 +200,17 @@ const Applications = () => {
                   {proposals.map((propo) => (
                     <div key={propo._id} className="card mb-2">
                       <div className="card-body">
-                        <p>Name: {propo.name} &nbsp; Email: {propo.email}</p>
-                        <p>Graduation Year: {propo.batch_year} &nbsp; <button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
+                        <p>Name: {propo.name} </p>
+                        <p>Email: {propo.email}</p>
+                        <p>Graduation Year: {propo.batch_year}</p>
+                        <p><button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
                         <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Yes</button>
                       </div>
                     </div>
                   ))}
                 </div>
               ) : (
-                <p>No Applications Found</p>
+                <p className="c">No Applications Found</p>
               )}
             </div>
           </div>
