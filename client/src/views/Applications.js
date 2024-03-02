@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BsChevronLeft } from "react-icons/bs";
+import '../views/applications.css';
 
 const Applications = () => {
   const navigate = useNavigate();
@@ -147,43 +148,41 @@ const Applications = () => {
   };
 
   return (
-    <div>
+  <div className="apply-form3">
       <div className="d-flex justify-content-between align-items-left mb-3">
         <button className="btn btn-link" onClick={goBack}>
           <BsChevronLeft size={24} />
         </button>
         {/* <button className="btn btn-danger" onClick={logout}>Logout</button> */}
       </div>
-      <h1 className="mb-3">Applications Page</h1>
+      <div className="heading">
+        <h1>Applications Page</h1>
+      </div>
       {projects.length > 0 ? (
-        <div>
-          <select className="form-select mt-3" onClick={getApplications}>
-            {projects.map((prj) => (
-              <option value={prj._id} key={prj._id} title={prj.title}>
-                {prj.title}
-              </option>
-            ))}
-          </select>
-
+        <div className="select-container">
+          <div>
+            <select className="form-select mt-3 custom-select" onClick={getApplications}>
+              {projects.map((prj) => (
+                <option value={prj._id} key={prj._id} title={prj.title}>
+                  {prj.title}
+                </option>
+              ))}
+            </select>
+          </div>
           <div>
             <h2>{selectedProjectTitle}</h2>
-            <div>
+            <div className="sel">
               <h3>Selected Proposals</h3>
               {selectedProposals.length > 0 ? (
                 <div>
                   {selectedProposals.map((selProp) => (
                     <div key={selProp._id} className="card mb-2">
                       <div className="card-body">
-                        <p>
-                          Name: {selProp.name} &nbsp; Email: {selProp.email}
-                        </p>
-                        <p>
-                          Graduation Year: {selProp.batch_year} &nbsp; 
-                        </p>
-                        <p>
-                          <button className="" onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button>
-                        </p>
-                      </div>
+                      <p>Name: {selProp.name}</p>
+                      <p>Email: {selProp.email}</p>
+                      <p>Graduation Year: {selProp.batch_year}</p>
+                      <p><button className="" onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button></p>
+                    </div>
                     </div>
                   ))}
                 </div>
@@ -191,28 +190,16 @@ const Applications = () => {
                 <p>No Selected Applications Found</p>
               )}
             </div>
-            <div>
+            <div className="sel">
               <h3>Active Applications</h3>
               {proposals.length > 0 ? (
                 <div>
                   {proposals.map((propo) => (
                     <div key={propo._id} className="card mb-2">
                       <div className="card-body">
-                        <p>
-                          Name: {propo.name} &nbsp; Email: {propo.email}
-                        </p>
-                        <p>
-                          Graduation Year: {propo.batch_year} 
-                          </p>
-                          <p>
-                          <button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button>
-                        </p>
-                        <button
-                          className="btn btn-success"
-                          onClick={() => SelectUser(propo._id)}
-                        >
-                          Yes
-                        </button>
+                        <p>Name: {propo.name} &nbsp; Email: {propo.email}</p>
+                        <p>Graduation Year: {propo.batch_year} &nbsp; <button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
+                        <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Yes</button>
                       </div>
                     </div>
                   ))}
