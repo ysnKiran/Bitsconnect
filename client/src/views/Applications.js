@@ -18,7 +18,7 @@ const Applications = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3001/myProjects", {
+      .get("https://se-project-backend-one.vercel.app/myProjects", {
         headers: {
           authorization: `${id}`,
         },
@@ -53,7 +53,7 @@ const Applications = () => {
     const user_id = localStorage.getItem("idToken");
 
     axios
-      .get(`http://localhost:3001/getApplicationsByProject/${project_id}`, {
+      .get(`https://se-project-backend-one.vercel.app/${project_id}`, {
         headers: {
           authorization: `${user_id}`,
         },
@@ -72,7 +72,7 @@ const Applications = () => {
       });
 
     axios
-      .get(`http://localhost:3001/getSelectedApplicationsByProject/${project_id}`, {
+      .get(`https://se-project-backend-one.vercel.app/${project_id}`, {
         headers: {
           authorization: `${user_id}`,
         },
@@ -97,7 +97,7 @@ const Applications = () => {
     if (id) {
       axios
         .post(
-          "http://localhost:3001/applyUser",
+          "https://se-project-backend-one.vercel.app/applyUser",
           { user_id, project_id: selectedProjectId },
           {
             headers: {
@@ -107,7 +107,7 @@ const Applications = () => {
         )
         .then((response) => {
           axios
-            .get(`http://localhost:3001/getApplicationsByProject/${selectedProjectId}`, {
+            .get(`https://se-project-backend-one.vercel.app/${selectedProjectId}`, {
               headers: {
                 authorization: `${id}`,
               },
@@ -120,7 +120,7 @@ const Applications = () => {
             });
 
           axios
-            .get(`http://localhost:3001/getSelectedApplicationsByProject/${selectedProjectId}`, {
+            .get(`https://se-project-backend-one.vercel.app/${selectedProjectId}`, {
               headers: {
                 authorization: `${id}`,
               },

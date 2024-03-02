@@ -15,7 +15,7 @@ const ViewMySelectedProjects = () => {
     useEffect(() => {
       // Fetch projects when the component mounts
       axios
-        .get("http://localhost:3001/mySelectedProjects", {
+        .get("https://se-project-backend-one.vercel.app/mySelectedProjects", {
           headers: {
             authorization: `${id}`,
           },

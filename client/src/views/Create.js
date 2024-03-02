@@ -79,7 +79,7 @@ const Create = () => {
     if (id) {
       axios
         .post(
-          "http://localhost:3001/newProject",
+          "https://se-project-backend-one.vercel.app/newProject",
           { title, pay, duration, description: desc, skills: filteredSkills },
           {
             headers: {

@@ -39,7 +39,7 @@ const Apply = () => {
           if (id) {
             axios
               .post(
-                "http://localhost:3001/apply",
+                "https://se-project-backend-one.vercel.app/apply",
                 { project_id:prj_id, proposal},
                 {
                   headers: {

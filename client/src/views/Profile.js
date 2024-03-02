@@ -20,7 +20,7 @@ const Profile = () => {
             const id=localStorage.getItem("idToken");
             
             axios
-            .get("http://localhost:3001/getUserByID/", {
+            .get("https://se-project-backend-one.vercel.app/getUserByID/", {
               headers: {
                 authorization: `${id}`,
               },
@@ -72,7 +72,7 @@ const Profile = () => {
 
         axios
         .put(
-          "http://localhost:3001/updateDetails",
+          "https://se-project-backend-one.vercel.app/updateDetails",
           { name: tempUserData.name, resume_link: newResumeUrl },
           {
             headers: {
