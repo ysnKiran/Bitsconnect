@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Upload from '../components/Upload';
-import "../views/Register.css"
+import "../views/Register.css";
+import '../views/global.css';
 
 const Register = () => {
   const navigate = useNavigate();

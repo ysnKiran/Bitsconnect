@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 import '../views/HomePage.css';
 import '../views/nav.css';
 import Navbar from "./NavbarHandlers.js";
+import '../views/global.css';
 
 function Home() {
   const navigate = useNavigate();
@@ -117,7 +118,7 @@ function Home() {
               <h3>{prj.title}</h3>
               <p>{prj.description}</p>
               <p>
-                <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration}
+                <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
               </p>
               {prj.skills.length > 0 ? (
                 <div className="skills">

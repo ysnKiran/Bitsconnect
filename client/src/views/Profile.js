@@ -4,6 +4,8 @@ import axios from "axios";
 import '../views/profile.css';
 import Upload from '../components/Upload';
 import { BsChevronLeft } from "react-icons/bs";
+import Navbar from "./NavbarHandlers.js";
+import '../views/global.css';
 
 const Profile = () => {
     const [editMode,setEditMode] =useState(false);
@@ -124,6 +126,9 @@ const Profile = () => {
       };
 
   return (
+    <div>
+      <Navbar/>
+    <div className='apply-form3'>
     <div className="d-flex justify-content-between align-items-left mb-3">
     <div className="col-auto"  style={{ paddingRight: '900px', backgroundColor: '#fff' }}>
      <button className="btn btn-link" onClick={goBack}>
@@ -182,6 +187,8 @@ const Profile = () => {
       ) : (
         <button onClick={handleEdit}>Edit</button>
       )}
+    </div>
+    </div>
     </div>
     </div>
   )

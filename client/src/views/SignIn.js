@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { auth, provider } from "../components/config";
 import { signInWithPopup } from "firebase/auth";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import "../views/SignIn.css";
-import blogo from "../assets/bg2.svg";
-import glogo from "../assets/glogo.png";
+import axios from 'axios'; 
+import { useNavigate } from 'react-router-dom';
+import '../views/SignIn.css';
+import blogo from '../assets/bg2.svg'
+import glogo from '../assets/glogo.png'
+import '../views/global.css';
 
 function SignIn() {
   const [user, setUser] = useState(null);

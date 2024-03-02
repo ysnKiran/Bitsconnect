@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from "react-router-dom";
 import '../views/styles.css';
+import '../views/global.css';
 
 
 const Navbar = () => {
@@ -46,7 +47,7 @@ const Navbar = () => {
   return (
     <nav id="navbar" className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#130525' }}>
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="#" onClick={() => navigate('/home')}>
           <span style={{
             fontFamily: 'Space Quest',
             fontStyle: 'normal',

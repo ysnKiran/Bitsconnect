@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs";
 import '../views/styles.css';
+import Navbar from "./NavbarHandlers.js";
+import '../views/global.css';
 
 
 
@@ -127,7 +129,9 @@ const Create = () => {
 return (
  
         
-    <div className="apply-form">
+  <div>
+  <Navbar/>
+  <div className="apply-form3">
       <div className="row justify-content-between align-items-center mb-3">
         <div className="col-auto">
           <button className="btn btn-link" onClick={goBack}>
@@ -209,6 +213,7 @@ return (
         </button>
       </div>
     </form>
+  </div>
   </div>
     
   );

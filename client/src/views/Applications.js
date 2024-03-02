@@ -4,6 +4,8 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BsChevronLeft } from "react-icons/bs";
 import '../views/applications.css';
+import Navbar from "./NavbarHandlers.js";
+import '../views/global.css';
 
 const Applications = () => {
   const navigate = useNavigate();
@@ -148,6 +150,8 @@ const Applications = () => {
   };
 
   return (
+    <div>
+      <Navbar/>
   <div className="apply-form3">
       <div className="d-flex justify-content-between align-items-left mb-3">
         <button className="btn btn-link" onClick={goBack}>
@@ -213,6 +217,7 @@ const Applications = () => {
       ) : (
         <p>No projects found</p>
       )}
+    </div>
     </div>
   );
 };
