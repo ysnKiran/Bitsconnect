@@ -20,7 +20,7 @@ const ViewMyAppliedProjects = () => {
 
   useEffect(() => {
     axios
-      .get("https://se-project-backend-one.vercel.app/myAppliedProjects", {
+      .get("https://se-project-backend-fard.onrender.com/myAppliedProjects", {
         headers: {
           authorization: `${id}`,
         },

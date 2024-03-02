@@ -17,7 +17,7 @@ function Home() {
   useEffect(() => {
     // Fetch projects when the component mounts
     axios
-      .get("https://se-project-backend-one.vercel.app/projects", {
+      .get("https://se-project-backend-fard.onrender.com/projects", {
         headers: {
           authorization: `${id}`,
         },

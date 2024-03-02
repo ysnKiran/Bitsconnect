@@ -27,7 +27,7 @@ const Register = () => {
       if (id) {
         axios
           .put(
-            "https://se-project-backend-one.vercel.app/updateDetails",
+            "https://se-project-backend-fard.onrender.com/updateDetails",
             { name: name,resume_link: res_link },
             {
               headers: {

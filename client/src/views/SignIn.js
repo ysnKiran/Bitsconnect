@@ -40,7 +40,7 @@ function SignIn() {
   };
 
   const sendUserDataToBackend = (name, email, idToken) => {
-    axios.post("https://se-project-backend-one.vercel.app/auth", {
+    axios.post("https://se-project-backend-fard.onrender.com/auth", {
       name,
       email,
       idToken

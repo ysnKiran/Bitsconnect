@@ -1,61 +1,58 @@
-import axios from 'axios';
-import React,{useEffect,useState} from 'react'
-import { useNavigate } from 'react-router-dom';
-import '../views/view_selected.css';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "../views/view_selected.css";
 import { BsChevronLeft } from "react-icons/bs";
 
-
-
 const ViewMySelectedProjects = () => {
-    // View all the projects that I got selected for
-    const navigate = useNavigate();
-    const id=localStorage.getItem('idToken');
-    const [projects, setProjects] = useState([]);
+  // View all the projects that I got selected for
+  const navigate = useNavigate();
+  const id = localStorage.getItem("idToken");
+  const [projects, setProjects] = useState([]);
 
-    useEffect(() => {
-      // Fetch projects when the component mounts
-      axios
-        .get("https://se-project-backend-one.vercel.app/mySelectedProjects", {
-          headers: {
-            authorization: `${id}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data);
-          // Set the fetched projects to state
-          setProjects(response.data);
-        })
-        .catch((error) => {
-          if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
-          console.error("Error fetching projects:", error);
-        });
-    }, []);
+  useEffect(() => {
+    // Fetch projects when the component mounts
+    axios
+      .get("https://se-project-backend-fard.onrender.com/mySelectedProjects", {
+        headers: {
+          authorization: `${id}`,
+        },
+      })
+      .then((response) => {
+        console.log(response.data);
+        // Set the fetched projects to state
+        setProjects(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          localStorage.clear();
+          navigate("/");
+        }
+        console.error("Error fetching projects:", error);
+      });
+  }, []);
 
-    const goBack = ()=>{ 
-        navigate('/home');
-      };
-  
-      const logout = () => {
-        localStorage.clear();
-        navigate("/");
-      };
+  const goBack = () => {
+    navigate("/home");
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
 
   return (
-<div>
-<div className="row justify-content-between align-items-center mb-5 left-margin">
+    <div>
+      <div className="row justify-content-between align-items-center mb-5 left-margin">
         <div className="col-auto">
           <button className="btn btn-link" onClick={goBack}>
             <BsChevronLeft size={24} />
           </button>
         </div>
-        </div>    
-        
-          <h1 className="left-margin">Your Current Projects</h1>
+      </div>
+
+      <h1 className="left-margin">Your Current Projects</h1>
       <div>
         {projects.length > 0 ? (
           projects.map((prj) => (
@@ -73,13 +70,13 @@ const ViewMySelectedProjects = () => {
                         key={index}
                         className="badge"
                         style={{
-                          backgroundColor: '#F5F2F7',
-                          borderRadius: '30px',
-                          color: '#64556D',
-                          fontSize: '1.5rem',
-                          fontWeight: 'lighter',
-                          display: 'inline-block',
-                          marginRight: '0.5rem',
+                          backgroundColor: "#F5F2F7",
+                          borderRadius: "30px",
+                          color: "#64556D",
+                          fontSize: "1.5rem",
+                          fontWeight: "lighter",
+                          display: "inline-block",
+                          marginRight: "0.5rem",
                         }}
                       >
                         {skill}
@@ -101,7 +98,3 @@ const ViewMySelectedProjects = () => {
 };
 
 export default ViewMySelectedProjects;
-
-
-
-
