@@ -1,7 +1,7 @@
-TO DO BEFORE SPRINT 1:
+PROBLEMS:
 
-1. PDF Upload - 27/02
-2. MAKE FRONTEND - IMPORTANT - HARD - 29/02
-3. MAKE VIDEO - 01/02
-4. SUBMIT REPORT - 01/02
-5. DELETION OF MY APPLICATION - 27/02
+1) Font Issues
+2) Applications Page only updates when I click on any one Project in Dropdown menu
+3) Resume Link is shown in Applications Page and not the Button to view it 
+4) Projects don't show the owner and don't have JD
+5) Applications Page doesn't show who applied for what project and doesn't show the proposal  
