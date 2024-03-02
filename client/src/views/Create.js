@@ -126,25 +126,21 @@ const Create = () => {
 
 return (
  
-        <div>
+        
+    <div className="apply-form">
       <div className="row justify-content-between align-items-center mb-3">
         <div className="col-auto">
           <button className="btn btn-link" onClick={goBack}>
             <BsChevronLeft size={24} />
           </button>
         </div>
-        {/* <div className="col-auto">
-          <button className="btn btn-danger" onClick={logout}>
-            Logout
-          </button>
-        </div> */}
       </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label className="form-label">Title:</label>
           <input
             type="text"
-            className="form-control"
+            className="form-control title-textarea"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
@@ -152,61 +148,68 @@ return (
         <div className="mb-3">
           <label className="form-label">Description:</label>
           <textarea
-            className="form-control"
+            className="form-control desc-textarea"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
         <div className="mb-3">
-          <label className="form-label">Pay:</label>
-          <input
-            type="number"
-            className="form-control"
-            value={pay}
-            onChange={(e) => setPay(e.target.value)}
-          />
-        </div>
+  <div className="d-flex">
+    <div className="me-3">
+      <label className="form-label">Pay:</label>
+      <input
+        type="number"
+        className="form-control pay-textarea"
+        value={pay}
+        onChange={(e) => setPay(e.target.value)}
+      />
+    </div>
+    <div>
+      <label className="form-label">Duration:</label>
+      <input
+        type="number"
+        className="form-control duration-textarea"
+        value={duration}
+        onChange={(e) => setDuration(e.target.value)}
+      />
+    </div>
+  </div>
+</div>
+
         <div className="mb-3">
-          <label className="form-label">Duration:</label>
-          <input
-            type="number"
-            className="form-control"
-            value={duration}
-            onChange={(e) => setDuration(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Skills:</label>
-          {skills.map((skill, index) => (
-            <div key={index} className="d-flex align-items-center mb-2">
-              <input
-                type="text"
-                className="form-control me-2"
-                value={skill}
-                onChange={(e) => handleSkillChange(index, e.target.value)}
-              />
-              <button
-                type="button"
-                className="btn btn-outline-danger"
-                onClick={() => handleRemoveSkill(index)}
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            className="btn btn-outline-primary"
-            onClick={handleAddSkill}
-          >
-            Add Skill
-          </button>
-        </div>
-        <button type="submit" className="btn btn-primary">
+        <label className="form-label skills-textarea">Skills:</label>
+        {skills.map((skill, index) => (
+          <div key={index} className="d-flex align-items-center mb-2">
+            <input
+              type="text"
+              className="form-control me-2"
+              value={skill}
+              onChange={(e) => handleSkillChange(index, e.target.value)}
+            />
+            <button
+              type="button"
+              className="btn1"
+              onClick={() => handleRemoveSkill(index)}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+      <div className="mb-3">
+        <button
+          type="button"
+          className="btn1"
+          onClick={handleAddSkill}
+        >
+          Add Skill
+        </button>
+        <button type="submit" className="btn2">
           Submit
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
     
   );
 };
