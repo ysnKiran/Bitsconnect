@@ -120,7 +120,8 @@ exports.updateDetails = async (req, res) => {
     user.name = name;
 
     // Added for Batch year calculation
-    user.batch_year = email.substring(1, 5);
+    const batchYear = parseInt(email.substring(1, 5), 10);
+    user.batch_year = isNaN(batchYear) ? 0 : batchYear;
 
     user.resume_link = resume_link;
     await user.save();
