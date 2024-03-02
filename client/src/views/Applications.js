@@ -181,7 +181,7 @@ const Applications = () => {
                           Graduation Year: {selProp.batch_year} &nbsp; 
                         </p>
                         <p>
-                          <button className="btn btn-outline-success" onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button>
+                          <button className="" onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button>
                         </p>
                       </div>
                     </div>
@@ -205,7 +205,7 @@ const Applications = () => {
                           Graduation Year: {propo.batch_year} 
                           </p>
                           <p>
-                          <button className="btn btn-outline-success" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button>
+                          <button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button>
                         </p>
                         <button
                           className="btn btn-success"
