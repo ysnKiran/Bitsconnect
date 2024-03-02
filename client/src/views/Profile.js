@@ -124,7 +124,7 @@ const Profile = () => {
       };
 
   return (
-    <div className='bg' style={{backgroundColor: '#000' }}>
+    <div className="d-flex justify-content-between align-items-left mb-3">
     <div className="col-auto"  style={{ paddingRight: '900px', backgroundColor: '#fff' }}>
      <button className="btn btn-link" onClick={goBack}>
         <BsChevronLeft size={24} />
