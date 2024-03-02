@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import { useParams,useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { BsChevronLeft } from "react-icons/bs";
+import '../views/apply.css';
 
 
 const Apply = () => {
