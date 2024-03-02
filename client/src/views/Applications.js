@@ -4,9 +4,6 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BsChevronLeft } from "react-icons/bs";
 
-
-
-
 const Applications = () => {
   const navigate = useNavigate();
   const id = localStorage.getItem("idToken");
@@ -27,12 +24,11 @@ const Applications = () => {
         setProjects(response.data);
       })
       .catch((error) => {
-        if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          localStorage.clear();
+          navigate("/");
+        }
         console.error("Error fetching projects:", error);
       });
   }, []);
@@ -53,40 +49,44 @@ const Applications = () => {
     const user_id = localStorage.getItem("idToken");
 
     axios
-      .get(`https://se-project-backend-fard.onrender.com/${project_id}`, {
-        headers: {
-          authorization: `${user_id}`,
-        },
-      })
+      .get(
+        `https://se-project-backend-fard.onrender.com/getApplicationsByProject/${project_id}`,
+        {
+          headers: {
+            authorization: `${user_id}`,
+          },
+        }
+      )
       .then((response) => {
         setProposals(response.data);
       })
       .catch((error) => {
-        if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          localStorage.clear();
+          navigate("/");
+        }
         console.error("Error fetching projects:", error);
       });
 
     axios
-      .get(`https://se-project-backend-fard.onrender.com/${project_id}`, {
-        headers: {
-          authorization: `${user_id}`,
-        },
-      })
+      .get(
+        `https://se-project-backend-fard.onrender.com/getSelectedApplicationsByProject/${project_id}`,
+        {
+          headers: {
+            authorization: `${user_id}`,
+          },
+        }
+      )
       .then((response) => {
         setSelectedProposals(response.data);
       })
       .catch((error) => {
-        if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          localStorage.clear();
+          navigate("/");
+        }
         console.error("Error fetching projects:", error);
       });
   };
@@ -107,11 +107,14 @@ const Applications = () => {
         )
         .then((response) => {
           axios
-            .get(`https://se-project-backend-fard.onrender.com/${selectedProjectId}`, {
-              headers: {
-                authorization: `${id}`,
-              },
-            })
+            .get(
+              `https://se-project-backend-fard.onrender.com/getApplicationsByProject/${selectedProjectId}`,
+              {
+                headers: {
+                  authorization: `${id}`,
+                },
+              }
+            )
             .then((response) => {
               setProposals(response.data);
             })
@@ -120,11 +123,14 @@ const Applications = () => {
             });
 
           axios
-            .get(`https://se-project-backend-fard.onrender.com/${selectedProjectId}`, {
-              headers: {
-                authorization: `${id}`,
-              },
-            })
+            .get(
+              `https://se-project-backend-fard.onrender.com/getSelectedApplicationsByProject/${selectedProjectId}`,
+              {
+                headers: {
+                  authorization: `${id}`,
+                },
+              }
+            )
             .then((response) => {
               setSelectedProposals(response.data);
             })
@@ -142,7 +148,6 @@ const Applications = () => {
 
   return (
     <div>
-      
       <div className="d-flex justify-content-between align-items-left mb-3">
         <button className="btn btn-link" onClick={goBack}>
           <BsChevronLeft size={24} />
@@ -169,8 +174,13 @@ const Applications = () => {
                   {selectedProposals.map((selProp) => (
                     <div key={selProp._id} className="card mb-2">
                       <div className="card-body">
-                        <p>Name: {selProp.name} &nbsp; Email: {selProp.email}</p>
-                        <p>Graduation Year: {selProp.batch_year} &nbsp; Resume link: {selProp.resume_link}</p>
+                        <p>
+                          Name: {selProp.name} &nbsp; Email: {selProp.email}
+                        </p>
+                        <p>
+                          Graduation Year: {selProp.batch_year} &nbsp; Resume
+                          link: {selProp.resume_link}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -186,9 +196,19 @@ const Applications = () => {
                   {proposals.map((propo) => (
                     <div key={propo._id} className="card mb-2">
                       <div className="card-body">
-                        <p>Name: {propo.name} &nbsp; Email: {propo.email}</p>
-                        <p>Graduation Year: {propo.batch_year} &nbsp; Resume link: {propo.resume_link}</p>
-                        <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Yes</button>
+                        <p>
+                          Name: {propo.name} &nbsp; Email: {propo.email}
+                        </p>
+                        <p>
+                          Graduation Year: {propo.batch_year} &nbsp; Resume
+                          link: {propo.resume_link}
+                        </p>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => SelectUser(propo._id)}
+                        >
+                          Yes
+                        </button>
                       </div>
                     </div>
                   ))}
