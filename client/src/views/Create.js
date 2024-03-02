@@ -165,7 +165,7 @@ return (
       />
     </div>
     <div>
-      <label className="form-label">Duration:</label>
+      <label className="form-label">Duration (In weeks):</label>
       <input
         type="number"
         className="form-control duration-textarea"
