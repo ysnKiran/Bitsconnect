@@ -18,7 +18,7 @@ admin.initializeApp({
 app.use(
   cors({
     origin: ["https://se-project-frontend.vercel.app"],
-    methods: ["GET", "POST", "PUT"],
+    methods: ["GET", "POST", "PUT", "OPTIONS"], // Include OPTIONS method
     credentials: true,
   })
 );
