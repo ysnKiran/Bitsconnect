@@ -9,6 +9,7 @@ const isAuthenticated = require("../middleware/auth");
 const serviceAccount = require("../auth.json");
 const userRoutes = require("../routes/userRoutes");
 const projRoutes = require("../routes/projectRoutes");
+app.use(express.json());
 
 app.use(cors());
 
