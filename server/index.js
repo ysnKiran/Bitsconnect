@@ -4,7 +4,6 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 app.use(express.json());
-app.use(cors());
 require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const isAuthenticated = require("./middleware/auth");
@@ -15,6 +14,14 @@ const projRoutes = require("./routes/projectRoutes");
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
+
+app.use(
+  cors({
+    origin: ["https://se-project-frontend.vercel.app/"],
+    methods: ["GET", "POST", "PUT"],
+    credentials: true,
+  })
+);
 
 mongoose.connect(process.env.DATABASE_URL);
 
