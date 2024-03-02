@@ -4,11 +4,11 @@ const app = express();
 const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require("cors");
-const authRoutes = require("./routes/authRoutes");
-const isAuthenticated = require("./middleware/auth");
-const serviceAccount = require("./auth.json");
-const userRoutes = require("./routes/userRoutes");
-const projRoutes = require("./routes/projectRoutes");
+const authRoutes = require("../routes/authRoutes");
+const isAuthenticated = require("../middleware/auth");
+const serviceAccount = require("../auth.json");
+const userRoutes = require("../routes/userRoutes");
+const projRoutes = require("../routes/projectRoutes");
 
 app.use(cors());
 
