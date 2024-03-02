@@ -159,7 +159,7 @@ const Applications = () => {
         </button>
         {/* <button className="btn btn-danger" onClick={logout}>Logout</button> */}
       </div>
-      <div className="heading">
+      <div className="with-margin1">
         <h1>Applications Page</h1>
       </div>
       {projects.length > 0 ? (
