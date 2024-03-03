@@ -204,7 +204,7 @@ const Applications = () => {
                         <p>Email: {propo.email}</p>
                         <p>Graduation Year: {propo.batch_year}</p>
                         <p><button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
-                        <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Yes</button>
+                        <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Select</button>
                       </div>
                     </div>
                   ))}
