@@ -4,8 +4,17 @@ const ProjectSchema = mongoose.Schema({
   alumni_id: {
     type: mongoose.Schema.Types.ObjectId,
   },
+  alumni_name:{
+    type:String,
+    require:true
+  },
+  alumni_email:{
+    type:String,
+    require:true
+  },
   title: {
     type: String,
+    require:true
   },
   pay: {
     type: Number,

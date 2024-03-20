@@ -22,14 +22,21 @@ exports.createProject = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
     const { pay, duration, description, skills, title } = req.body;
+    console.log("hello");
+    let project;
 
     const user = await User.findOne({ email: email });
     if (user) {
       const alumni_id = user._id;
+      // Need to add alumni_email, 
+      const alumni_name = user.name;
+      const alumni_email = user.email;
       const applied_users = [];
       const selected_users = [];
-      const project = new Project({
+      project = new Project({
         alumni_id,
+        alumni_name,
+        alumni_email,
         title,
         pay,
         duration,
@@ -39,11 +46,12 @@ exports.createProject = async (req, res) => {
         selected_users,
       });
       await project.save();
+      console.log(project);
     } else {
       res.status(400).json({ message: "User Not Found" });
     }
 
-    res.status(200).json({ message: "Project Created Succesfully" });
+    res.status(200).json(project);
   } catch (err) {
     res.status(400).json({ message: err });
   }

@@ -10,6 +10,7 @@ const ViewMyAppliedProjects = () => {
   const navigate = useNavigate();
   const id = localStorage.getItem('idToken');
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading projects
 
   const goBack = () => {
     navigate('/home');
@@ -22,7 +23,7 @@ const ViewMyAppliedProjects = () => {
 
   useEffect(() => {
     axios
-      .get("https://se-project-backend-fard.onrender.com/myAppliedProjects", {
+      .get(`${process.env.REACT_APP_BACKEND_URL}/myAppliedProjects`, {
         headers: {
           authorization: `${id}`,
         },
@@ -30,14 +31,15 @@ const ViewMyAppliedProjects = () => {
       .then((response) => {
         console.log(response.data);
         setProjects(response.data);
+        setLoading(false); // Turn off loading spinner when projects are fetched
       })
       .catch((error) => {
-        if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
+        setLoading(false); // Turn off loading spinner in case of error
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          localStorage.clear();
+          navigate("/");
+        }
         console.error("Error fetching projects:", error);
       });
   }, []);
@@ -52,17 +54,16 @@ const ViewMyAppliedProjects = () => {
             <BsChevronLeft size={24} />
           </button>
         </div>
-        {/* <div className="col-auto">
-          <button className="btn btn-danger" onClick={logout}>
-            Logout
-          </button>
-        </div> */}
       </div>
 
       <h1 class="with-margin1">Your Applied Projects</h1>
 
       <div>
-        {projects.length > 0 ? (
+        {loading ? ( // Render spinner while loading is true
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : projects.length > 0 ? (
           projects.map((prj) => (
             <div key={prj._id} className="project-item2">
               <div className="project-item-content1">

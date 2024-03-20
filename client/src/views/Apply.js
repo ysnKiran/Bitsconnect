@@ -42,7 +42,7 @@ const Apply = () => {
           if (id) {
             axios
               .post(
-                "https://se-project-backend-fard.onrender.com/apply",
+                `${process.env.REACT_APP_BACKEND_URL}/apply`,
                 { project_id:prj_id, proposal},
                 {
                   headers: {

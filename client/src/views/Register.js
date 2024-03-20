@@ -28,7 +28,7 @@ const Register = () => {
       if (id) {
         axios
           .put(
-            "https://se-project-backend-fard.onrender.com/updateDetails",
+            `${process.env.REACT_APP_BACKEND_URL}/updateDetails`,
             { name: name,resume_link: res_link },
             {
               headers: {

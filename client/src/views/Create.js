@@ -6,8 +6,8 @@ import { BsChevronLeft } from "react-icons/bs";
 import '../views/styles.css';
 import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
-
-
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Create = () => {
@@ -81,7 +81,7 @@ const Create = () => {
     if (id) {
       axios
         .post(
-          "https://se-project-backend-fard.onrender.com/newProject",
+          `${process.env.REACT_APP_BACKEND_URL}/newProject`,
           { title, pay, duration, description: desc, skills: filteredSkills },
           {
             headers: {
@@ -96,16 +96,47 @@ const Create = () => {
         .catch((error) => {
           if(error.response.status===401)
                 {
-                    console.log("Unauth")
+                    console.log("Unauth");
+                    toast.error('Logged Out', {
+                      position: "top-center",
+                      autoClose: 1000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: false,
+                      draggable: false,
+                      progress: undefined,
+                      theme: "dark",
+                      });
                     localStorage.clear();
                     navigate("/");
                 }
           console.error("Error fetching data:", error);
+          
+          toast.error('Error Fetching Data', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+
         });
     } else {
       console.error("idToken is null or undefined");
     }
-    alert("Project Posted");
+    toast.success('Project Posted Successfully', {
+      position: "top-center",
+      autoClose: 1000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: "dark",
+      });
 
     setPay("");
     setDuration("");

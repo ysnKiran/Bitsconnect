@@ -9,10 +9,27 @@ import Applications from './views/Applications';
 import ViewMyAppliedProjects from './views/ViewMyAppliedProjects';
 import ViewMySelectedProjects from './views/ViewMySelectedProjects';
 import Profile from './views/Profile';
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import { Slide} from 'react-toastify';
 
 const App = () => {
   return (
-    
+    <div>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme="light"
+        transition={Slide}
+      />
+
       <Routes>
         <Route exact path='/' element={<SignIn/>}/>
         <Route exact path='/home' element={<Home/>} />
@@ -25,7 +42,8 @@ const App = () => {
         <Route exact path='/profile' element={<Profile/>}/>
         {/* Other routes */}
       </Routes>
-    
+      
+    </div>
   )
 }
 
