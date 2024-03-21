@@ -70,6 +70,28 @@ exports.getSelectedProjects = async (req, res) => {
   }
 };
 
+exports.getRejectedProjects = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    if (user) {
+      const rejectedProjectIds = user.rejected_projects.map(
+        (rejectedProject) => rejectedProject.project_id
+      );
+
+      const projects = await Project.find({ _id: { $in: rejectedProjectIds } });
+
+      res.status(200).json(projects);
+    } else {
+      res.status(400).json({ message: "User not found" });
+    }
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+
 exports.applyForProject = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
@@ -178,5 +200,34 @@ exports.removeProject = async (req, res) => {
     }
   } catch (err) {
     res.status(400).json({ message: err });
+  }
+};
+
+exports.deleteApplication = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    const user_id = user._id;
+    const { project_id} = req.params;
+
+    if(user){
+      // Remove project_id from applied_projects of user
+      await User.findByIdAndUpdate(user_id, {
+        $pull: { applied_projects: { project_id: project_id } },
+      });
+
+      // Remove user_id from applied_users of project
+      await Project.findByIdAndUpdate(project_id, {
+        $pull: { applied_users: { user_id: user_id } },
+      });
+
+      return res.status(200).json({ message: 'Application deleted successfully' });
+    }
+    res.status(400).json({message:"User Not found"});
+  } catch (error) {
+    console.error('Error deleting application:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };

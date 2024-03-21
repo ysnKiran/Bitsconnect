@@ -33,14 +33,13 @@ Profile.js
 - spinner
 
 
---------------------------------------------------------
 
 
 SPRINT 2-2
 
 
 Profile.js/Register.js/Create.js:
-- - (((?????))) Upload button changes
+- - (((?????))) Upload button changes [SANJANA]
 - Add deadline and JD field to Projects
 - - Add deadline field for application
 
@@ -49,6 +48,8 @@ Profile.js/Register.js/Create.js:
 
 - Reject Applications
 - Pending/Rejected/Selected
+--------------------------------------------------------
+
 - Update Project Details
 - Delete Projects
 - Delete/retract Application

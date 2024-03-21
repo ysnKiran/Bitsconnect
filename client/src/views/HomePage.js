@@ -165,6 +165,7 @@ function Home() {
                         <p>No specific skill requirement</p>
                       )}
                       <p>Owner: <b>{prj.alumni_name}</b> Id: {prj.alumni_email}</p>
+                      <p>Deadline: <b>{new Date(prj.deadline).toLocaleDateString()}</b></p>
                     </div>
                     <div className="apply-btn-container">
                       <button className="apply-btn1" onClick={() => apply(prj._id, prj.title)}>Apply</button>

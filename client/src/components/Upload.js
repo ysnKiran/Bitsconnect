@@ -59,7 +59,7 @@ const Upload = ({ handleUpload ,saveBtn_State}) => {
   return (
     <div className="upload">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="pdf">Upload Resume:</label> {pdfPerc > 0 && pdfPerc < 100 && 'Uploading: ' + pdfPerc + '%'}
+        <label htmlFor="pdf">Upload:</label> {pdfPerc > 0 && pdfPerc < 100 && 'Uploading: ' + pdfPerc + '%'}
         <br />
         <input
           type="file"

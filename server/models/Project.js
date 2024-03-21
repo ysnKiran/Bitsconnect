@@ -51,6 +51,22 @@ const ProjectSchema = mongoose.Schema({
       },
     },
   ],
+  rejected_users: [
+    {
+      _id: false,
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+    },
+  ],
+  deadline:{
+    type:Date,
+    require: true
+  },
+  jobDescription:{
+    type:String,
+    required:true
+  }
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

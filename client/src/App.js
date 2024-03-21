@@ -12,6 +12,7 @@ import Profile from './views/Profile';
 import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { Slide} from 'react-toastify';
+import MyProjects from './views/MyProjects';
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
         <Route exact path='/applied-projects' element={<ViewMyAppliedProjects/>}/>
         <Route exact path='/selected-projects' element={<ViewMySelectedProjects/>} />
         <Route exact path='/profile' element={<Profile/>}/>
+        <Route exact path='/my-projects' element={<MyProjects/>}/>
         {/* Other routes */}
       </Routes>
       

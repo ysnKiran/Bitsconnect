@@ -30,8 +30,11 @@ const Applications = () => {
       })
       .then((response) => {
         setProjects(response.data);
-        console.log("1:",response.data[0]);
-        getApplications(response.data[0]._id);
+        if(response.data.length>0)
+        {
+          console.log("1:",response.data[0]);
+          getApplications(response.data[0]._id);
+        }
         setLoadingProjects(false); // Turn off loading spinner when projects are fetched
       })
       .catch((error) => {
@@ -203,6 +206,54 @@ const Applications = () => {
     }
   };
 
+  const DeleteUser = (user_id) => {
+    setLoadingApplications(true); // Turn on loading spinner for selected applications
+    const id = localStorage.getItem("idToken");
+
+    if (id) {
+      axios
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/rejectUser`,
+          { user_id, project_id: selectedProjectId },
+          {
+            headers: {
+              authorization: `${id}`,
+            },
+          }
+        )
+        .then((response) => {
+          getApplications(selectedProjectId);
+          toast.success('Successfully Rejected Application', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+          toast.error('Retry', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+            setLoadingApplications(false); // Turn off loading spinner in case of error
+        });
+    } else {
+      console.error("idToken is null or undefined");
+      setLoadingApplications(false); // Turn off loading spinner in case of error
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -271,6 +322,7 @@ const Applications = () => {
                           <p>Graduation Year: {propo.batch_year}</p>
                           <p><button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
                           <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Select</button>
+                          <button className="btn btn-error" onClick={() => DeleteUser(propo._id)}>Reject</button>
                         </div>
                       </div>
                     ))}
