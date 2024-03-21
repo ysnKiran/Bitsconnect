@@ -6,7 +6,9 @@ import { BsChevronLeft } from "react-icons/bs";
 import '../views/styles.css';
 import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
-
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import Upload from '../components/Upload';
 
 
 
@@ -17,38 +19,13 @@ const Create = () => {
   const [duration, setDuration] = useState("");
   const [desc, setDesc] = useState("");
   const [skills, setSkills] = useState([]);
+  const [deadline, setDeadline] = useState(""); // State for deadline
+  const [jobDescription, setJD] = useState("");
+  const [Save_active,setDisable] =useState(false);
 
-  // HATAYA NAHI HAI INCASE YOU NEED A TEMPLATE
-  //const onSubmit =(e) =>{
-  //    console.log('Submit pressed')
-  //    e.preventDefault()
-  //
-  //
-  //
-  //    const id = localStorage.getItem("idToken");
-  //    console.log(id);
-  //    // Check if idToken is null or undefined before making the request
-  //    if (id) {
-  //      axios.put('http://localhost:3001/updateDetails', { "name":name, "batch_year": gradYear }, {
-  //        headers: {
-  //          "authorization": `${id}`
-  //        }
-  //      })
-  //        .then(response => {
-  //          console.log(response.data); // Logging the response data to console
-  //          navigate('/home');
-  //        })
-  //        .catch(error => {
-  //          console.error('Error fetching data:', error);
-  //        });
-  //    } else {
-  //      console.error('idToken is null or undefined');
-  //    }
-  //
-  //
-  //    setName('')
-  //    setYear('')
-  //}
+  const handleUpload = (url) => {
+    setJD(url);
+  };
 
   const handleSkillChange = (index, value) => {
     const newSkills = [...skills];
@@ -66,6 +43,11 @@ const Create = () => {
     setSkills(newSkills);
   };
 
+  const handleDeadlineChange = (e) => {
+    setDeadline(e.target.value);
+    console.log("Dead date: ",e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Filter out empty skills
@@ -81,8 +63,8 @@ const Create = () => {
     if (id) {
       axios
         .post(
-          "https://se-project-backend-fard.onrender.com/newProject",
-          { title, pay, duration, description: desc, skills: filteredSkills },
+          `${process.env.REACT_APP_BACKEND_URL}/newProject`,
+          { title, pay, duration, description: desc, skills: filteredSkills, deadline, jobDescription},
           {
             headers: {
               authorization: `${id}`,
@@ -91,21 +73,53 @@ const Create = () => {
         )
         .then((response) => {
           console.log(response.data); // Logging the response data to console
-          navigate("/home");
+          toast.success('Project Posted Successfully', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+            navigate("/home");
         })
         .catch((error) => {
           if(error.response.status===401)
                 {
-                    console.log("Unauth")
+                    console.log("Unauth");
+                    toast.error('Logged Out', {
+                      position: "top-center",
+                      autoClose: 1000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: false,
+                      draggable: false,
+                      progress: undefined,
+                      theme: "dark",
+                      });
                     localStorage.clear();
                     navigate("/");
                 }
           console.error("Error fetching data:", error);
+          
+          toast.error('Error Fetching Data', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+
         });
     } else {
       console.error("idToken is null or undefined");
     }
-    alert("Project Posted");
+    
 
     setPay("");
     setDuration("");
@@ -139,7 +153,7 @@ return (
           </button>
         </div>
       </div>
-      <form onSubmit={handleSubmit}>
+      <div>
         <div className="mb-3">
           <label className="form-label">Title:</label>
           <input
@@ -157,6 +171,13 @@ return (
             onChange={(e) => setDesc(e.target.value)}
           ></textarea>
         </div>
+        <div className="mb-3">
+          <label className="form-label">Job Description:</label>
+        
+          <Upload handleUpload={handleUpload} saveBtn_State={setDisable}/>
+          
+        </div>
+        
         <div className="mb-3">
   <div className="d-flex">
     <div className="me-3">
@@ -179,6 +200,17 @@ return (
     </div>
   </div>
 </div>
+          <div className="mb-3">
+            <label className="form-label"> Application Deadline:</label>
+            <input
+              type="date"
+              className="form-control"
+              value={deadline}
+              onChange={handleDeadlineChange}
+              min={new Date().toISOString().split("T")[0]} 
+              required
+            />
+          </div>
 
         <div className="mb-3">
         <label className="form-label skills-textarea">Skills:</label>
@@ -200,6 +232,7 @@ return (
           </div>
         ))}
       </div>
+      
       <div className="mb-3">
         <button
           type="button"
@@ -208,11 +241,13 @@ return (
         >
           Add Skill
         </button>
-        <button type="submit" className="btn2">
+        
+
+        <button type="submit" className="btn2" onClick={handleSubmit}>
           Submit
         </button>
       </div>
-    </form>
+    </div>
   </div>
   </div>
     

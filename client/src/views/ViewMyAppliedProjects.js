@@ -5,11 +5,16 @@ import { BsChevronLeft } from "react-icons/bs";
 import '../views/view_applied.css';
 import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const ViewMyAppliedProjects = () => {
   const navigate = useNavigate();
   const id = localStorage.getItem('idToken');
   const [projects, setProjects] = useState([]);
+  const [rejects, setRejects] = useState([]);
+  const [loading, setLoading] = useState(true); // State for loading projects
+  const [rejLoad, setRejLoading] = useState(true);
 
   const goBack = () => {
     navigate('/home');
@@ -21,26 +26,67 @@ const ViewMyAppliedProjects = () => {
   };
 
   useEffect(() => {
+    displayDetails();
+      }, []);
+
+  const deletePendingApplication =(projectId) =>{
+
     axios
-      .get("https://se-project-backend-fard.onrender.com/myAppliedProjects", {
-        headers: {
-          authorization: `${id}`,
-        },
-      })
+      .delete(`${process.env.REACT_APP_BACKEND_URL}/deleteApplication/${projectId}`,
+        { headers: { authorization: `${id}` } })
       .then((response) => {
-        console.log(response.data);
-        setProjects(response.data);
+        displayDetails();
+        toast.success('Successfully Retracted Application', { position: "top-center", autoClose: 1000, hideProgressBar: true, closeOnClick: true, pauseOnHover: false, draggable: false, progress: undefined, theme: "dark" });
       })
       .catch((error) => {
-        if(error.response.status===401)
-                {
-                    console.log("Unauth")
-                    localStorage.clear();
-                    navigate("/");
-                }
-        console.error("Error fetching projects:", error);
+        toast.error('Oh ohhh. Sorry! ', { position: "top-center", autoClose: 1000, hideProgressBar: true, closeOnClick: true, pauseOnHover: false, draggable: false, progress: undefined, theme: "dark" });
       });
-  }, []);
+  };
+
+  const displayDetails=()=>{
+    axios
+    .get(`${process.env.REACT_APP_BACKEND_URL}/myAppliedProjects`, {
+      headers: {
+        authorization: `${id}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      setProjects(response.data);
+      setLoading(false); // Turn off loading spinner when projects are fetched
+    })
+    .catch((error) => {
+      setLoading(false); // Turn off loading spinner in case of error
+      if (error.response.status === 401) {
+        console.log("Unauth");
+        localStorage.clear();
+        navigate("/");
+      }
+      console.error("Error fetching projects:", error);
+    });
+
+    axios
+    .get(`${process.env.REACT_APP_BACKEND_URL}/myRejectedProjects`, {
+      headers: {
+        authorization: `${id}`,
+      },
+    })
+    .then((response) => {
+      console.log(response.data);
+      setRejects(response.data);
+      setRejLoading(false); // Turn off loading spinner when projects are fetched
+    })
+    .catch((error) => {
+      setRejLoading(false); // Turn off loading spinner in case of error
+      if (error.response.status === 401) {
+        console.log("Unauth");
+        localStorage.clear();
+        navigate("/");
+      }
+      console.error("Error fetching projects:", error);
+    });
+
+  };
 
   return (
     <div>
@@ -52,17 +98,16 @@ const ViewMyAppliedProjects = () => {
             <BsChevronLeft size={24} />
           </button>
         </div>
-        {/* <div className="col-auto">
-          <button className="btn btn-danger" onClick={logout}>
-            Logout
-          </button>
-        </div> */}
       </div>
-
-      <h1 class="with-margin1">Your Applied Projects</h1>
-
+  
+      <h1 className="with-margin1">Your Pending Applications</h1>
+  
       <div>
-        {projects.length > 0 ? (
+        {loading ? ( // Render spinner while loading is true
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : projects.length > 0 ? (
           projects.map((prj) => (
             <div key={prj._id} className="project-item2">
               <div className="project-item-content1">
@@ -71,7 +116,58 @@ const ViewMyAppliedProjects = () => {
                 <p>
                   <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
                 </p>
-
+  
+                {prj.skills.length > 0 ? (
+                  <div className="skills">
+                    {prj.skills.map((skill, index) => (
+                      <p
+                        key={index}
+                        className="badge"
+                        style={{
+                          backgroundColor: '#F5F2F7',
+                          borderRadius: '30px',
+                          color: '#64556D',
+                          fontSize: '1.5rem',
+                          fontWeight: 'lighter',
+                          display: 'inline-block'
+                        }}
+                      >
+                        {skill}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  "No specific skill requirement"
+                )}
+              </div>
+              <div className="project-actions">
+                {/* Add Delete button */}
+                <button className="btn btn-danger" onClick={() => deletePendingApplication(prj._id)}>Retract</button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>You have not applied to any projects yet. Keep searching for your passion :)</p>
+        )}
+      </div>
+      
+      <h1 className="with-margin1">Your Rejected Applications</h1>
+  
+      <div>
+        {rejLoad ? ( // Render spinner while loading is true
+          <div className="spinner-border" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : rejects.length > 0 ? (
+          rejects.map((prj) => (
+            <div key={prj._id} className="project-item2">
+              <div className="project-item-content1">
+                <h3>{prj.title}</h3>
+                <p>{prj.description}</p>
+                <p>
+                  <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
+                </p>
+  
                 {prj.skills.length > 0 ? (
                   <div className="skills">
                     {prj.skills.map((skill, index) => (
@@ -98,12 +194,13 @@ const ViewMyAppliedProjects = () => {
             </div>
           ))
         ) : (
-          <p>You have not applied to any projects yet. Keep searching for your passion :)</p>
+          <p>You have not been rejected from a projects yet. Yay</p>
         )}
       </div>
     </div>
     </div>
   );
+  
 };
 
 export default ViewMyAppliedProjects;

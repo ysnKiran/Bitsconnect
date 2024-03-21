@@ -4,8 +4,17 @@ const ProjectSchema = mongoose.Schema({
   alumni_id: {
     type: mongoose.Schema.Types.ObjectId,
   },
+  alumni_name:{
+    type:String,
+    require:true
+  },
+  alumni_email:{
+    type:String,
+    require:true
+  },
   title: {
     type: String,
+    require:true
   },
   pay: {
     type: Number,
@@ -42,6 +51,22 @@ const ProjectSchema = mongoose.Schema({
       },
     },
   ],
+  rejected_users: [
+    {
+      _id: false,
+      user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+      },
+    },
+  ],
+  deadline:{
+    type:Date,
+    require: true
+  },
+  jobDescription:{
+    type:String,
+    required:true
+  }
 });
 
 const ProjectModel = mongoose.model("Project", ProjectSchema);

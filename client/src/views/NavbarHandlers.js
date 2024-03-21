@@ -39,6 +39,11 @@ const Navbar = () => {
     navigate("/selected-projects");
   };
 
+  const ViewMyProjects = () => {
+    console.log("View My Projects");
+    navigate("/my-projects");
+  };
+
   const Profile = () => {
     console.log("View Profile");
     navigate("/profile");
@@ -77,7 +82,10 @@ const Navbar = () => {
               <button className="nav-link btn btn-primary mx-2" onClick={ViewAppliedProjects}>Applied</button>
             </li>
             <li className="nav-item">
-              <button className="nav-link btn btn-primary mx-2" onClick={ViewSelectedProjects}>Selected Projects</button>
+              <button className="nav-link btn btn-primary mx-2" onClick={ViewSelectedProjects}>Selected</button>
+            </li>
+            <li className="nav-item">
+              <button className="nav-link btn btn-primary mx-2" onClick={ViewMyProjects}>MyProjects</button>
             </li>
             <li className="nav-item">
               <button className="nav-link btn btn-primary mx-2 rounded-circle profile-button" onClick={Profile}>

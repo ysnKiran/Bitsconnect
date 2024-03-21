@@ -42,6 +42,15 @@ const UserSchema = mongoose.Schema({
       }
     },
   ],
+
+  rejected_projects: [
+    {
+      _id: false,
+      project_id:{
+        type: mongoose.Schema.Types.ObjectId,
+      }
+    },
+  ],
 });
 
 const UserModel = mongoose.model("Users", UserSchema);

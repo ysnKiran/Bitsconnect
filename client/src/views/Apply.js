@@ -5,6 +5,8 @@ import { BsChevronLeft } from "react-icons/bs";
 import '../views/apply.css';
 import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 const Apply = () => {
@@ -42,7 +44,7 @@ const Apply = () => {
           if (id) {
             axios
               .post(
-                "https://se-project-backend-fard.onrender.com/apply",
+                `${process.env.REACT_APP_BACKEND_URL}/apply`,
                 { project_id:prj_id, proposal},
                 {
                   headers: {
@@ -51,18 +53,49 @@ const Apply = () => {
                 }
               )
               .then((response) => {
-                alert('Successfully applied for project ID');
+                //alert('Successfully applied for project ID');
                 console.log(response.data); // Logging the response data to console
+                toast.success('Applied Successfully', {
+                  position: "top-center",
+                  autoClose: 1000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  progress: undefined,
+                  theme: "dark",
+                  });
                 navigate("/home");
               })
               .catch((error) => {
                 if(error.response.status===401)
                 {
                     console.log("Unauth")
+                    toast.error('Logged Out', {
+                      position: "top-center",
+                      autoClose: 1000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: false,
+                      draggable: false,
+                      progress: undefined,
+                      theme: "dark",
+                      });
                     localStorage.clear();
                     navigate("/");
                 }
                 console.error("Error fetching data:", error);
+                toast.error('Already Applied', {
+                  position: "top-center",
+                  autoClose: 1000,
+                  hideProgressBar: true,
+                  closeOnClick: true,
+                  pauseOnHover: false,
+                  draggable: false,
+                  progress: undefined,
+                  theme: "dark",
+                  });
+                navigate("/home");
               });
           } else {
             console.error("idToken is null or undefined");

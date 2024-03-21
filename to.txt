@@ -1,7 +1,55 @@
 PROBLEMS:
 
-1) Font Issues
-2) Applications Page only updates when I click on any one Project in Dropdown menu
-3) Resume Link is shown in Applications Page and not the Button to view it 
-4) Projects don't show the owner and don't have JD
-5) Applications Page doesn't show who applied for what project and doesn't show the proposal  
+SPRINT 2-1:
+
+SignIn:
+- Sign-in failed: popup (Location: handleClick)
+- sendUserDataToBackend: popup (Location: sendUserDataToBackend)
+
+
+
+HomePage.js
+- Need loader for projects list
+- Additional info for projects (Owner,email)
+- Popup for errors
+
+
+Create.js
+
+- Popup
+
+
+Applications.js
+- Loading spinner
+- Select Bar change
+- Popup 
+
+
+AppliedProject.js
+- spinner
+
+
+Profile.js
+- spinner
+
+
+
+
+SPRINT 2-2
+
+
+Profile.js/Register.js/Create.js:
+- - (((?????))) Upload button changes [SANJANA]
+- Add deadline and JD field to Projects
+- - Add deadline field for application
+
+- Add JD PDF field for Create.js
+- Add more info about projects
+
+- Reject Applications
+- Pending/Rejected/Selected
+--------------------------------------------------------
+
+- Update Project Details
+- Delete Projects
+- Delete/retract Application

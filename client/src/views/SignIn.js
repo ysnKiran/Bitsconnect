@@ -7,6 +7,9 @@ import '../views/SignIn.css';
 import blogo from '../assets/bg2.svg'
 import glogo from '../assets/glogo.png'
 import '../views/global.css';
+import {ToastContainer, toast} from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+
 
 function SignIn() {
   const [user, setUser] = useState(null);
@@ -31,10 +34,31 @@ function SignIn() {
           localStorage.setItem("email", email);
           sendUserDataToBackend(displayName, email, idToken);
         });
+        
+        toast.success('Signed In Successfully', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+          });
         // localStorage.setItem("idToken",id);
       })
       .catch((error) => {
         console.error("Sign-in failed:", error);
+        toast.error('Sign In Unsuccessful', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+          });
       });
   };
 
@@ -42,7 +66,7 @@ function SignIn() {
     console.log("Sending data to backend");
     axios
       .post(
-        "https://se-project-backend-fard.onrender.com/auth",
+        `${process.env.REACT_APP_BACKEND_URL}/auth`,
         {
           name,
           email,
@@ -66,6 +90,16 @@ function SignIn() {
       })
       .catch((error) => {
         console.error("Error sending user data to backend:", error);
+        toast.error('Error sending user data to backend', {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+          });
       });
   };
 
