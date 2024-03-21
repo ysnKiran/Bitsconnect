@@ -1,3 +1,5 @@
+BACKEND URL: https://se-project-backend-fard.onrender.com
+
 PROBLEMS:
 
 SPRINT 2-1:
@@ -48,8 +50,20 @@ Profile.js/Register.js/Create.js:
 
 - Reject Applications
 - Pending/Rejected/Selected
---------------------------------------------------------
 
 - Update Project Details
 - Delete Projects
 - Delete/retract Application
+
+--------------------------------------------------------
+
+SPRINT 2-3
+
+- Add Search/Filter for projects in frontend 
+- Add Search/Filter for projects in backend 
+- Add Notifs for selection/rejection of application and successfull application
+
+
+SPRINT 2-4
+
+- Add Chat Feature along with Notifs for each message

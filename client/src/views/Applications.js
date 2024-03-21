@@ -69,6 +69,7 @@ const Applications = () => {
 
   const getApplications = (projectId) => {
     setLoadingApplications(true); // Turn on loading spinner for applications
+    setSelProId(projectId);
     const user_id = localStorage.getItem("idToken");
 
     axios
@@ -159,6 +160,8 @@ const Applications = () => {
   };
 
   const SelectUser = (user_id) => {
+    console.log(user_id);
+    console.log(selectedProjectId);
     setLoadingSelectedApplications(true); // Turn on loading spinner for selected applications
     const id = localStorage.getItem("idToken");
 
