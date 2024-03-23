@@ -16,7 +16,9 @@ function Home() {
   const navigate = useNavigate();
 
   const [projects, setProjects] = useState([]);
+  const [copyProjects, setCopy] = useState([]);
   const [loading, setLoading] = useState(true); // State to manage loading state
+  const [searchQuery, setSearchQuery] = useState(""); // State to manage search query
   const id = localStorage.getItem("idToken");
 
   useEffect(() => {
@@ -31,6 +33,12 @@ function Home() {
         console.log(response.data);
         // Set the fetched projects to state
         setProjects(response.data);
+        console.log("Initial:",response.data);
+
+        // Set Copy
+        setCopy(response.data);
+        console.log(response.data);
+        setSearchQuery("");
         setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
@@ -64,6 +72,24 @@ function Home() {
           });
       });
   }, []);
+
+  // Search
+  const handleChange=(target)=>{
+    console.log("Value entered, ",target);
+    setSearchQuery(target);
+    if (target === "") {
+      // If search query is empty, reset to display all projects
+      setCopy(projects);
+    } else {
+      // Otherwise, filter projects based on search query
+      const filtered = projects.filter((project) =>
+        project.title.toLowerCase().includes(target.toLowerCase()) ||
+        project.description.toLowerCase().includes(target.toLowerCase())
+      );
+      setCopy(filtered);
+      console.log("Filtered: ",filtered);
+    }
+  }
 
   const scrollToProjects = () => {
     document.getElementById("projects-section").scrollIntoView({ behavior: "smooth" });
@@ -143,9 +169,17 @@ function Home() {
             <h1 style={{ fontWeight: 600, fontFamily: 'ClashDisplay-Variable', fontSize: '60px' }}>PROJECTS</h1>
           </div>
           <div className="project-container"> 
+            <div className="search-bar">
+            <input
+              type="text"
+              placeholder="Search projects by title or description"
+              value={searchQuery}
+              onChange={(e)=>handleChange(e.target.value)}
+            />
+          </div>
             <ul className="project-list">
-              {projects.length > 0 ? (
-                projects.map((prj) => (
+              {copyProjects.length > 0 ? (
+                copyProjects.map((prj) => (
                   <li key={prj._id} className="project-item">
                     <div className="project-item-content">
                       <h3>{prj.title}</h3>

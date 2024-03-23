@@ -35,7 +35,6 @@ exports.createProject = async (req, res) => {
     const { pay, duration, description, skills, title, deadline, jobDescription } = req.body;
     const deadlineDate = new Date(deadline);
     let project;
-
     const user = await User.findOne({ email: email });
     if (user) {
       const alumni_id = user._id;
@@ -60,11 +59,10 @@ exports.createProject = async (req, res) => {
         jobDescription,
       });
       await project.save();
-
       const subject = 'Project Created Successfully';
       const body = `Dear "${alumni_name}",
 
-      Your project "${projectName}" has been successfully created.
+      Your project "${title}" has been successfully created.
       
       Project Description:
       ${description}
