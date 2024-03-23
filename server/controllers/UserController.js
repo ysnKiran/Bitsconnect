@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const admin = require("firebase-admin");
 const Project = require("../models/Project");
+const { sendEmail } = require('../service/emailService'); 
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -100,6 +101,9 @@ exports.applyForProject = async (req, res) => {
     const user = await User.findOne({ email: email });
     const { project_id, proposal } = req.body;
     const project = await Project.findOne({ _id: project_id });
+    const projectName = project.title;
+    const email2 =project.alumni_email;
+    const alumni =project.alumni_name;
 
     if (user && project) {
       const alreadyApplied = user.applied_projects.some(
@@ -119,6 +123,32 @@ exports.applyForProject = async (req, res) => {
       await user.save();
       project.applied_users.push({ user_id: user._id });
       await project.save();
+
+      const subject = 'Application Successful';
+      const body = `Dear User,
+
+      We're pleased to inform you that your application for the project "${projectName}" has been successfully submitted.
+
+      Thank you for your interest in the project. "${project.alumni_name}" review your application and get back to you soon.
+
+      Best regards,
+      BITSConnect`;
+
+      await sendEmail(email, subject, body);
+
+      const subject2 = 'New Application';
+      const body2 = `Dear "${project.alumni_name}",
+
+      You have a new application for your project "${projectName}".
+      
+      Please review the application and take appropriate action.
+      
+      Best regards,
+      BITSConnect`;
+      console.log("Subject:",subject2);
+
+      await sendEmail(email2, subject2, body2);
+
       return res.status(200).json({ message: "Applied Successfully" });
     } else {
       return res.status(400).json({ message: "User not found" });

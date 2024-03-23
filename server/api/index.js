@@ -10,11 +10,18 @@ const serviceAccount = require("../auth.json");
 const userRoutes = require("../routes/userRoutes");
 const projRoutes = require("../routes/projectRoutes");
 app.use(express.json());
+const AWS = require('aws-sdk');
 
 app.use(cors());
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
+});
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION // Set your AWS region
 });
 
 mongoose.connect(process.env.DATABASE_URL);

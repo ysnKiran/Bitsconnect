@@ -1,6 +1,7 @@
 const Project = require("../models/Project");
 const admin = require("firebase-admin");
 const User = require("../models/User");
+const { sendEmail } = require('../service/emailService'); 
 
 exports.getAllProjects = async (req, res) => {
   try {
@@ -59,6 +60,22 @@ exports.createProject = async (req, res) => {
         jobDescription,
       });
       await project.save();
+
+      const subject = 'Project Created Successfully';
+      const body = `Dear "${alumni_name}",
+
+      Your project "${projectName}" has been successfully created.
+      
+      Project Description:
+      ${description}
+      
+      Thank you for creating this project.
+      
+      Best regards,
+      BITSConnect`;
+      console.log("Subject:",subject);
+      await sendEmail(email, subject, body);
+
       console.log(project);
     } else {
       res.status(400).json({ message: "User Not Found" });
@@ -161,7 +178,21 @@ exports.changeSelectToApply = async (req, res) => {
         },
         { new: true }
       );
+      
+      const subject = 'Your Application has been Selected';
+      const body = `
+        Dear ${user.name},
 
+        Congratulations! Your application for the project "${project.title}" has been selected.
+        
+        Thank you for your interest and participation in our project. We look forward to working with you.
+        
+        Best regards,
+        BITSConnect
+      `;
+      console.log("Subject:",subject);
+      await sendEmail(user.email, subject, body);
+      
       res.status(200).json({ message: "User selected successfully" });
     } else {
       res
@@ -206,6 +237,18 @@ exports.changeSelectToReject = async (req, res) => {
         },
         { new: true }
       );
+      
+      const subject = 'Your Application has been Rejected';
+      const body = `Dear ${user.name},
+
+      We regret to inform you that your application for the project "${project.title}" has been rejected.
+      
+      Thank you for your interest and participation in our project. We appreciate your effort and encourage you to apply for future opportunities.
+      
+      Best regards,
+      BITSConnect`;
+      console.log("Subject:",subject);
+      await sendEmail(user.email, subject, body);
 
       res.status(200).json({ message: "User rejected successfully" });
     } else {
