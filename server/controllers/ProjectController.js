@@ -1,6 +1,7 @@
 const Project = require("../models/Project");
 const admin = require("firebase-admin");
 const User = require("../models/User");
+const { sendEmail } = require('../service/emailService'); 
 
 exports.getAllProjects = async (req, res) => {
   try {
@@ -25,6 +26,59 @@ exports.getAllProjects = async (req, res) => {
   }
 };
 
+exports.filterProjects = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    const user_id = user._id;
+
+    // Extract filters from request body
+    const { minPay, maxPay, minDuration, maxDuration, skills } = req.body;
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Construct query object
+    const query = {
+      alumni_id: { $ne: user_id },
+      deadline: { $gt: currentDate }
+    };
+
+    // Add filters based on minimum and maximum pay
+    if (minPay !== undefined && maxPay !== undefined) {
+      query.pay = { $gte: minPay, $lte: maxPay };
+    } else if (minPay !== undefined) {
+      query.pay = { $gte: minPay };
+    } else if (maxPay !== undefined) {
+      query.pay = { $lte: maxPay };
+    }
+
+    // Add filters based on minimum and maximum duration
+    if (minDuration !== undefined && maxDuration !== undefined) {
+      query.duration = { $gte: minDuration, $lte: maxDuration };
+    } else if (minDuration !== undefined) {
+      query.duration = { $gte: minDuration };
+    } else if (maxDuration !== undefined) {
+      query.duration = { $lte: maxDuration };
+    }
+
+    // Add filter based on skills
+    if (skills && skills.length > 0) {
+      query.skills = { $in: skills }; // Projects must contain any one of the specified skills
+    }
+
+    // Find projects matching the query
+    const projects = await Project.find(query);
+
+    res.status(200).json(projects);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+
+
 
 exports.createProject = async (req, res) => {
   try {
@@ -34,7 +88,6 @@ exports.createProject = async (req, res) => {
     const { pay, duration, description, skills, title, deadline, jobDescription } = req.body;
     const deadlineDate = new Date(deadline);
     let project;
-
     const user = await User.findOne({ email: email });
     if (user) {
       const alumni_id = user._id;
@@ -59,6 +112,21 @@ exports.createProject = async (req, res) => {
         jobDescription,
       });
       await project.save();
+      const subject = 'Project Created Successfully';
+      const body = `Dear "${alumni_name}",
+
+      Your project "${title}" has been successfully created.
+      
+      Project Description:
+      ${description}
+      
+      Thank you for creating this project.
+      
+      Best regards,
+      BITSConnect`;
+      console.log("Subject:",subject);
+      await sendEmail(email, subject, body);
+
       console.log(project);
     } else {
       res.status(400).json({ message: "User Not Found" });
@@ -161,7 +229,21 @@ exports.changeSelectToApply = async (req, res) => {
         },
         { new: true }
       );
+      
+      const subject = 'Your Application has been Selected';
+      const body = `
+        Dear ${user.name},
 
+        Congratulations! Your application for the project "${project.title}" has been selected.
+        
+        Thank you for your interest and participation in our project. We look forward to working with you.
+        
+        Best regards,
+        BITSConnect
+      `;
+      console.log("Subject:",subject);
+      await sendEmail(user.email, subject, body);
+      
       res.status(200).json({ message: "User selected successfully" });
     } else {
       res
@@ -206,6 +288,18 @@ exports.changeSelectToReject = async (req, res) => {
         },
         { new: true }
       );
+      
+      const subject = 'Your Application has been Rejected';
+      const body = `Dear ${user.name},
+
+      We regret to inform you that your application for the project "${project.title}" has been rejected.
+      
+      Thank you for your interest and participation in our project. We appreciate your effort and encourage you to apply for future opportunities.
+      
+      Best regards,
+      BITSConnect`;
+      console.log("Subject:",subject);
+      await sendEmail(user.email, subject, body);
 
       res.status(200).json({ message: "User rejected successfully" });
     } else {

@@ -11,5 +11,6 @@ router.post("/applyUser",ProjectController.changeSelectToApply);
 router.post("/rejectUser",ProjectController.changeSelectToReject);
 router.put("/updateProject/:project_id", ProjectController.updateProject);
 router.delete("/deleteProject/:project_id", ProjectController.deleteProject);
+router.post('/filter', ProjectController.filterProjects);
 
 module.exports = router;

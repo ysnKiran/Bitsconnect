@@ -55,15 +55,25 @@ Profile.js/Register.js/Create.js:
 - Delete Projects
 - Delete/retract Application
 
---------------------------------------------------------
 
 SPRINT 2-3
 
+- Add Notifs for selection/rejection of application and successfull application
+
+--------------------------------------------------------
+
 - Add Search/Filter for projects in frontend 
 - Add Search/Filter for projects in backend 
-- Add Notifs for selection/rejection of application and successfull application
 
 
 SPRINT 2-4
 
-- Add Chat Feature along with Notifs for each message
+- Add Chat Feature
+
+Twilio: H46JN94PBSDRHY28ZNBD3LN6
+
+
+Project Created -> 1) PO ----------------- done
+Application -> 1) Applicant gets a mail 2) PO gets a mail -------------- done
+Selection -> 1) Applicant -- done
+Rejection -> 1) Applicant -- done
