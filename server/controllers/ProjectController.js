@@ -26,6 +26,59 @@ exports.getAllProjects = async (req, res) => {
   }
 };
 
+exports.filterProjects = async (req, res) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const decodedToken = await admin.auth().verifyIdToken(authHeader);
+    const email = decodedToken.email;
+    const user = await User.findOne({ email: email });
+    const user_id = user._id;
+
+    // Extract filters from request body
+    const { minPay, maxPay, minDuration, maxDuration, skills } = req.body;
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Construct query object
+    const query = {
+      alumni_id: { $ne: user_id },
+      deadline: { $gt: currentDate }
+    };
+
+    // Add filters based on minimum and maximum pay
+    if (minPay !== undefined && maxPay !== undefined) {
+      query.pay = { $gte: minPay, $lte: maxPay };
+    } else if (minPay !== undefined) {
+      query.pay = { $gte: minPay };
+    } else if (maxPay !== undefined) {
+      query.pay = { $lte: maxPay };
+    }
+
+    // Add filters based on minimum and maximum duration
+    if (minDuration !== undefined && maxDuration !== undefined) {
+      query.duration = { $gte: minDuration, $lte: maxDuration };
+    } else if (minDuration !== undefined) {
+      query.duration = { $gte: minDuration };
+    } else if (maxDuration !== undefined) {
+      query.duration = { $lte: maxDuration };
+    }
+
+    // Add filter based on skills
+    if (skills && skills.length > 0) {
+      query.skills = { $in: skills }; // Projects must contain any one of the specified skills
+    }
+
+    // Find projects matching the query
+    const projects = await Project.find(query);
+
+    res.status(200).json(projects);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+
+
 
 exports.createProject = async (req, res) => {
   try {

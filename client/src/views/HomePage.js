@@ -10,6 +10,9 @@ import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
 import {ToastContainer, toast} from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import Select from 'react-select';
+import { BsSliders } from 'react-icons/bs';
+import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
 
 
 function Home() {
@@ -20,6 +23,21 @@ function Home() {
   const [loading, setLoading] = useState(true); // State to manage loading state
   const [searchQuery, setSearchQuery] = useState(""); // State to manage search query
   const id = localStorage.getItem("idToken");
+
+  // Filter
+  const [minPay,setMinPay] =useState(0);
+  const [maxPay,setMaxPay] =useState(0);
+  const [minDuration, setMinDuration] =useState(0);
+  const [maxDuration, setMaxDuration] =useState(0);
+  const [skills, setSkills]=useState([]);
+
+  // Range Master
+
+  const [mP,setmP]=useState(0);
+  const [MP,setMP]=useState(0);
+  const [mD,setmD]=useState(0);
+  const [MD,setMD]=useState(0);
+  const [selectedSkills,setSelSkills]=useState([]);
 
   useEffect(() => {
     // Fetch projects when the component mounts
@@ -39,6 +57,35 @@ function Home() {
         setCopy(response.data);
         console.log(response.data);
         setSearchQuery("");
+
+        //Filter 
+        setMinPay(Math.min(...response.data.map(project => project.pay)));
+        setMaxPay(Math.max(...response.data.map(project => project.pay)));
+        setMinDuration(Math.min(...response.data.map(project => project.duration)));
+        setMaxDuration(Math.max(...response.data.map(project => project.duration)));
+
+        // Extract unique skills from the projects
+        const allSkills = response.data.reduce((acc, project) => {
+          project.skills.forEach(skill => {
+            if (!acc.includes(skill)) {
+              acc.push(skill);
+            }
+          });
+          return acc;
+        }, []);
+
+        // Map skills to options format
+        const skillOptions = allSkills.map(skill => ({ value: skill, label: skill }));
+        setSkills(skillOptions);
+        
+
+        //Range Major
+        setmP(minPay);
+        setMP(Math.max(...response.data.map(project => project.pay))); 
+        setmD(minDuration);
+        setMD(Math.max(...response.data.map(project => project.duration)));
+        
+
         setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {
@@ -91,6 +138,63 @@ function Home() {
     }
   }
 
+  const StartFilter = () =>{
+    console.log(mP,MP,mD,MD,selectedSkills);
+
+    axios
+        .post(
+          `${process.env.REACT_APP_BACKEND_URL}/filter`,
+          {  minPay:mP, maxPay:MP, minDuration:mD, maxDuration:MD, skills:selectedSkills },
+          {
+            headers: {
+              authorization: `${id}`,
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response.data); // Logging the response data to console
+          setProjects(response.data);
+          console.log("Filtered:",response.data);
+
+          // Set Copy
+          setCopy(response.data);
+          console.log(response.data);
+          setSearchQuery("");
+        })
+        .catch((error) => {
+          if(error.response.status===401)
+                {
+                    console.log("Unauth");
+                    toast.error('Logged Out', {
+                      position: "top-center",
+                      autoClose: 1000,
+                      hideProgressBar: true,
+                      closeOnClick: true,
+                      pauseOnHover: false,
+                      draggable: false,
+                      progress: undefined,
+                      theme: "dark",
+                      });
+                    localStorage.clear();
+                    navigate("/");
+                }
+          console.error("Error fetching data:", error);
+          
+          toast.error('Error Fetching Data', {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+            });
+
+        });
+
+  }
+
   const scrollToProjects = () => {
     document.getElementById("projects-section").scrollIntoView({ behavior: "smooth" });
   };
@@ -129,6 +233,13 @@ function Home() {
     console.log("View Profile");
     navigate("/profile");
   };
+
+  const handleSkillChange = (selectedOptions) => {
+    
+    // Updating the state variable with the selected skills
+    setSelSkills(selectedOptions.map(option => option.value));
+  };
+  
 
   return (
     <div>
@@ -176,6 +287,76 @@ function Home() {
               value={searchQuery}
               onChange={(e)=>handleChange(e.target.value)}
             />
+            
+            {/*Inside your component's JSX*/}
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              <BsSliders /> {/* Use the imported icon component */}
+            </button>
+
+            
+            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">Filter</h1>
+                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                      <div className="modal-body">
+                      <label htmlFor="pay">Pay:</label>
+                      <div className="input-group mb-3">
+                        <span className="input-group-text" id="basic-addon1">{minPay}</span>
+                        <MultiRangeSlider
+				              	min={minPay}
+				              	max={maxPay}
+				              	step={100}
+				              	minValue={mP}
+				              	maxValue={MP}
+				              	onInput={(e: ChangeResult) => {
+				              		setmP(e.minValue);
+				              		setMP(e.maxValue);
+				              	}}
+				              ></MultiRangeSlider>
+
+                        <span className="input-group-text" id="basic-addon1">{maxPay}</span>
+                      </div>
+                      
+                      <br />
+                      <label htmlFor="duration">Duration:</label>
+                      <div className="input-group mb-3">
+                      <span className="input-group-text" id="basic-addon1">{minDuration}</span>
+                      
+                      <MultiRangeSlider
+				              	min={minDuration}
+				              	max={maxDuration}
+				              	step={5}
+				              	minValue={mD}
+				              	maxValue={MD}
+				              	onInput={(e: ChangeResult) => {
+				              		setmD(e.minValue);
+				              		setMD(e.maxValue);
+				              	}}
+				              ></MultiRangeSlider>
+
+                      <span className="input-group-text" id="basic-addon1">{maxDuration}</span>
+                      </div>
+
+                      <br />
+                      <label htmlFor="skills">Skills:</label>
+                      <Select
+                        isMulti
+                        name="skills"
+                        options={skills}
+                        onChange={handleSkillChange}
+                      />
+                  </div>
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary" onClick={StartFilter} data-bs-dismiss="modal">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
             <ul className="project-list">
               {copyProjects.length > 0 ? (
