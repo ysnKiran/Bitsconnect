@@ -24,19 +24,21 @@ function Home() {
   const [searchQuery, setSearchQuery] = useState(""); // State to manage search query
   const id = localStorage.getItem("idToken");
 
+  
+
   // Filter
   const [minPay,setMinPay] =useState(0);
-  const [maxPay,setMaxPay] =useState(0);
+  const [maxPay,setMaxPay] =useState(100);
   const [minDuration, setMinDuration] =useState(0);
-  const [maxDuration, setMaxDuration] =useState(0);
+  const [maxDuration, setMaxDuration] =useState(100);
   const [skills, setSkills]=useState([]);
 
   // Range Master
 
   const [mP,setmP]=useState(0);
-  const [MP,setMP]=useState(0);
+  const [MP,setMP]=useState(100);
   const [mD,setmD]=useState(0);
-  const [MD,setMD]=useState(0);
+  const [MD,setMD]=useState(100);
   const [selectedSkills,setSelSkills]=useState([]);
 
   useEffect(() => {
@@ -51,41 +53,43 @@ function Home() {
         console.log(response.data);
         // Set the fetched projects to state
         setProjects(response.data);
-        console.log("Initial:",response.data);
+        if(response.data.length>0)
+        {
+          console.log("Initial:",response.data);
 
-        // Set Copy
-        setCopy(response.data);
-        console.log(response.data);
-        setSearchQuery("");
-
-        //Filter 
-        setMinPay(Math.min(...response.data.map(project => project.pay)));
-        setMaxPay(Math.max(...response.data.map(project => project.pay)));
-        setMinDuration(Math.min(...response.data.map(project => project.duration)));
-        setMaxDuration(Math.max(...response.data.map(project => project.duration)));
-
-        // Extract unique skills from the projects
-        const allSkills = response.data.reduce((acc, project) => {
-          project.skills.forEach(skill => {
-            if (!acc.includes(skill)) {
-              acc.push(skill);
-            }
-          });
-          return acc;
-        }, []);
-
-        // Map skills to options format
-        const skillOptions = allSkills.map(skill => ({ value: skill, label: skill }));
-        setSkills(skillOptions);
+          // Set Copy
+          setCopy(response.data);
+          console.log(response.data);
+          setSearchQuery("");
+  
+          //Filter 
+          setMinPay(Math.min(...response.data.map(project => project.pay)));
+          setMaxPay(Math.max(...response.data.map(project => project.pay)));
+          setMinDuration(Math.min(...response.data.map(project => project.duration)));
+          setMaxDuration(Math.max(...response.data.map(project => project.duration)));
+  
+          // Extract unique skills from the projects
+          const allSkills = response.data.reduce((acc, project) => {
+            project.skills.forEach(skill => {
+              if (!acc.includes(skill)) {
+                acc.push(skill);
+              }
+            });
+            return acc;
+          }, []);
+  
+          // Map skills to options format
+          const skillOptions = allSkills.map(skill => ({ value: skill, label: skill }));
+          setSkills(skillOptions);
+          
+  
+          //Range Major
+          setmP(minPay);
+          setMP(Math.max(...response.data.map(project => project.pay))); 
+          setmD(minDuration);
+          setMD(Math.max(...response.data.map(project => project.duration)));
+        }
         
-
-        //Range Major
-        setmP(minPay);
-        setMP(Math.max(...response.data.map(project => project.pay))); 
-        setmD(minDuration);
-        setMD(Math.max(...response.data.map(project => project.duration)));
-        
-
         setLoading(false); // Set loading to false when data is fetched
       })
       .catch((error) => {

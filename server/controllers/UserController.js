@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const admin = require("firebase-admin");
 const Project = require("../models/Project");
-const { sendEmail } = require('../service/emailService'); 
+const sendEmail = require('../service/transporter'); 
 
 exports.getAllUsers = async (req, res) => {
   try {
