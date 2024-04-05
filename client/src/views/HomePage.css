@@ -183,13 +183,15 @@ transform: translate(-50%, -50%); /* Center the content */
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
-  flex: 0 0 calc(50% - 1rem); /* Two cards per row */
+  flex: 1; /* Take up full width */
+  max-width: calc(50% - 1rem); /* Maximum width for two items per row */
   background-color: #ffffff;
   border: 1px solid #2d0064;
   border-radius: 30px;
   margin-bottom: 2rem; /* Adjust bottom margin as needed */
   box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
+
 
 /* Media query for responsiveness */
 @media (max-width: 768px) {
@@ -229,7 +231,7 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .project-item .skills .badge {
   margin-left: 0.5rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 
 }
 
@@ -243,7 +245,7 @@ transform: translate(-50%, -50%); /* Center the content */
   color: #FFFFFF;
   border: none;
   border-radius: 45px;
-  padding: 1.5rem 4rem;
+  padding: 1rem 3rem;
   font-weight: bold;
   cursor: pointer;
   margin-left: 50px;
@@ -263,3 +265,179 @@ transform: translate(-50%, -50%); /* Center the content */
       }
     }
   
+/* Styles for the search bar */
+/* .search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
+
+
+.search-bar input[type="text"] {
+  box-sizing: border-box;
+  width: 624px;
+  height: 48px;
+  padding: 10px;
+  background: #FFFFFF;
+  mix-blend-mode: normal;
+  border: 2px solid #E4EBE4; 
+  border-radius: 160px;
+  margin-right: 10px;
+  font-size: 16px;
+} */
+
+.search-bar-container {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+.search-bar-container:hover .air3-input-group input[type="text"] {
+  border-color: #ccc5d2;
+}
+
+
+
+
+.air3-input-group {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.air3-input-group .icon {
+  position: absolute;
+  left: 20px; /* Adjust as needed */
+}
+
+.air3-input-group input[type="text"] {
+  box-sizing: border-box;
+  width: 624px; /* Adjust width as needed */
+  height: 56px;
+  padding-left: 40px; /* Ensure space for the icon */
+  background: #FFFFFF;
+  mix-blend-mode: normal;
+  border: 2px solid #E4EBE4; 
+  border-radius: 160px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.air3-input-group .clear-btn6 {
+  position: absolute;
+  right: 30px; /* Adjust as needed */
+  color: #000000; /* Black color for the cross mark */
+  background-color: transparent; /* Transparent background */
+  border: 2px solid transparent; /* Transparent border initially */
+  border-radius: 50%; /* Make it a circle */
+  width: 30px; /* Set width and height to ensure a circle */
+  height: 30px;
+  padding: 0; /* Remove padding */
+  cursor: pointer;
+  transition: border-color 0.3s ease; /* Smooth transition on border-color change */
+}
+
+.air3-input-group .clear-btn6:hover {
+  border-color: black; /* Add a black border on hover */
+}
+
+
+
+
+
+
+.search-bar-container button {
+  background-color: transparent;
+  color: #3b006f;
+  border: 1px solid #3b006f; 
+  border-radius: 100px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 20px;
+  
+}
+
+
+/* Add this CSS to your global.css or any other CSS file */
+
+/* Modal styles */
+.modal-content {
+  border-radius: 10px;
+}
+
+.modal-header {
+  background-color: #007bff; /* Header background color */
+  color: #fff; /* Header text color */
+  border-bottom: none; /* Remove bottom border */
+}
+
+.modal-title {
+  font-size: 1.5rem; /* Title font size */
+}
+
+.modal-body {
+  padding: 20px; /* Add padding */
+}
+
+.modal-footer {
+  background-color: #f7f7f7; /* Footer background color */
+  border-top: none; /* Remove top border */
+}
+
+/* Input styles */
+.input-group-text {
+  background-color: #f7f7f7; /* Input group background color */
+}
+
+/* Slider styles */
+/* Slider styles */
+.multi-range-slider-track {
+  background-color: #007bff; /* Track color */
+  height: 6px; /* Track height */
+}
+
+.multi-range-slider-thumb {
+  background-color: #007bff; /* Thumb color */
+  border-color: #007bff; /* Thumb border color */
+  width: 20px; /* Thumb width */
+  height: 20px; /* Thumb height */
+}
+
+.multi-range-slider-thumb:focus {
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Thumb focus shadow */
+}
+
+
+/* Button styles */
+.btn-primary {
+  background-color: #007bff; /* Primary button background color */
+  border-color: #007bff; /* Primary button border color */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Primary button hover background color */
+  border-color: #0056b3; /* Primary button hover border color */
+}
+
+.btn-secondary {
+  background-color: #6c757d; /* Secondary button background color */
+  border-color: #6c757d; /* Secondary button border color */
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268; /* Secondary button hover background color */
+  border-color: #5a6268; /* Secondary button hover border color */
+}
+
+.alert {
+  margin-top: 20px; /* Adjust as needed */
+  padding: 20px;
+  border-radius: 16px;
+  background-color: #cca7ff; /* Example background color */
+  color: #1b1b1b; /* Example text color */
+}
