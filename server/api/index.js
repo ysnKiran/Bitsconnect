@@ -9,8 +9,9 @@ const isAuthenticated = require("../middleware/auth");
 const serviceAccount = require("../auth.json");
 const userRoutes = require("../routes/userRoutes");
 const projRoutes = require("../routes/projectRoutes");
+const convoRoutes = require("../routes/conversationRoutes");
 app.use(express.json());
-const AWS = require('aws-sdk');
+const AWS = require("aws-sdk");
 
 app.use(cors());
 
@@ -21,7 +22,7 @@ admin.initializeApp({
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-  region: process.env.AWS_REGION // Set your AWS region
+  region: process.env.AWS_REGION, // Set your AWS region
 });
 
 mongoose.connect(process.env.DATABASE_URL);
@@ -40,3 +41,4 @@ app.get("/", (req, res) => {
 app.use("/", authRoutes);
 app.use("/", isAuthenticated, userRoutes);
 app.use("/", isAuthenticated, projRoutes);
+app.use("/", isAuthenticated, convoRoutes);

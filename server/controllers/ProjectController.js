@@ -1,8 +1,9 @@
 const Project = require("../models/Project");
 const admin = require("firebase-admin");
 const User = require("../models/User");
+const Conversation = require("../models/Conversation");
 //const { sendEmail } = require('../service/emailService');
-const sendEmail = require('../service/transporter');
+const sendEmail = require("../service/transporter");
 
 exports.getAllProjects = async (req, res) => {
   try {
@@ -11,14 +12,14 @@ exports.getAllProjects = async (req, res) => {
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
     const user_id = user._id;
-    
+
     // Get the current date
     const currentDate = new Date();
 
     // Find projects where the deadline is after the current date
-    const projects = await Project.find({ 
+    const projects = await Project.find({
       alumni_id: { $ne: user_id },
-      deadline: { $gt: currentDate }
+      deadline: { $gt: currentDate },
     });
 
     res.status(200).json(projects);
@@ -44,7 +45,7 @@ exports.filterProjects = async (req, res) => {
     // Construct query object
     const query = {
       alumni_id: { $ne: user_id },
-      deadline: { $gt: currentDate }
+      deadline: { $gt: currentDate },
     };
 
     // Add filters based on minimum and maximum pay
@@ -79,14 +80,20 @@ exports.filterProjects = async (req, res) => {
   }
 };
 
-
-
 exports.createProject = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
-    const { pay, duration, description, skills, title, deadline, jobDescription } = req.body;
+    const {
+      pay,
+      duration,
+      description,
+      skills,
+      title,
+      deadline,
+      jobDescription,
+    } = req.body;
     const deadlineDate = new Date(deadline);
     let project;
     const user = await User.findOne({ email: email });
@@ -113,7 +120,7 @@ exports.createProject = async (req, res) => {
         jobDescription,
       });
       await project.save();
-      const subject = 'Project Created Successfully';
+      const subject = "Project Created Successfully";
       const body = `Dear "${alumni_name}",
 
       Your project "${title}" has been successfully created.
@@ -125,7 +132,7 @@ exports.createProject = async (req, res) => {
       
       Best regards,
       BITSConnect`;
-      console.log("Subject:",subject);
+      console.log("Subject:", subject);
       await sendEmail(email, subject, body);
 
       console.log(project);
@@ -138,7 +145,6 @@ exports.createProject = async (req, res) => {
     res.status(400).json({ message: err });
   }
 };
-
 
 exports.getProjectsByUser = async (req, res) => {
   try {
@@ -230,8 +236,8 @@ exports.changeSelectToApply = async (req, res) => {
         },
         { new: true }
       );
-      
-      const subject = 'Your Application has been Selected';
+
+      const subject = "Your Application has been Selected";
       const body = `
         Dear ${user.name},
 
@@ -242,9 +248,25 @@ exports.changeSelectToApply = async (req, res) => {
         Best regards,
         BITSConnect
       `;
-      console.log("Subject:",subject);
+      console.log("Subject:", subject);
       await sendEmail(user.email, subject, body);
-      
+
+      // Check if conversation already exists
+      const existingConversation = await Conversation.findOne({
+        participants: { $all: [project.alumni_id, user_id] },
+      });
+
+      console.log("Existing Conversation:", existingConversation);
+
+      if (!existingConversation) {
+        // If conversation doesn't exist, create a new one
+        const newConversation = new Conversation({
+          participants: [project.alumni_id, user_id],
+        });
+        console.log("New Conversation:", newConversation);
+        await newConversation.save();
+      }
+
       res.status(200).json({ message: "User selected successfully" });
     } else {
       res
@@ -255,7 +277,6 @@ exports.changeSelectToApply = async (req, res) => {
     res.status(400).json({ message: err.message });
   }
 };
-
 
 exports.changeSelectToReject = async (req, res) => {
   try {
@@ -289,8 +310,8 @@ exports.changeSelectToReject = async (req, res) => {
         },
         { new: true }
       );
-      
-      const subject = 'Your Application has been Rejected';
+
+      const subject = "Your Application has been Rejected";
       const body = `Dear ${user.name},
 
       We regret to inform you that your application for the project "${project.title}" has been rejected.
@@ -299,7 +320,7 @@ exports.changeSelectToReject = async (req, res) => {
       
       Best regards,
       BITSConnect`;
-      console.log("Subject:",subject);
+      console.log("Subject:", subject);
       await sendEmail(user.email, subject, body);
 
       res.status(200).json({ message: "User rejected successfully" });
@@ -319,15 +340,23 @@ exports.updateProject = async (req, res) => {
     const decodedToken = await admin.auth().verifyIdToken(authHeader);
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
-    const { pay, duration, description, skills, title, deadline, jobDescription } = req.body;
+    const {
+      pay,
+      duration,
+      description,
+      skills,
+      title,
+      deadline,
+      jobDescription,
+    } = req.body;
     const deadlineDate = new Date(deadline);
     const { project_id } = req.params;
     const project = await Project.findOne({ _id: project_id });
     if (!user) {
       return res.status(400).json({ message: "User not found" });
     }
-    
-    if(project){
+
+    if (project) {
       project.pay = pay;
       project.duration = duration;
       project.description = description;
@@ -339,8 +368,7 @@ exports.updateProject = async (req, res) => {
       return res.status(200).json(project);
     }
 
-    res.json({message:"Project Not Found"});
-
+    res.json({ message: "Project Not Found" });
   } catch (err) {
     res.status(400).json({ message: err });
   }
@@ -368,18 +396,18 @@ exports.deleteProject = async (req, res) => {
 
     // Remove project_id from applied_projects array of all users
     await User.updateMany(
-      { _id: { $in: project.applied_users.map(user => user.user_id) } },
+      { _id: { $in: project.applied_users.map((user) => user.user_id) } },
       { $pull: { applied_projects: { project_id: project_id } } }
     );
 
     // Remove project_id from selected_projects and rejected_projects arrays of all users
     await User.updateMany(
-      { _id: { $in: project.selected_users.map(user => user.user_id) } },
+      { _id: { $in: project.selected_users.map((user) => user.user_id) } },
       { $pull: { selected_projects: { $eq: project_id } } }
     );
 
     await User.updateMany(
-      { _id: { $in: project.rejected_users.map(user => user.user_id) } },
+      { _id: { $in: project.rejected_users.map((user) => user.user_id) } },
       { $pull: { rejected_projects: { $eq: project_id } } }
     );
 
@@ -392,9 +420,3 @@ exports.deleteProject = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
-
-
-
-
-

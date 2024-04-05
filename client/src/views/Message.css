@@ -1,0 +1,51 @@
+.listing {
+  width: 20rem;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+.menu {
+  display: flex;
+  width: 80vw;
+  height: 92vh;
+}
+
+
+/* Message.css */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding-left:3%;
+}
+
+.message {
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 5px 0;
+  max-width: 70%;
+}
+
+.message.sender {
+  align-self: flex-end;
+  background-color: #6de810;
+}
+
+.message.receiver{
+    align-self: flex-start;
+    background-color: rgb(0, 157, 255);
+}
+
+.message-content {
+  word-wrap: break-word;
+}
+
+.chat-input {
+  margin-top: 10px;
+}
