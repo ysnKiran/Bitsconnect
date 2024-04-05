@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import { BsSliders } from "react-icons/bs";
 import MultiRangeSlider, { ChangeResult } from "multi-range-slider-react";
+import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function Home() {
   const navigate = useNavigate();
@@ -295,7 +296,13 @@ function Home() {
         <div
           className="container mt-4 text-center"
           id="projects-section"
-          style={{ margin: "auto", maxWidth: "1200px" }}
+          style={{
+            margin: "auto",
+            maxWidth: "1200px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
         >
           <div
             className="projects-heading-container"
@@ -310,16 +317,27 @@ function Home() {
             >
               PROJECTS
             </h1>
-          </div>
-          <div className="project-container">
-            <div className="search-bar">
-              <input
-                type="text"
-                size={50}
-                placeholder="Search projects by title or description"
-                value={searchQuery}
-                onChange={(e) => handleChange(e.target.value)}
-              />
+
+            <div className="search-bar-container">
+              <div className="air3-input-group">
+                <span className="icon">
+                  <FontAwesomeIcon icon={faSearch} />
+                </span>
+                <input
+                  type="text"
+                  placeholder="Search projects by title or description"
+                  value={searchQuery}
+                  onChange={(e) => handleChange(e.target.value)}
+                />
+                {searchQuery && (
+                  <button
+                    className="clear-btn6"
+                    onClick={() => setSearchQuery("")}
+                  >
+                    <FontAwesomeIcon icon={faTimes} />
+                  </button>
+                )}
+              </div>
 
               {/*Inside your component's JSX*/}
               <button
@@ -426,6 +444,9 @@ function Home() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="project-container">
             <ul className="project-list">
               {copyProjects.length > 0 ? (
                 copyProjects.map((prj) => (

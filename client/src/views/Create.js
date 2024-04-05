@@ -12,6 +12,7 @@ import Upload from "../components/Upload";
 
 const Create = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // State for loading spinner
   const [title, setTitle] = useState("");
   const [pay, setPay] = useState("");
   const [duration, setDuration] = useState("");
@@ -48,6 +49,7 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // Show spinner on submit
     // Filter out empty skills
     if (!title) {
       toast.error("Please add title", {
@@ -60,6 +62,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -74,6 +77,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -88,6 +92,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -102,6 +107,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -117,6 +123,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -132,6 +139,7 @@ const Create = () => {
         progress: undefined,
         theme: "dark",
       });
+      setLoading(false);
       return;
     }
 
@@ -201,9 +209,12 @@ const Create = () => {
             progress: undefined,
             theme: "dark",
           });
+        }).finally(()=>{
+          setLoading(false);
         });
     } else {
       console.error("idToken is null or undefined");
+      setLoading(false);
     }
 
     setPay("");
@@ -334,9 +345,20 @@ const Create = () => {
               Add Skill
             </button>
 
+            {loading ? (
+        <div className="text-center mt-4">
+          <div
+            className="spinner-border"
+            style={{ width: "3rem", height: "3rem" }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
             <button type="submit" className="btn2" onClick={handleSubmit}>
               Submit
-            </button>
+            </button>)}
           </div>
         </div>
       </div>

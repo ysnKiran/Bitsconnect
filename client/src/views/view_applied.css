@@ -1,18 +1,8 @@
-.container {
+/* .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 0 5rem; /* Adjust the left and right margins as needed */
-}
-
-.project-item1 {
-  flex: 0 0 calc(50% - 1rem); /* Two cards per row */
-  background-color: #ffffff;
-  border: 1px solid #2d0064;
-  border-radius: 60px;
-  margin-bottom: 2rem; /* Adjust bottom margin as needed */
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
-}
 
 @media (max-width: 767px) {
   .project-item1 {
@@ -20,7 +10,7 @@
   }
 }
 
-.project-item-content1 {
+.project-item-content {
   padding: 2rem;
   text-align: left;
   font-size: 1.5rem;
@@ -52,9 +42,44 @@
   margin-top: auto; /* Align the button to the bottom */
 }
 
-h1.with-margin1{
+h1.with-margin1 {
   text-align: center;
   padding: 2%;
   /* Adjust the value as needed */
 }
 
+.spinner-container {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 20vh; /* Adjust as needed */
+}
+
+.project-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.project-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.project-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1; /* Take up full width */
+  max-width: calc(50% - 1rem); /* Maximum width for two items per row */
+  min-width: 400px;
+  background-color: #ffffff;
+  border: 1px solid #2d0064;
+  border-radius: 30px;
+  margin-bottom: 2rem; /* Adjust bottom margin as needed */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}

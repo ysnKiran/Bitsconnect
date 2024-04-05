@@ -90,117 +90,132 @@ const ViewMyAppliedProjects = () => {
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <div className="apply-form3">
-      <div className="row justify-content-between align-items-center mb-5 left-margin">
-        <div className="col-auto">
-          <button className="btn btn-link" onClick={goBack}>
-            <BsChevronLeft size={24} />
-          </button>
+        <div className="row justify-content-between align-items-center mb-5 left-margin">
+          <div className="col-auto">
+            <button className="btn btn-link" onClick={goBack}>
+              <BsChevronLeft size={24} />
+            </button>
+          </div>
+        </div>
+  
+        <h1 className="with-margin1">Your Pending Applications</h1>
+  
+        <div>
+          {loading ? ( // Render spinner while loading is true
+            <div className="spinner-container">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            <div className="project-container">
+              <ul className="project-list">
+                {projects.length > 0 ? (
+                  projects.map((prj) => (
+                    <div key={prj._id} className="project-item">
+                      <div className="project-item-content">
+                        <h3>{prj.title}</h3>
+                        <p>{prj.description}</p>
+                        <p>
+                          <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
+                        </p>
+  
+                        {prj.skills.length > 0 ? (
+                          <div className="skills">
+                            {prj.skills.map((skill, index) => (
+                              <p
+                                key={index}
+                                className="badge"
+                                style={{
+                                  backgroundColor: '#F5F2F7',
+                                  borderRadius: '30px',
+                                  color: '#64556D',
+                                  fontSize: '1.5rem',
+                                  fontWeight: 'lighter',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                {skill}
+                              </p>
+                            ))}
+                          </div>
+                        ) : (
+                          "No specific skill requirement"
+                        )}
+                      </div>
+                      <div className="project-actions">
+                        {/* Add Delete button */}
+                        <button className="apply-btn1" onClick={() => deletePendingApplication(prj._id)}>Retract</button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>You have not applied to any projects yet. Keep searching for your passion :)</p>
+                )}
+              </ul>
+            </div>
+          )}
+        </div>
+  
+        <h1 className="with-margin1">Your Rejected Applications</h1>
+  
+        <div>
+          {rejLoad ? ( // Render spinner while loading is true
+            <div className="spinner-container">
+              <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            <div className="project-container">
+              <ul className="project-list">
+                {rejects.length > 0 ? (
+                  rejects.map((prj) => (
+                    <div key={prj._id} className="project-item">
+                      <div className="project-item-content">
+                        <h3>{prj.title}</h3>
+                        <p>{prj.description}</p>
+                        <p>
+                          <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
+                        </p>
+  
+                        {prj.skills.length > 0 ? (
+                          <div className="skills">
+                            {prj.skills.map((skill, index) => (
+                              <p
+                                key={index}
+                                className="badge"
+                                style={{
+                                  backgroundColor: '#F5F2F7',
+                                  borderRadius: '30px',
+                                  color: '#64556D',
+                                  fontSize: '1.5rem',
+                                  fontWeight: 'lighter',
+                                  display: 'inline-block'
+                                }}
+                              >
+                                {skill}
+                              </p>
+                            ))}
+                          </div>
+                        ) : (
+                          "No specific skill requirement"
+                        )}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>You have not been rejected from any projects yet. Yay!</p>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
-  
-      <h1 className="with-margin1">Your Pending Applications</h1>
-  
-      <div>
-        {loading ? ( // Render spinner while loading is true
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        ) : projects.length > 0 ? (
-          projects.map((prj) => (
-            <div key={prj._id} className="project-item2">
-              <div className="project-item-content1">
-                <h3>{prj.title}</h3>
-                <p>{prj.description}</p>
-                <p>
-                  <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
-                </p>
-  
-                {prj.skills.length > 0 ? (
-                  <div className="skills">
-                    {prj.skills.map((skill, index) => (
-                      <p
-                        key={index}
-                        className="badge"
-                        style={{
-                          backgroundColor: '#F5F2F7',
-                          borderRadius: '30px',
-                          color: '#64556D',
-                          fontSize: '1.5rem',
-                          fontWeight: 'lighter',
-                          display: 'inline-block'
-                        }}
-                      >
-                        {skill}
-                      </p>
-                    ))}
-                  </div>
-                ) : (
-                  "No specific skill requirement"
-                )}
-              </div>
-              <div className="project-actions">
-                {/* Add Delete button */}
-                <button className="btn btn-danger" onClick={() => deletePendingApplication(prj._id)}>Retract</button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>You have not applied to any projects yet. Keep searching for your passion :)</p>
-        )}
-      </div>
-      
-      <h1 className="with-margin1">Your Rejected Applications</h1>
-  
-      <div>
-        {rejLoad ? ( // Render spinner while loading is true
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        ) : rejects.length > 0 ? (
-          rejects.map((prj) => (
-            <div key={prj._id} className="project-item2">
-              <div className="project-item-content1">
-                <h3>{prj.title}</h3>
-                <p>{prj.description}</p>
-                <p>
-                  <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
-                </p>
-  
-                {prj.skills.length > 0 ? (
-                  <div className="skills">
-                    {prj.skills.map((skill, index) => (
-                      <p
-                        key={index}
-                        className="badge"
-                        style={{
-                          backgroundColor: '#F5F2F7',
-                          borderRadius: '30px',
-                          color: '#64556D',
-                          fontSize: '1.5rem',
-                          fontWeight: 'lighter',
-                          display: 'inline-block'
-                        }}
-                      >
-                        {skill}
-                      </p>
-                    ))}
-                  </div>
-                ) : (
-                  "No specific skill requirement"
-                )}
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>You have not been rejected from a projects yet. Yay</p>
-        )}
-      </div>
-    </div>
     </div>
   );
+}
+  export default ViewMyAppliedProjects;
   
-};
-
-export default ViewMyAppliedProjects;

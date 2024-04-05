@@ -77,3 +77,27 @@ Project Created -> 1) PO ----------------- done
 Application -> 1) Applicant gets a mail 2) PO gets a mail -------------- done
 Selection -> 1) Applicant -- done
 Rejection -> 1) Applicant -- done
+
+
+
+
+
+--------------------------------------
+
+To do:
+
+-> Add spinner in:
+
+1) Apply to a project
+2) Selection in a project
+3) Rejection in a project
+
+-> Make changes in email body 
+
+-> Change Project Card and include JD (in Apply) as well in both Homepage and MyProjects
+
+-> Change Names in Navbar
+
+-> Report
+
+-> Messages
