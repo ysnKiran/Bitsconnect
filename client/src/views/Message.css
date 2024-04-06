@@ -3,12 +3,26 @@
   font-family: "Roboto Condensed", sans-serif;
 }
 
+select{
+  overflow: hidden;
+}
 .menu {
   display: flex;
-  width: 80vw;
-  height: 92vh;
+  width: auto;
+  height: 25rem;
 }
 
+.form-select {
+  height: 25rem;
+}
+
+.option {
+  background-color: orange;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: large;
+  font-weight: bold;
+}
 
 /* Message.css */
 
@@ -16,36 +30,90 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  width: 100%;
+}
+
+/* Customize scrollbar */
+.chat-messages::-webkit-scrollbar {
+  width: 8px; /* Set the width of the scrollbar */
+}
+
+/* Handle */
+.chat-messages::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar handle */
+  border-radius: 4px; /* Border radius of the scrollbar handle */
+}
+
+/* Track */
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color of the scrollbar track */
 }
 
 .chat-messages {
+  display: flex;
   flex-grow: 1;
+  flex-direction: column;
+  align-items: flex-start;
   overflow-y: auto;
-  padding-left:3%;
+  background-color: yellow;
 }
 
-.message {
+.message-container {
   background-color: #f2f2f2;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 5px 0;
   max-width: 70%;
+  padding: 8px 12px;
+  margin: 4px;
+  border-radius: 8px;
 }
 
-.message.sender {
+.message-container.sender {
   align-self: flex-end;
   background-color: #6de810;
 }
 
-.message.receiver{
-    align-self: flex-start;
-    background-color: rgb(0, 157, 255);
-}
-
-.message-content {
-  word-wrap: break-word;
+.message-container.receiver {
+  align-self: flex-start;
+  background-color: rgb(0, 157, 255);
 }
 
 .chat-input {
   margin-top: 10px;
+}
+
+.message-input {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.message-input input[type="text"] {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+}
+
+.message-input button {
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  background-color: blue;
+  color: white;
+  cursor: pointer;
+}
+
+.message-input button:hover {
+  background-color: blueviolet;
+}
+
+.recipient-name {
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.message-timestamp {
+  align-self: flex-end;
+  font-size: 10px;
+  color: #777;
 }

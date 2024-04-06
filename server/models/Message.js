@@ -9,6 +9,7 @@ const MessageSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  recipient_name: String,
   content: String,
   timestamp: {
     type: Date,

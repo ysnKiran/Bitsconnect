@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { BsChevronLeft } from "react-icons/bs";
 import Navbar from "./NavbarHandlers.js";
@@ -14,8 +14,26 @@ const Conversations = () => {
   const id = localStorage.getItem("idToken");
   const [convos, setConvos] = useState([]);
   const [messages, setMessages] = useState([]);
-  const [loading, setLoading] = useState(false); // State for loading projects
+  const [loading, setLoading] = useState(false); // State for loading convos
   const [myId, setMyId] = useState();
+  const [inputValue, setInputValue] = useState("");
+  const messagesEndRef = useRef(null);
+  const [loadMsg, setLoadMsg] = useState(true);
+  const [isCssLoaded, setIsCssLoaded] = useState(false);
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  const handleCssLoad = () => {
+    setIsCssLoaded(true);
+  };
+
+  const scrollToBottom = () => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto", block: "end" });
+    }
+  };
 
   const goBack = () => {
     navigate("/home");
@@ -25,6 +43,10 @@ const Conversations = () => {
     localStorage.clear();
     navigate("/");
   };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   useEffect(() => {
     axios
@@ -79,9 +101,12 @@ const Conversations = () => {
         }
       )
       .then((response) => {
-        setMessages(response.data);
-        console.log("Messages:", response.data);
-        setLoading(false); // Turn off loading spinner when projects are fetched
+        // Simulate loading for 1 second
+        setTimeout(() => {
+          setMessages(response.data);
+          console.log("Messages:", response.data);
+          setLoadMsg(false); // Turn off loading spinner when projects are fetched
+        }, 500); // 1 second delay
       })
       .catch((error) => {
         setLoading(false); // Turn off loading spinner in case of error
@@ -101,6 +126,9 @@ const Conversations = () => {
           progress: undefined,
           theme: "dark",
         });
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -110,8 +138,67 @@ const Conversations = () => {
     navigate(`/messages/${convo_id}`);
   };
 
+  const postNewMessage = (e) => {
+    // Handle submitting the message
+    console.log("I am here");
+    e.preventDefault();
+    console.log("I am there");
+    console.log(e.target.value);
+
+    axios
+      .post(
+        `${process.env.REACT_APP_BACKEND_URL}/conversations/messages/newMessage`,
+        { sender: myId, content: inputValue, conversation_id: convo_id },
+        {
+          headers: {
+            authorization: `${id}`,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response.data);
+        setMessages(response.data);
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          console.log("Unauth");
+          toast.error("Logged Out", {
+            position: "top-center",
+            autoClose: 1000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "dark",
+          });
+          localStorage.clear();
+          navigate("/");
+        }
+        console.error("Error fetching data:", error);
+        toast.error("Already Applied", {
+          position: "top-center",
+          autoClose: 1000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .finally(() => {
+        // Reset the input field after submitting
+        setInputValue("");
+        scrollToBottom(); // Scroll to bottom after new message is posted
+      });
+
+    // Reset the input field after submitting
+    setInputValue("");
+  };
+
   return (
-    <div className="chat-container">
+    <div>
       <Navbar />
       <div className="apply-form3">
         <div className="row justify-content-between align-items-center mb-5 left-margin">
@@ -130,7 +217,7 @@ const Conversations = () => {
           </div>
         ) : (
           <div className="menu">
-            <div>
+            <div className="select">
               <select
                 className="form-select text-uppercase listing"
                 multiple
@@ -139,6 +226,7 @@ const Conversations = () => {
               >
                 {convos.map((talk) => (
                   <option
+                    className="option"
                     value={talk.convoId}
                     key={talk.convoId}
                     title={talk.otherName}
@@ -148,19 +236,70 @@ const Conversations = () => {
                 ))}
               </select>
             </div>
-            <div className="chat-messages">
-              {messages.map((message) => (
+            {loadMsg ? (
+              <div className="chat-container">
                 <div
-                  key={message._id}
-                  className={`message ${
-                    message.sender === myId ? "sender" : "receiver"
-                  }`}
+                  className="chat-messages"
+                  style={{ alignItems: "center", justifyContent: "center" }}
                 >
-                  {console.log("MyId: ", message.myId)}
-                  <p className="message-content">{message.content}</p>
+                  <div className="spinner-border" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ) : (
+              <div className="chat-container">
+                <div className="chat-messages">
+                  {messages.map((message) => {
+                    const messageTime = new Date(message.timestamp);
+                    const formattedDate = messageTime.toLocaleDateString();
+                    const formattedTime = messageTime.toLocaleTimeString([], {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    });
+
+                    return (
+                      <div
+                        key={message._id}
+                        className={`message-container ${
+                          message.sender === myId ? "sender" : "receiver"
+                        }`}
+                      >
+                        <p className="recipient-name">
+                          {message.sender === myId
+                            ? "You"
+                            : message.recipient_name}
+                        </p>
+                        <div className="message">
+                          <p className="message-content">{message.content}</p>
+                          <p className="message-timestamp">
+                            {formattedDate} - {formattedTime}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                  <div ref={messagesEndRef} />
+                </div>
+                <form className="message-input">
+                  <input
+                    type="text"
+                    placeholder="Type your message here..."
+                    value={inputValue}
+                    onChange={handleInputChange}
+                    style={{ width: "calc(100% - 60px)", marginRight: "10px" }}
+                  />
+                  <button
+                    type="submit"
+                    onClick={postNewMessage}
+                    style={{ width: "50px" }}
+                    disabled={!inputValue}
+                  >
+                    Send
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
         )}
       </div>

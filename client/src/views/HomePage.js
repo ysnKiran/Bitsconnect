@@ -512,7 +512,7 @@ function Home() {
                         className="apply-btn1"
                         onClick={() => apply(prj._id, prj.title)}
                       >
-                        Apply
+                        Know More
                       </button>
                     </div>
                   </li>

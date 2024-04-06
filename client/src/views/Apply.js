@@ -29,6 +29,7 @@ const Apply = () => {
         console.log("Project details: ", response.data);
         setProject(response.data);
         setLoading(false);
+        window.scrollTo({ top: 0, behavior: "smooth" });
       })
       .catch((error) => {
         if (error.response.status === 401) {
@@ -233,7 +234,7 @@ const Apply = () => {
             </div>
           ) : (
             <button type="submit" className="btn2">
-              Submit
+              Apply
             </button>
           )}
         </form>

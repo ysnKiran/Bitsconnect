@@ -98,10 +98,21 @@ exports.postMessage = async (req, res) => {
       return res.status(404).json({ message: "Recipient not found" });
     }
 
+    const recipientUser = await User.findById(recipient);
+    if (!recipientUser) {
+      return res.status(404).json({ message: "Recipient user not found" });
+    }
+
+    const senderUser = await User.findById(sender);
+    if (!senderUser) {
+      return res.status(404).json({ message: "Sender user not found" });
+    }
+
     // Create a new message
     const newMessage = new Message({
       sender,
       recipient,
+      recipient_name: senderUser.name,
       content,
       conversation: conversation_id,
     });
