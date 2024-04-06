@@ -202,8 +202,8 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .project-item-content {
   flex: 1;
-  padding-right: 1rem;
   padding: 3rem;
+  padding-right: 1rem;
   text-align: left;
   font-size: 1.5rem;
   font-weight:regular;

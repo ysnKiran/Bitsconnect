@@ -463,11 +463,22 @@ function Home() {
                   <li key={prj._id} className="project-item">
                     <div className="project-item-content">
                       <h3>{prj.title}</h3>
-                      <p>{prj.description}</p>
+                      <hr />
                       <p>
-                        <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>:{" "}
-                        {prj.duration} weeks
+                        Pay: <b>Rs {prj.pay}</b> &nbsp; Duration:&nbsp;<b>{prj.duration} weeks</b>
+            
                       </p>
+                      <p>
+                        Owner: <b>{prj.alumni_name}</b> 
+                      </p>
+                      <p>
+                      ID: <b>{prj.alumni_email}</b>
+                      </p>
+                      <p>
+                        Deadline:{" "}
+                        <b>{new Date(prj.deadline).toLocaleDateString()}</b>
+                      </p>
+                      
                       {prj.skills.length > 0 ? (
                         <div className="skills">
                           <ul className="list-inline">
@@ -491,17 +502,9 @@ function Home() {
                       ) : (
                         <p>No specific skill requirement</p>
                       )}
-                      <p>
-                        Owner: <b>{prj.alumni_name}</b> 
-                      </p>
-                      <p>
-                      Id: {prj.alumni_email}
-                      </p>
-                      <p>
-                        Deadline:{" "}
-                        <b>{new Date(prj.deadline).toLocaleDateString()}</b>
-                      </p>
+                      <hr/>
                     </div>
+        
                     <div className="apply-btn-container">
                       <button
                         className="apply-btn1"

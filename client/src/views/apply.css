@@ -11,10 +11,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .apply-form2 {
+  flex-direction: column;
+  align-items:center;
+  padding: 100px;/*padding of whole form*/
+  padding-top: 1rem;
+}
+
+.apply-details {
   
   flex-direction: column;
   align-items:center;
   padding: 100px;/*padding of whole form*/
+  padding-bottom: 0.5rem;
+  padding-top: 1rem;
 }
 
 .apply-form2 h1 {
@@ -116,3 +125,81 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff; /* Button text color */
 
 }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 5rem; /* Adjust the left and right margins as needed */
+  }
+  
+  .project-item2 {
+    flex: 0 0 calc(50% - 1rem); /* Two cards per row */
+    background-color: #ffffff;
+    border: 1px solid #2d0064;
+    border-radius: 60px;
+    margin-bottom: 2rem; /* Adjust bottom margin as needed */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    margin-left: 50px;
+    margin-right: 50px;
+
+}
+  
+  @media (max-width: 767px) {
+    .project-item2 {
+      flex-basis: calc(100% - 1rem); /* Single card per row on smaller screens */
+    }
+  }
+  
+  .project-item-content2 {
+    padding: 2rem;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: regular;
+    color: #21003a;
+  }
+  
+  .project-item1 h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .project-item2 p {
+    margin: 1rem 0;
+  }
+  
+  .project-item2 .skills {
+    display: flex;
+  }
+  
+  .project-item2 .skills .badge {
+    margin-right: 0.5rem;
+  }
+  
+  .apply-btn-container {
+    align-self: flex-start;
+    margin-top: auto; /* Align the button to the bottom */
+  }
+  
+  h1.with-margin2 {
+    /* margin-left: 100px; */
+    text-align: center;
+    /* Adjust the value as needed */
+  }
+
+  .skills {
+    display: flex;
+  }
+  
+  .skills {
+    margin-right: 0.5rem;
+  }
+
+ 
+
+  p {
+    margin-left: 100px;
+    /* Adjust the value as needed */
+  }

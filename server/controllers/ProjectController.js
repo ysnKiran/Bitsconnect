@@ -28,6 +28,19 @@ exports.getAllProjects = async (req, res) => {
   }
 };
 
+exports.getProjectByID = async (req, res) => {
+  try {
+    const { project_id } = req.params;
+    const project = await Project.findOne({ _id: project_id });
+    if (!project) {
+      return res.status(400).json({ message: "Project Not Found" });
+    }
+    res.status(200).json(project);
+  } catch (err) {
+    res.status(400).json({ message: err });
+  }
+};
+
 exports.filterProjects = async (req, res) => {
   try {
     const authHeader = req.headers.authorization;
