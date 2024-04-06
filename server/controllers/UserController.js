@@ -1,7 +1,7 @@
 const User = require("../models/User");
 const admin = require("firebase-admin");
 const Project = require("../models/Project");
-const sendEmail = require('../service/transporter'); 
+const sendEmail = require("../service/transporter");
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -102,8 +102,8 @@ exports.applyForProject = async (req, res) => {
     const { project_id, proposal } = req.body;
     const project = await Project.findOne({ _id: project_id });
     const projectName = project.title;
-    const email2 =project.alumni_email;
-    const alumni =project.alumni_name;
+    const email2 = project.alumni_email;
+    const alumni = project.alumni_name;
 
     if (user && project) {
       const alreadyApplied = user.applied_projects.some(
@@ -124,28 +124,14 @@ exports.applyForProject = async (req, res) => {
       project.applied_users.push({ user_id: user._id });
       await project.save();
 
-      const subject = 'Application Successful';
-      const body = `Dear User,
-
-      We're pleased to inform you that your application for the project "${projectName}" has been successfully submitted.
-
-      Thank you for your interest in the project. "${project.alumni_name}" review your application and get back to you soon.
-
-      Best regards,
-      BITSConnect`;
+      const subject = "Application Successful";
+      const body = `Dear ${user.name},\n\nWe're pleased to inform you that your application for the project: ${projectName} has been successfully submitted.Thank you for your interest in the project.\n\n${alumni} will review your application and get back to you soon.\n\nBest regards,\nBITSConnect`;
 
       await sendEmail(email, subject, body);
 
-      const subject2 = 'New Application';
-      const body2 = `Dear "${project.alumni_name}",
-
-      You have a new application for your project "${projectName}".
-      
-      Please review the application and take appropriate action.
-      
-      Best regards,
-      BITSConnect`;
-      console.log("Subject:",subject2);
+      const subject2 = "New Application";
+      const body2 = `Dear ${project.alumni_name},\n\nYou have a new application for your project: ${projectName}.\n\nPlease review the application and take appropriate action.\n\nBest regards,\nBITSConnect`;
+      console.log("Subject:", subject2);
 
       await sendEmail(email2, subject2, body2);
 
@@ -240,9 +226,9 @@ exports.deleteApplication = async (req, res) => {
     const email = decodedToken.email;
     const user = await User.findOne({ email: email });
     const user_id = user._id;
-    const { project_id} = req.params;
+    const { project_id } = req.params;
 
-    if(user){
+    if (user) {
       // Remove project_id from applied_projects of user
       await User.findByIdAndUpdate(user_id, {
         $pull: { applied_projects: { project_id: project_id } },
@@ -253,11 +239,13 @@ exports.deleteApplication = async (req, res) => {
         $pull: { applied_users: { user_id: user_id } },
       });
 
-      return res.status(200).json({ message: 'Application deleted successfully' });
+      return res
+        .status(200)
+        .json({ message: "Application deleted successfully" });
     }
-    res.status(400).json({message:"User Not found"});
+    res.status(400).json({ message: "User Not found" });
   } catch (error) {
-    console.error('Error deleting application:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    console.error("Error deleting application:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

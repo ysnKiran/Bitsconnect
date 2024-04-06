@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BsChevronLeft } from "react-icons/bs";
 import Navbar from "./NavbarHandlers.js";
 import '../views/global.css';
+import '../views/view_selected.css';
 
 const ViewMySelectedProjects = () => {
   const navigate = useNavigate();
@@ -63,7 +64,7 @@ const ViewMySelectedProjects = () => {
             </div>
           ) : projects.length > 0 ? (
             projects.map((prj) => (
-              <div key={prj._id} className="project-item2">
+              <div key={prj._id} className="project-item2" style={{padding:"1rem"}}>
                 <div className="project-item-content1">
                   <h3>{prj.title}</h3>
                   <p>{prj.description}</p>

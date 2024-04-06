@@ -134,17 +134,7 @@ exports.createProject = async (req, res) => {
       });
       await project.save();
       const subject = "Project Created Successfully";
-      const body = `Dear "${alumni_name}",
-
-      Your project "${title}" has been successfully created.
-      
-      Project Description:
-      ${description}
-      
-      Thank you for creating this project.
-      
-      Best regards,
-      BITSConnect`;
+      const body = `Dear ${alumni_name},\n\nYour project: ${title} has been successfully created.\n\nProject Description: ${description}\n\nThank you for creating this project.\n\nBest Regards,\nBITSConnect`;
       console.log("Subject:", subject);
       await sendEmail(email, subject, body);
 
@@ -251,16 +241,7 @@ exports.changeSelectToApply = async (req, res) => {
       );
 
       const subject = "Your Application has been Selected";
-      const body = `
-        Dear ${user.name},
-
-        Congratulations! Your application for the project "${project.title}" has been selected.
-        
-        Thank you for your interest and participation in our project. We look forward to working with you.
-        
-        Best regards,
-        BITSConnect
-      `;
+      const body = `Dear ${user.name},\n\nCongratulations! Your application for the project: ${project.title} has been selected.\n\nThank you for your interest and participation in our project. We look forward to working with you.\n\nBest regards,\nBITSConnect`;
       console.log("Subject:", subject);
       await sendEmail(user.email, subject, body);
 
@@ -325,14 +306,7 @@ exports.changeSelectToReject = async (req, res) => {
       );
 
       const subject = "Your Application has been Rejected";
-      const body = `Dear ${user.name},
-
-      We regret to inform you that your application for the project "${project.title}" has been rejected.
-      
-      Thank you for your interest and participation in our project. We appreciate your effort and encourage you to apply for future opportunities.
-      
-      Best regards,
-      BITSConnect`;
+      const body = `Dear ${user.name},\n\nWe regret to inform you that your application for the project: ${project.title} has been rejected.\n\nThank you for your interest and participation in our project. We appreciate your effort and encourage you to apply for future opportunities.\n\nBest regards,\nBITSConnect`;
       console.log("Subject:", subject);
       await sendEmail(user.email, subject, body);
 

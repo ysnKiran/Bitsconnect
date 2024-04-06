@@ -432,18 +432,20 @@ function Home() {
                         <div className="modal-footer">
                           <button
                             type="button"
-                            className="btn btn-secondary"
+                            className=""
+                            style={{background:"#fc6203",color:"white"}}
                             data-bs-dismiss="modal"
+                            aria-label="Close"
                           >
                             Close
                           </button>
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            style={{background:"#03fc7b",color:"black"}}
                             onClick={StartFilter}
                             data-bs-dismiss="modal"
                           >
-                            Save changes
+                            Save
                           </button>
                         </div>
                       </div>

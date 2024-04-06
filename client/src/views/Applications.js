@@ -83,6 +83,7 @@ const Applications = () => {
       )
       .then((response) => {
         setProposals(response.data);
+        console.log("Pending: ",response.data);
         setLoadingApplications(false); // Turn off loading spinner when applications are fetched
       })
       .catch((error) => {
@@ -126,6 +127,7 @@ const Applications = () => {
       )
       .then((response) => {
         setSelectedProposals(response.data);
+        console.log("Selected: ",response.data);
         setLoadingSelectedApplications(false); // Turn off loading spinner when selected applications are fetched
       })
       .catch((error) => {
@@ -323,6 +325,7 @@ const Applications = () => {
                           <p>Name: {propo.name} </p>
                           <p>Email: {propo.email}</p>
                           <p>Graduation Year: {propo.batch_year}</p>
+                          <p>SOP: {propo.applied_projects.find(ap => ap.project_id === selectedProjectId)?.proposal}</p>
                           <p><button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
                           <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Select</button>
                           <button className="btn btn-error" onClick={() => DeleteUser(propo._id)}>Reject</button>
