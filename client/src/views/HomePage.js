@@ -52,44 +52,45 @@ function Home() {
         // Set the fetched projects to state
         setProjects(response.data);
         console.log("Initial:", response.data);
-
         // Set Copy
         setCopy(response.data);
         console.log(response.data);
         setSearchQuery("");
 
-        //Filter
-        setMinPay(Math.min(...response.data.map((project) => project.pay)));
-        setMaxPay(Math.max(...response.data.map((project) => project.pay)));
-        setMinDuration(
-          Math.min(...response.data.map((project) => project.duration))
-        );
-        setMaxDuration(
-          Math.max(...response.data.map((project) => project.duration))
-        );
+        if (response.data.length > 0) {
+          //Filter
+          setMinPay(Math.min(...response.data.map((project) => project.pay)));
+          setMaxPay(Math.max(...response.data.map((project) => project.pay)));
+          setMinDuration(
+            Math.min(...response.data.map((project) => project.duration))
+          );
+          setMaxDuration(
+            Math.max(...response.data.map((project) => project.duration))
+          );
 
-        // Extract unique skills from the projects
-        const allSkills = response.data.reduce((acc, project) => {
-          project.skills.forEach((skill) => {
-            if (!acc.includes(skill)) {
-              acc.push(skill);
-            }
-          });
-          return acc;
-        }, []);
+          // Extract unique skills from the projects
+          const allSkills = response.data.reduce((acc, project) => {
+            project.skills.forEach((skill) => {
+              if (!acc.includes(skill)) {
+                acc.push(skill);
+              }
+            });
+            return acc;
+          }, []);
 
-        // Map skills to options format
-        const skillOptions = allSkills.map((skill) => ({
-          value: skill,
-          label: skill,
-        }));
-        setSkills(skillOptions);
+          // Map skills to options format
+          const skillOptions = allSkills.map((skill) => ({
+            value: skill,
+            label: skill,
+          }));
+          setSkills(skillOptions);
 
-        //Range Major
-        setmP(minPay);
-        setMP(Math.max(...response.data.map((project) => project.pay)));
-        setmD(minDuration);
-        setMD(Math.max(...response.data.map((project) => project.duration)));
+          //Range Major
+          setmP(minPay);
+          setMP(Math.max(...response.data.map((project) => project.pay)));
+          setmD(minDuration);
+          setMD(Math.max(...response.data.map((project) => project.duration)));
+        }
 
         setLoading(false); // Set loading to false when data is fetched
       })
@@ -318,132 +319,141 @@ function Home() {
               PROJECTS
             </h1>
 
-            <div className="search-bar-container">
-              <div className="air3-input-group">
-                <span className="icon">
-                  <FontAwesomeIcon icon={faSearch} />
-                </span>
-                <input
-                  type="text"
-                  placeholder="Search projects by title or description"
-                  value={searchQuery}
-                  onChange={(e) => handleChange(e.target.value)}
-                />
-                {searchQuery && (
+            {projects.length > 0 ? (
+              <div>
+                <div className="search-bar-container">
+                  <div className="air3-input-group">
+                    <span className="icon">
+                      <FontAwesomeIcon icon={faSearch} />
+                    </span>
+                    <input
+                      type="text"
+                      placeholder="Search projects by title or description"
+                      value={searchQuery}
+                      onChange={(e) => handleChange(e.target.value)}
+                    />
+                    {searchQuery && (
+                      <button
+                        className="clear-btn6"
+                        onClick={() => setSearchQuery("")}
+                      >
+                        <FontAwesomeIcon icon={faTimes} />
+                      </button>
+                    )}
+                  </div>
+
+                  {/*Inside your component's JSX*/}
                   <button
-                    className="clear-btn6"
-                    onClick={() => setSearchQuery("")}
+                    type="button"
+                    className="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
                   >
-                    <FontAwesomeIcon icon={faTimes} />
+                    <BsSliders /> {/* Use the imported icon component */}
                   </button>
-                )}
-              </div>
 
-              {/*Inside your component's JSX*/}
-              <button
-                type="button"
-                className="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                <BsSliders /> {/* Use the imported icon component */}
-              </button>
+                  <div
+                    className="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div className="modal-dialog">
+                      <div className="modal-content">
+                        <div className="modal-header">
+                          <h1
+                            className="modal-title fs-5"
+                            id="exampleModalLabel"
+                          >
+                            Filter
+                          </h1>
+                          <button
+                            type="button"
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div className="modal-body">
+                          <label htmlFor="pay">Pay:</label>
+                          <div className="input-group mb-3">
+                            {/* <span className="input-group-text" id="basic-addon1">{minPay}</span> */}
+                            <MultiRangeSlider
+                              min={minPay}
+                              max={maxPay}
+                              step={100}
+                              minValue={mP}
+                              maxValue={MP}
+                              barInnerColor="#9e81ff"
+                              style={{ width: "100%" }}
+                              onInput={(e: ChangeResult) => {
+                                setmP(e.minValue);
+                                setMP(e.maxValue);
+                              }}
+                            ></MultiRangeSlider>
 
-              <div
-                className="modal fade"
-                id="exampleModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-              >
-                <div className="modal-dialog">
-                  <div className="modal-content">
-                    <div className="modal-header">
-                      <h1 className="modal-title fs-5" id="exampleModalLabel">
-                        Filter
-                      </h1>
-                      <button
-                        type="button"
-                        className="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"
-                      >
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div className="modal-body">
-                      <label htmlFor="pay">Pay:</label>
-                      <div className="input-group mb-3">
-                        {/* <span className="input-group-text" id="basic-addon1">{minPay}</span> */}
-                        <MultiRangeSlider
-                          min={minPay}
-                          max={maxPay}
-                          step={100}
-                          minValue={mP}
-                          maxValue={MP}
-                          barInnerColor="#9e81ff"
-                          style={{ width: "100%" }}
-                          onInput={(e: ChangeResult) => {
-                            setmP(e.minValue);
-                            setMP(e.maxValue);
-                          }}
-                        ></MultiRangeSlider>
+                            {/* <span className="input-group-text" id="basic-addon1">{maxPay}</span> */}
+                          </div>
 
-                        {/* <span className="input-group-text" id="basic-addon1">{maxPay}</span> */}
+                          <hr />
+                          <label htmlFor="duration">Duration:</label>
+                          <div className="input-group mb-3">
+                            {/* <span className="input-group-text" id="basic-addon1">{minDuration}</span> */}
+
+                            <MultiRangeSlider
+                              min={minDuration}
+                              max={maxDuration}
+                              step={5}
+                              minValue={mD}
+                              maxValue={MD}
+                              style={{ width: "100%" }}
+                              barInnerColor="#9e81ff"
+                              onInput={(e: ChangeResult) => {
+                                setmD(e.minValue);
+                                setMD(e.maxValue);
+                              }}
+                            ></MultiRangeSlider>
+
+                            {/* <span className="input-group-text" id="basic-addon1">{maxDuration}</span> */}
+                          </div>
+
+                          <hr />
+                          <label htmlFor="skills">Skills:</label>
+                          <Select
+                            isMulti
+                            name="skills"
+                            options={skills}
+                            onChange={handleSkillChange}
+                          />
+                        </div>
+                        <div className="modal-footer">
+                          <button
+                            type="button"
+                            className="btn btn-secondary"
+                            data-bs-dismiss="modal"
+                          >
+                            Close
+                          </button>
+                          <button
+                            type="button"
+                            className="btn btn-primary"
+                            onClick={StartFilter}
+                            data-bs-dismiss="modal"
+                          >
+                            Save changes
+                          </button>
+                        </div>
                       </div>
-
-                      <hr />
-                      <label htmlFor="duration">Duration:</label>
-                      <div className="input-group mb-3">
-                        {/* <span className="input-group-text" id="basic-addon1">{minDuration}</span> */}
-
-                        <MultiRangeSlider
-                          min={minDuration}
-                          max={maxDuration}
-                          step={5}
-                          minValue={mD}
-                          maxValue={MD}
-                          style={{ width: "100%" }}
-                          barInnerColor="#9e81ff"
-                          onInput={(e: ChangeResult) => {
-                            setmD(e.minValue);
-                            setMD(e.maxValue);
-                          }}
-                        ></MultiRangeSlider>
-
-                        {/* <span className="input-group-text" id="basic-addon1">{maxDuration}</span> */}
-                      </div>
-
-                      <hr />
-                      <label htmlFor="skills">Skills:</label>
-                      <Select
-                        isMulti
-                        name="skills"
-                        options={skills}
-                        onChange={handleSkillChange}
-                      />
-                    </div>
-                    <div className="modal-footer">
-                      <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button>
-                      <button
-                        type="button"
-                        className="btn btn-primary"
-                        onClick={StartFilter}
-                        data-bs-dismiss="modal"
-                      >
-                        Save changes
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <div></div>
+            )}
           </div>
 
           <div className="project-container">
@@ -482,7 +492,10 @@ function Home() {
                         <p>No specific skill requirement</p>
                       )}
                       <p>
-                        Owner: <b>{prj.alumni_name}</b> Id: {prj.alumni_email}
+                        Owner: <b>{prj.alumni_name}</b> 
+                      </p>
+                      <p>
+                      Id: {prj.alumni_email}
                       </p>
                       <p>
                         Deadline:{" "}
