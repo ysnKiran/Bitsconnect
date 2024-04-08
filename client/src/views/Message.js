@@ -58,13 +58,6 @@ const Message = () => {
       });
   }, []);
 
-  const getConvo = (convo_id) => {
-    console.log("Convo clicked: ", convo_id);
-    // navigate to Apply page with Id as params
-
-    navigate(`/messages/${convo_id}`);
-  };
-
   return (
     <div>
       <Navbar />
@@ -91,6 +84,7 @@ const Message = () => {
                     className="form-select text-uppercase listing"
                     multiple
                     aria-label="multiple select example"
+                    onDoubleClick={(e) => navigate(`/messages/${e.target.value}/${e.target.title}`)}
                     onClick={(e) => navigate(`/messages/${e.target.value}/${e.target.title}`)}
                   >
                     {convos.map((talk) => (

@@ -49,7 +49,6 @@ const Conversations = () => {
   };
 
   useEffect(() => {
-    scrollToBottom();
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/conversations`, {
         headers: {
@@ -90,7 +89,8 @@ const Conversations = () => {
           theme: "dark",
         });
       });
-
+    
+      scrollToBottom();
     const fetchMessages = () => {
       axios
         .get(
@@ -147,7 +147,8 @@ const Conversations = () => {
       .catch((error) => {
         // Handle error...
       });
-
+    
+      setLoadMsg(false); // Turn off loading spinner
     // navigate to Apply page with Id as params
     navigate(`/messages/${convo_id}/${recipientName}`);
   };
@@ -226,8 +227,8 @@ const Conversations = () => {
                 className="form-select text-uppercase listing"
                 multiple
                 aria-label="multiple select example"
-                onClick={(e) => getConvo(e.target.value, e.target.title)}
                 onDoubleClick={(e) => getConvo(e.target.value, e.target.title)}
+                onClick={(e) => getConvo(e.target.value, e.target.title)}
               >
                 {convos.map((talk) => (
                   <option
