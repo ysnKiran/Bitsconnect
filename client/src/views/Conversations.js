@@ -136,6 +136,7 @@ const Conversations = () => {
 
   const getConvo = (convo_id, recipientName) => {
     console.log("Convo clicked: ", convo_id);
+    setLoadMsg(true);
     // Fetch messages for the selected conversation
     axios
       .get(
