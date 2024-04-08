@@ -244,6 +244,7 @@ const Conversations = () => {
                 multiple
                 aria-label="multiple select example"
                 onClick={(e) => getConvo(e.target.value, e.target.title)}
+                onDoubleClick={(e) => getConvo(e.target.value, e.target.title)}
               >
                 {convos.map((talk) => (
                   <option
