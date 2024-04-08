@@ -143,6 +143,40 @@ const Create = () => {
       return;
     }
 
+    if (pay && pay < 0) {
+      
+      setPay("");
+      toast.error("Pay cannot be negative", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
+      setLoading(false);
+      return;
+    }
+
+    // Duration check
+    if (!duration || duration <= 0) {
+      setDuration("");
+      toast.error("Duration must be greater than 0", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+        theme: "dark",
+      });
+      setLoading(false);
+      return;
+    }
+
     const filteredSkills = skills.filter((skill) => skill.trim() !== "");
     const id = localStorage.getItem("idToken");
 
@@ -217,10 +251,6 @@ const Create = () => {
       setLoading(false);
     }
 
-    setPay("");
-    setDuration("");
-    setDesc("");
-    setSkills([]);
   };
 
   const goBack = () => {
@@ -279,10 +309,11 @@ const Create = () => {
           <div className="mb-3">
             <div className="d-flex">
               <div className="me-3">
-                <label className="form-label">Pay:</label>
+                <label className="form-label">Pay (in Rs):</label>
                 <input
                   type="number"
                   className="form-control pay-textarea"
+                  min="0"
                   value={pay}
                   onChange={(e) => setPay(e.target.value)}
                   placeholder="Enter pay in INR"
@@ -296,6 +327,7 @@ const Create = () => {
                   type="number"
                   className="form-control duration-textarea"
                   value={duration}
+                  min="0"
                   onChange={(e) => setDuration(e.target.value)}
                   placeholder="Enter duration in weeks"
                   required

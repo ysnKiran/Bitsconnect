@@ -172,7 +172,7 @@ const Apply = () => {
                 </p>
 
                 <p style={{ fontSize: "1.5rem", marginLeft: "0" }}>
-                  Pay: <b>Rs {project.pay}</b>&nbsp; Duration:{" "}
+                  Pay: {project.pay?(<><b>Rs {project.pay}</b></>):(<>Experience</>)}&nbsp; Duration:{" "}
                   <b>{project.duration} weeks</b>
                 </p>
                 <div className="skills">

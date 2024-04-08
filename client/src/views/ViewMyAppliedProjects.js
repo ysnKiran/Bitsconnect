@@ -119,7 +119,7 @@ const ViewMyAppliedProjects = () => {
                         <h3>{prj.title}</h3>
                         <p>{prj.description}</p>
                         <p>
-                          <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
+                          <b>Pay</b>: {prj.pay?(<><b>Rs {prj.pay}</b></>):(<>Experience</>)} &nbsp; <b>Duration</b>: {prj.duration} weeks
                         </p>
   
                         {prj.skills.length > 0 ? (
