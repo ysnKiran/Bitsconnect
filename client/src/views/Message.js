@@ -15,6 +15,7 @@ const Message = () => {
   const [message, setMessage] = useState([]);
   const [loading, setLoading] = useState(false); // State for loading projects
 
+
   const goBack = () => {
     navigate("/home");
   };
@@ -60,22 +61,23 @@ const Message = () => {
   const getConvo = (convo_id) => {
     console.log("Convo clicked: ", convo_id);
     // navigate to Apply page with Id as params
+
     navigate(`/messages/${convo_id}`);
   };
 
   return (
     <div>
       <Navbar />
-      <div className="apply-form3">
-        <div className="row justify-content-between align-items-center mb-5 left-margin">
+      <div className="apply-form4">
+        {/* <div className="row justify-content-between align-items-center mb-5 left-margin">
           <div className="col-auto">
             <button className="btn btn-link" onClick={goBack}>
               <BsChevronLeft size={24} />
             </button>
           </div>
-        </div>
+        </div> */}
 
-        <h1 className="with-margin2">Lets Talk!</h1>
+        {/* <h1 className="with-margin2">Lets Talk!</h1> */}
         <div>
           {loading ? (
             <div className="spinner-border" role="status">
@@ -104,6 +106,7 @@ const Message = () => {
                   </select>
                 </div>
                 <div className="chat-container">
+                
                 <div className="chat-messages" style={{alignItems:'center',justifyContent:'center'}}><h2>Choose a Convo To Show</h2></div>
                 </div>
                 

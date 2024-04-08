@@ -101,3 +101,10 @@ To do:
 -> Report
 
 -> Messages
+
+---------------------------------------------
+Fetching of messages in real-time
+Notifs
+Style the pages
+
+Sprint 3 work shuru karna hai: Admin, Rate/Review, Group Application

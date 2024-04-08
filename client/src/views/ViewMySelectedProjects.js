@@ -65,11 +65,11 @@ const ViewMySelectedProjects = () => {
           ) : projects.length > 0 ? (
             projects.map((prj) => (
               <div key={prj._id} className="project-item2" style={{padding:"1rem"}}>
-                <div className="project-item-content1">
-                  <h3>{prj.title}</h3>
+                <div className="project-item-content2">
+                  <h2>{prj.title}</h2>
                   <p>{prj.description}</p>
                   <p>
-                    <b>Pay</b>: {prj.pay?(<><b>Rs {prj.pay}</b></>):(<>Experience</>)} &nbsp; <b>Duration</b>: {prj.duration} weeks
+                    <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
                   </p>
                   {prj.skills.length > 0 ? (
                     <div className="skills">

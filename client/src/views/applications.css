@@ -3,6 +3,9 @@
 
 }
 
+.form-select5 {
+  border-radius: 25px;
+}
 
 
 body {
@@ -139,4 +142,29 @@ h1, h2, h3, h4, h5, h6 {
 p.c{
   text-align: center;
   margin-left: 10px;
+}
+
+.btn3{
+  color: #e40000;
+  background-color: transparent;
+  border: 1px  solid #ff0000;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 16px;
+  max-width: 160px;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: block;
+}
+
+.btn3:hover{
+  background-color: #e40000;
+  color: #ffffff;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-between;
 }

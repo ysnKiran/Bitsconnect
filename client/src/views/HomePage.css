@@ -158,6 +158,7 @@ transform: translate(-50%, -50%); /* Center the content */
 
 
 
+
 .navbar {
   background-color: #130525;
   transition: top 0.3s; /* Add transition effect for smoother appearance */
@@ -223,6 +224,13 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .project-item p {
   margin: 1rem 0;
+  line-height: 1.4em; /* Adjust the line height as needed */
+  max-height: 5.6em; /* Set the maximum height to 4 lines (4 * line-height) */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Limit the number of lines to 4 */
+  -webkit-box-orient: vertical;
 }
 
 .project-item .skills {
@@ -347,10 +355,58 @@ transform: translate(-50%, -50%); /* Center the content */
 
 
 
+.modal-close-btn,
+.modal-save-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 25px;
+}
 
+.modal-close-btn {
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  position: relative;
+  cursor: pointer;
+}
 
+.modal-close-btn:before,
+.modal-close-btn:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 2px;
+  background-color: #fff;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
 
-.search-bar-container button {
+.modal-close-btn:after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.modal-close-btn:hover {
+  border: 1px solid #fff;
+  transition: border 0.3s ease;
+}
+
+.modal-save-btn {
+  background-color: #44008d;
+  color: #fff;
+  border: none;
+}
+
+.modal-save-btn:hover {
+  background-color: #44008d;
+}
+
+.filter-btn{
   background-color: transparent;
   color: #3b006f;
   border: 1px solid #3b006f; 
@@ -359,7 +415,7 @@ transform: translate(-50%, -50%); /* Center the content */
   height: 60px;
   cursor: pointer;
   font-size: 20px;
-  
+  margin-bottom:5px;
 }
 
 
@@ -371,7 +427,9 @@ transform: translate(-50%, -50%); /* Center the content */
 }
 
 .modal-header {
-  background-color: #007bff; /* Header background color */
+  display: flex;
+  justify-content: space-between;
+  background-color: #44008d; /* Header background color */
   color: #fff; /* Header text color */
   border-bottom: none; /* Remove bottom border */
 }
@@ -387,6 +445,7 @@ transform: translate(-50%, -50%); /* Center the content */
 .modal-footer {
   background-color: #f7f7f7; /* Footer background color */
   border-top: none; /* Remove top border */
+  padding: 20px;
 }
 
 /* Input styles */
@@ -441,5 +500,4 @@ transform: translate(-50%, -50%); /* Center the content */
   background-color: #cca7ff; /* Example background color */
   color: #1b1b1b; /* Example text color */
 }
-
 

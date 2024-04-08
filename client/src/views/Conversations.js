@@ -7,6 +7,8 @@ import "../views/global.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../views/Message.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Conversations = () => {
   const { convo_id } = useParams();
@@ -20,6 +22,7 @@ const Conversations = () => {
   const messagesEndRef = useRef(null);
   const [loadMsg, setLoadMsg] = useState(true);
   const [isCssLoaded, setIsCssLoaded] = useState(false);
+  const [recipientName, setRecipientName] = useState('');
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -49,6 +52,7 @@ const Conversations = () => {
   }, [messages]);
 
   useEffect(() => {
+    
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/conversations`, {
         headers: {
@@ -200,8 +204,8 @@ const Conversations = () => {
   return (
     <div>
       <Navbar />
-      <div className="apply-form3">
-        <div className="row justify-content-between align-items-center mb-5 left-margin">
+      <div className="apply-form4">
+        {/* <div className="row justify-content-between align-items-center mb-5 left-margin">
           <div className="col-auto">
             <button className="btn btn-link" onClick={goBack}>
               <BsChevronLeft size={24} />
@@ -209,7 +213,7 @@ const Conversations = () => {
           </div>
         </div>
 
-        <h1 className="with-margin2">Let's Talk!</h1>
+        <h1 className="with-margin2">Let's Talk!</h1> */}
 
         {loading ? (
           <div className="spinner-border" role="status">
@@ -218,30 +222,35 @@ const Conversations = () => {
         ) : (
           <div className="menu">
             <div className="select">
-              <select
-                className="form-select text-uppercase listing"
-                multiple
-                aria-label="multiple select example"
-                onClick={(e) => navigate(`/messages/${e.target.value}`)}
-              >
-                {convos.map((talk) => (
-                  <option
-                    className="option"
-                    value={talk.convoId}
-                    key={talk.convoId}
-                    title={talk.otherName}
-                  >
-                    {talk.otherName}
-                  </option>
-                ))}
-              </select>
-            </div>
+  <select
+    className="form-select text-uppercase listing"
+    multiple
+    aria-label="multiple select example"
+    onClick={(e) => navigate(`/messages/${e.target.value}`)}
+  >
+    {convos.map((talk) => (
+      <option
+        className="option"
+        value={talk.convoId}
+        key={talk.convoId}
+        title={talk.otherName}
+      >
+        <div className="option-content">
+         
+          <span>{talk.otherName}</span>
+        </div>
+      </option>
+    ))}
+  </select>
+</div>
             {loadMsg ? (
               <div className="chat-container">
+                
                 <div
                   className="chat-messages"
                   style={{ alignItems: "center", justifyContent: "center" }}
                 >
+                  
                   <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
@@ -249,7 +258,36 @@ const Conversations = () => {
               </div>
             ) : (
               <div className="chat-container">
-                <div className="chat-messages">
+                  {loadMsg ? (
+                  <div
+                    className="chat-messages"
+                    style={{ alignItems: "center", justifyContent: "center" }}
+                  >
+                     <div className="spinner-border" role="status">
+                   <span className="visually-hidden">Loading...</span>
+                 </div>
+                 </div>
+                 ) : (
+                  <>
+                  <div className="chat-header">
+                  <div className="avatar">
+                  {convos.length > 0 && convos[0].otherName.charAt(0).toUpperCase()}
+
+                          </div>
+                    {convos.map((talk) => (
+                      <option
+                        className="recipient-info"
+                        value={talk.convoId}
+                        key={talk.convoId}
+                        title={talk.otherName}
+                      >
+                        <div className="recipient-info">
+                          <span>{talk.otherName}</span>
+                        </div>
+                      </option>
+                    ))}
+                  </div>
+                    <div className="chat-messages">
                   {messages.map((message) => {
                     const messageTime = new Date(message.timestamp);
                     const formattedDate = messageTime.toLocaleDateString();
@@ -265,11 +303,11 @@ const Conversations = () => {
                           message.sender === myId ? "sender" : "receiver"
                         }`}
                       >
-                        <p className="recipient-name">
+                        {/* <p className="recipient-name">
                           {message.sender === myId
                             ? "You"
                             : message.recipient_name}
-                        </p>
+                        </p> */}
                         <div className="message">
                           <p className="message-content">{message.content}</p>
                           <p className="message-timestamp">
@@ -282,22 +320,31 @@ const Conversations = () => {
                   <div ref={messagesEndRef} />
                 </div>
                 <form className="message-input">
-                  <input
-                    type="text"
-                    placeholder="Type your message here..."
-                    value={inputValue}
-                    onChange={handleInputChange}
-                    style={{ width: "calc(100% - 60px)", marginRight: "10px" }}
-                  />
-                  <button
-                    type="submit"
-                    onClick={postNewMessage}
-                    style={{ width: "50px" }}
-                    disabled={!inputValue}
-                  >
-                    Send
-                  </button>
+                  <div className="input-container">
+                    <input
+                      type="text"
+                      placeholder="Type your message here..."
+                      value={inputValue}
+                      onChange={handleInputChange}
+                      className="message-text-input"
+                    />
+
+                      <button
+                      type="submit"
+                      onClick={postNewMessage}
+                      className="send-button"
+                      disabled={!inputValue}
+                    >
+                      <FontAwesomeIcon icon={faPaperPlane} />
+                    </button>
+                    
+                  </div>
+                  
                 </form>
+                
+              
+                </>
+  )}
               </div>
             )}
           </div>

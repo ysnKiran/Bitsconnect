@@ -182,23 +182,7 @@ const MyProjects = () => {
   const handlePayChange = (e, projectId) => {
     const newProjects = projects.map((project) => {
       if (project._id === projectId) {
-        const newPay = parseInt(e.target.value);
-        if (newPay >= 0) {
-          return { ...project, pay: newPay };
-        } else {
-          // Notify user about negative pay
-          toast.error("Pay cannot be negative", {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "dark",
-          });
-          return project;
-        }
+        return { ...project, pay: e.target.value };
       }
       return project;
     });
@@ -208,23 +192,7 @@ const MyProjects = () => {
   const handleDurationChange = (e, projectId) => {
     const newProjects = projects.map((project) => {
       if (project._id === projectId) {
-        const newDuration = parseInt(e.target.value);
-        if (newDuration > 0) {
-          return { ...project, duration: newDuration };
-        } else {
-          // Notify user about invalid duration
-          toast.error("Duration must be greater than 0", {
-            position: "top-center",
-            autoClose: 1000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: false,
-            progress: undefined,
-            theme: "dark",
-          });
-          return project;
-        }
+        return { ...project, duration: e.target.value };
       }
       return project;
     });
@@ -275,7 +243,7 @@ const MyProjects = () => {
             ) : projects.length > 0 ? (
               projects.map((project) => (
                 <li key={project._id} className="project-item2">
-                  <div className="project-item-content">
+                  <div className="project-item-content2">
                     {project.editing ? (
                       <>
                         <div className="form-group">
@@ -310,7 +278,6 @@ const MyProjects = () => {
                           <input
                             type="text"
                             id="pay"
-                            min="0"
                             className="form-control3"
                             value={project.pay}
                             onChange={(e) => handlePayChange(e, project._id)}
@@ -323,7 +290,6 @@ const MyProjects = () => {
                           <input
                             type="text"
                             id="duration"
-                            min="0"
                             className="form-control3"
                             value={project.duration}
                             onChange={(e) =>
@@ -352,7 +318,7 @@ const MyProjects = () => {
                         <h3>{project.title}</h3>
                         <p>{project.description}</p>
                         <p>
-                          <b>Pay</b>: {project.pay?(<><b>Rs {project.pay}</b></>):(<>Experience</>)} &nbsp; <b>Duration</b>:{" "}
+                          <b>Pay</b>: {project.pay} &nbsp; <b>Duration</b>:{" "}
                           {project.duration} weeks
                         </p>
                         <p>

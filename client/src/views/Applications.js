@@ -278,7 +278,7 @@ const Applications = () => {
         ) : projects.length > 0 ? (
           <div className="select-container">
             <div>
-              <select className="form-select mt-3 custom-select" onChange={(e) => getApplications(e.target.value)}>
+              <select className="form-select5 mt-3 custom-select" onChange={(e) => getApplications(e.target.value)}>
                 {projects.map((prj) => (
                   <option value={prj._id} key={prj._id} title={prj.title}>
                     {prj.title}
@@ -301,8 +301,8 @@ const Applications = () => {
                         <div className="card-body">
                           <p>Name: {selProp.name}</p>
                           <p>Email: {selProp.email}</p>
-                          <p>Graduation Year: {selProp.batch_year}</p>
-                          <p><button className="" onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button></p>
+                          <p>Batch: {selProp.batch_year}</p>
+                          <p><button className="btn2 btn-success" style={{backgroundColor:'white',color:'black',border:'1px solid black',fontSize:'16px'}} onClick={() => window.open(selProp.resume_link, '_blank')}>Resume</button></p>
                         </div>
                       </div>
                     ))}
@@ -324,11 +324,13 @@ const Applications = () => {
                         <div className="card-body">
                           <p>Name: {propo.name} </p>
                           <p>Email: {propo.email}</p>
-                          <p>Graduation Year: {propo.batch_year}</p>
+                          <p>Batch: {propo.batch_year}</p>
                           <p>SOP: {propo.applied_projects.find(ap => ap.project_id === selectedProjectId)?.proposal}</p>
-                          <p><button className="" onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
+                          <p><button className="btn2 btn-success" style={{backgroundColor:'white',color:'black',border:'1px solid black',fontSize:'16px'}} onClick={() => window.open(propo.resume_link, '_blank')}>Resume</button></p>
+                          <div className="buttons">
                           <button className="btn btn-success" onClick={() => SelectUser(propo._id)}>Select</button>
-                          <button className="btn btn-error" onClick={() => DeleteUser(propo._id)}>Reject</button>
+                          <button className="btn3 btn-error" onClick={() => DeleteUser(propo._id)}>Reject</button>
+                          </div>
                         </div>
                       </div>
                     ))}

@@ -9,13 +9,14 @@ import "../views/global.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Upload from "../components/Upload";
+import "../views/create.css";
 
 const Create = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false); // State for loading spinner
   const [title, setTitle] = useState("");
-  const [pay, setPay] = useState("");
-  const [duration, setDuration] = useState("");
+  const [pay, setPay] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [desc, setDesc] = useState("");
   const [skills, setSkills] = useState([]);
   const [deadline, setDeadline] = useState(""); // State for deadline
@@ -269,7 +270,7 @@ const Create = () => {
   return (
     <div>
       <Navbar />
-      <div className="apply-form3">
+      <div className="apply-form6">
         <div className="row justify-content-between align-items-center mb-3">
           <div className="col-auto">
             <button className="btn btn-link" onClick={goBack}>
@@ -342,7 +343,7 @@ const Create = () => {
             </label>
             <input
               type="date"
-              className="form-control"
+              className="form-control4"
               value={deadline}
               onChange={handleDeadlineChange}
               min={new Date().toISOString().split("T")[0]}
