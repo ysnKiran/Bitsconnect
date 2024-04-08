@@ -91,7 +91,7 @@ const Message = () => {
                     className="form-select text-uppercase listing"
                     multiple
                     aria-label="multiple select example"
-                    onClick={(e) => navigate(`/messages/${e.target.value}`)}
+                    onClick={(e) => navigate(`/messages/${e.target.value}/${e.target.title}`)}
                   >
                     {convos.map((talk) => (
                       <option

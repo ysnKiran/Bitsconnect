@@ -7,11 +7,11 @@ import "../views/global.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../views/Message.css";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPaperPlane, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane, faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const Conversations = () => {
-  const { convo_id } = useParams();
+  const { convo_id, recipientName } = useParams();
   const navigate = useNavigate();
   const id = localStorage.getItem("idToken");
   const [convos, setConvos] = useState([]);
@@ -22,7 +22,6 @@ const Conversations = () => {
   const messagesEndRef = useRef(null);
   const [loadMsg, setLoadMsg] = useState(true);
   const [isCssLoaded, setIsCssLoaded] = useState(false);
-  const [recipientName, setRecipientName] = useState('');
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -52,7 +51,6 @@ const Conversations = () => {
   }, [messages]);
 
   useEffect(() => {
-    
     axios
       .get(`${process.env.REACT_APP_BACKEND_URL}/conversations`, {
         headers: {
@@ -136,10 +134,28 @@ const Conversations = () => {
       });
   }, []);
 
-  const getConvo = (convo_id) => {
+  const getConvo = (convo_id, recipientName) => {
     console.log("Convo clicked: ", convo_id);
+    // Fetch messages for the selected conversation
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_URL}/conversations/messages/${convo_id}`,
+        {
+          headers: {
+            authorization: `${id}`,
+          },
+        }
+      )
+      .then((response) => {
+        setMessages(response.data); // Update messages with the fetched data
+        setLoadMsg(false); // Turn off loading spinner
+      })
+      .catch((error) => {
+        // Handle error...
+      });
+
     // navigate to Apply page with Id as params
-    navigate(`/messages/${convo_id}`);
+    navigate(`/messages/${convo_id}/${recipientName}`);
   };
 
   const postNewMessage = (e) => {
@@ -222,35 +238,32 @@ const Conversations = () => {
         ) : (
           <div className="menu">
             <div className="select">
-  <select
-    className="form-select text-uppercase listing"
-    multiple
-    aria-label="multiple select example"
-    onClick={(e) => navigate(`/messages/${e.target.value}`)}
-  >
-    {convos.map((talk) => (
-      <option
-        className="option"
-        value={talk.convoId}
-        key={talk.convoId}
-        title={talk.otherName}
-      >
-        <div className="option-content">
-         
-          <span>{talk.otherName}</span>
-        </div>
-      </option>
-    ))}
-  </select>
-</div>
+              <select
+                className="form-select text-uppercase listing"
+                multiple
+                aria-label="multiple select example"
+                onClick={(e) => getConvo(e.target.value, e.target.title)}
+              >
+                {convos.map((talk) => (
+                  <option
+                    className="option"
+                    value={talk.convoId}
+                    key={talk.convoId}
+                    title={talk.otherName}
+                  >
+                    <div className="option-content">
+                      <span>{talk.otherName}</span>
+                    </div>
+                  </option>
+                ))}
+              </select>
+            </div>
             {loadMsg ? (
               <div className="chat-container">
-                
                 <div
                   className="chat-messages"
                   style={{ alignItems: "center", justifyContent: "center" }}
                 >
-                  
                   <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
@@ -258,23 +271,23 @@ const Conversations = () => {
               </div>
             ) : (
               <div className="chat-container">
-                  {loadMsg ? (
+                {loadMsg ? (
                   <div
                     className="chat-messages"
                     style={{ alignItems: "center", justifyContent: "center" }}
                   >
-                     <div className="spinner-border" role="status">
-                   <span className="visually-hidden">Loading...</span>
-                 </div>
-                 </div>
-                 ) : (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                ) : (
                   <>
-                  <div className="chat-header">
-                  <div className="avatar">
-                  {convos.length > 0 && convos[0].otherName.charAt(0).toUpperCase()}
-
-                          </div>
-                    {convos.map((talk) => (
+                    <div className="chat-header">
+                      <div className="avatar">
+                        {convos.length > 0 &&
+                          convos[0].otherName.charAt(0).toUpperCase()}
+                      </div>
+                      {/*convos.map((talk) => (
                       <option
                         className="recipient-info"
                         value={talk.convoId}
@@ -285,66 +298,72 @@ const Conversations = () => {
                           <span>{talk.otherName}</span>
                         </div>
                       </option>
-                    ))}
-                  </div>
+                    ))*/}
+                      {
+                        <div className="recipient-info">
+                          <span>{recipientName}</span>
+                        </div>
+                      }
+                    </div>
                     <div className="chat-messages">
-                  {messages.map((message) => {
-                    const messageTime = new Date(message.timestamp);
-                    const formattedDate = messageTime.toLocaleDateString();
-                    const formattedTime = messageTime.toLocaleTimeString([], {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    });
+                      {messages.map((message) => {
+                        const messageTime = new Date(message.timestamp);
+                        const formattedDate = messageTime.toLocaleDateString();
+                        const formattedTime = messageTime.toLocaleTimeString(
+                          [],
+                          {
+                            hour: "2-digit",
+                            minute: "2-digit",
+                          }
+                        );
 
-                    return (
-                      <div
-                        key={message._id}
-                        className={`message-container ${
-                          message.sender === myId ? "sender" : "receiver"
-                        }`}
-                      >
-                        {/* <p className="recipient-name">
+                        return (
+                          <div
+                            key={message._id}
+                            className={`message-container ${
+                              message.sender === myId ? "sender" : "receiver"
+                            }`}
+                          >
+                            {/* <p className="recipient-name">
                           {message.sender === myId
                             ? "You"
                             : message.recipient_name}
                         </p> */}
-                        <div className="message">
-                          <p className="message-content">{message.content}</p>
-                          <p className="message-timestamp">
-                            {formattedDate} - {formattedTime}
-                          </p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                  <div ref={messagesEndRef} />
-                </div>
-                <form className="message-input">
-                  <div className="input-container">
-                    <input
-                      type="text"
-                      placeholder="Type your message here..."
-                      value={inputValue}
-                      onChange={handleInputChange}
-                      className="message-text-input"
-                    />
+                            <div className="message">
+                              <p className="message-content">
+                                {message.content}
+                              </p>
+                              <p className="message-timestamp">
+                                {formattedDate} - {formattedTime}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <div ref={messagesEndRef} />
+                    </div>
+                    <form className="message-input">
+                      <div className="input-container">
+                        <input
+                          type="text"
+                          placeholder="Type your message here..."
+                          value={inputValue}
+                          onChange={handleInputChange}
+                          className="message-text-input"
+                        />
 
-                      <button
-                      type="submit"
-                      onClick={postNewMessage}
-                      className="send-button"
-                      disabled={!inputValue}
-                    >
-                      <FontAwesomeIcon icon={faPaperPlane} />
-                    </button>
-                    
-                  </div>
-                  
-                </form>
-                
-              
-                </>
-  )}
+                        <button
+                          type="submit"
+                          onClick={postNewMessage}
+                          className="send-button"
+                          disabled={!inputValue}
+                        >
+                          <FontAwesomeIcon icon={faPaperPlane} />
+                        </button>
+                      </div>
+                    </form>
+                  </>
+                )}
               </div>
             )}
           </div>

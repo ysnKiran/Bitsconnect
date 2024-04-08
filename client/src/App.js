@@ -45,7 +45,7 @@ const App = () => {
         <Route exact path='/profile' element={<Profile/>}/>
         <Route exact path='/my-projects' element={<MyProjects/>}/>
         <Route exact path='/messages' element={<Message/>}/>
-        <Route exact path='/messages/:convo_id' element={<Conversations/>}/>
+        <Route exact path='/messages/:convo_id/:recipientName' element={<Conversations/>}/>
         {/* Other routes */}
       </Routes>
       
