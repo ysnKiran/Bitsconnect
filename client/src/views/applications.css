@@ -1,35 +1,37 @@
 .select-container {
-    
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .form-select5 {
   border-radius: 25px;
 }
 
-
 body {
-  font-family: 'Gilroy', sans-serif; 
+  font-family: "Gilroy", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Gilroy-Bold', sans-serif; /* Apply Gilroy font to all headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Gilroy-Bold", sans-serif; /* Apply Gilroy font to all headings */
 }
 
 .apply-form3 {
   display: flex;
   flex-direction: column;
-  align-items:left;
-  padding-left: 300px;/*padding of whole form*/
-  padding-right: 300px;/*padding of whole form*/
-  padding-top: 100px;/*padding of whole form*/
-
-
-
+  align-items: left;
+  padding-left: 300px; /*padding of whole form*/
+  padding-right: 300px; /*padding of whole form*/
+  padding-top: 100px; /*padding of whole form*/
 }
 
 .apply-form h1 {
-  font-family: 'Gilroy-Bold', sans-serif;
+  font-family: "Gilroy-Bold", sans-serif;
   font-size: 48px;
   margin-bottom: 20px;
 }
@@ -40,7 +42,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-label {
-  font-family: 'Gilroy-SemiBold', sans-serif;
+  font-family: "Gilroy-SemiBold", sans-serif;
   font-size: 18px;
 }
 
@@ -48,10 +50,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 80%;
   height: 150px;
   padding: 20px; /* Adjust padding for form fields */
-  background: #E7EEF3;
+  background: #e7eef3;
   border-radius: 16px;
   border: none;
-  resize: vertical; 
+  resize: vertical;
 }
 
 .title-textarea {
@@ -72,8 +74,6 @@ h1, h2, h3, h4, h5, h6 {
   height: 60px; /* Adjust height as needed */
   width: fit-content;
   border-radius: 12px;
-
-
 }
 
 .d-flex {
@@ -93,22 +93,17 @@ h1, h2, h3, h4, h5, h6 {
 .d-flex .btn {
   /* Additional styling for the remove button */
   margin-left: 20px; /* Adjust margin as needed */
- 
 }
-
-
 
 .custom-select {
-  /* Add your custom styling here */
-  /* For example: */
-  background-color: rgb(158, 129, 255); /* Change button color on hover */
+  background-color: rgb(158, 129, 255);
   color: #ffffff;
   border-radius: 24px;
-  padding: 18px;
-  width: 100%;
-  /* Add more styles as needed */
-}
+  padding: 12px;
+  width: 40%;
 
+  /* width: 50%; */
+}
 
 .card {
   background-color: #ffffff;
@@ -119,14 +114,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .card-body {
-  font-family: 'Gilroy', sans-serif; 
+  font-family: "Gilroy", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #333333;
 }
 
 .card-body p {
-  font-family: 'Gilroy', sans-serif; /* Apply Gilroy font to all headings */
+  font-family: "Gilroy", sans-serif; /* Apply Gilroy font to all headings */
 
   margin: 10px 0; /* Adjust spacing between paragraphs */
 }
@@ -138,16 +133,15 @@ h1, h2, h3, h4, h5, h6 {
   padding-top: 30px;
 }
 
-
-p.c{
+p.c {
   text-align: center;
   margin-left: 10px;
 }
 
-.btn3{
+.btn3 {
   color: #e40000;
   background-color: transparent;
-  border: 1px  solid #ff0000;
+  border: 1px solid #ff0000;
   padding: 10px 20px;
   border-radius: 25px;
   cursor: pointer;
@@ -159,12 +153,26 @@ p.c{
   display: block;
 }
 
-.btn3:hover{
+.btn3:hover {
   background-color: #e40000;
   color: #ffffff;
 }
 
-.buttons{
+.buttons {
   display: flex;
   justify-content: space-between;
+}
+
+.size {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .custom-select {
+    width: 60%;
+
+    /* width: 50%; */
+  }
 }

@@ -5,25 +5,40 @@
   padding: 10px 20px;
   color: #fff; /* White text color */
   border-radius: 35px;
-  text-decoration:none; /* Remove default underline */
+  text-decoration: none; /* Remove default underline */
   cursor: pointer;
   transition: background-color 0.3s; /* Add transition for hover effect */
-  font-family: 'ClashDisplay-Variable';
+  font-family: "ClashDisplay-Variable";
   font-size: medium;
   border: 1px solid #ccc;
-  background-color:transparent;
-
+  background-color: transparent;
+  font-size: 25px;
 }
 
 .view-projects-button:hover {
-
-color: #ffffff; /* White text color */
-box-shadow: 0 5px 15px rgba(211, 182, 255, 0.353);
-border: 1px solid #80fff2;
-
-
+  color: #ffffff; /* White text color */
+  box-shadow: 0 5px 15px rgba(211, 182, 255, 0.353);
+  border: 1px solid #80fff2;
 }
 
+.hero-heading {
+  font-family: "Clash Display Variable";
+  font-style: normal;
+  line-height: 110%;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 6vw; /* Adjust font size responsively */
+
+  background: linear-gradient(180deg, #ba65ff 0%, rgb(204, 188, 255) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: fadeIn 1s ease forwards;
+  position: fixed; /* Ensure content stays fixed during animation */
+  top: 50%; /* Adjust vertical position */
+  left: 50%; /* Adjust horizontal position */
+  transform: translate(-50%, -50%); /* Center the content */
+}
 
 .hero-container {
   /* background-color: #8567FF; */
@@ -32,11 +47,24 @@ border: 1px solid #80fff2;
   max-width: 100%; /* Set a max-width to prevent the hero section from becoming too wide */
   height: 100vh; /* Adjust height as needed */
   margin: 0 auto;
-  background-image: url('../assets/bg.svg');
+  background-image: url("../assets/bg.svg");
   background-size: cover;
   background-position: center;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   top: 0px;
+}
+
+.hero-overlay {
+  position: relative;
+  width: 80%; /* Adjust width as needed */
+  height: 70vh; /* Adjust height as needed */
+  background: linear-gradient(180deg, #8c69d830 0%, rgba(14, 1, 42, 0) 100%);
+  filter: drop-shadow(0px 4px 4px rgba(42, 3, 47, 0));
+  border-radius: 100px; /* Adjust border-radius as needed */
+  animation: fadeIn 1s ease forwards;
+  top: 50%; /* Adjust vertical position */
+  left: 50%; /* Adjust horizontal position */
+  transform: translate(-50%, -50%); /* Center the overlay */
 }
 
 @keyframes fadeIn {
@@ -49,73 +77,6 @@ border: 1px solid #80fff2;
     transform: translate(-50%, -50%);
   }
 }
-.hero-overlay {
-  position: absolute;
-  width: 80%; /* Adjust width as needed */
-  height: 60vh; /* Adjust height as needed */
-  background: linear-gradient(180deg, #8c69d830 0%, rgba(14, 1, 42, 0) 100%);
-  filter: drop-shadow(0px 4px 4px rgba(42, 3, 47, 0));
-  border-radius:30px; /* Adjust border-radius as needed */
-  animation: fadeIn 1s ease forwards;
-  top: 50%; /* Adjust vertical position */
-  left: 50%; /* Adjust horizontal position */
-  transform: translate(-50%, -50%); /* Center the overlay */
-}
-
-/* Media query for small screens */
-@media (max-width: 576px) {
-  .hero-overlay {
-      width: 75%;
-      height: 75%;
-      border-radius: 8%;
-  }
-
-  .hero-heading {
-      font-size: 36px;
-    }
-  
-    .view-projects-button {
-      font-size: 16px;
-    }
-}
-
-/* Media query for medium screens */
-@media (min-width: 577px) and (max-width: 992px) {
-  .hero-overlay {
-    width: 75%;
-    height: 75%;
-    border-radius: 8%;
- 
-  }
-
-  .hero-heading {
-      font-size: 64px;
-    }
-  
-    .view-projects-button {
-      font-size: 16px;
-    }
-}
-
-/* Media query for large screens */
-@media (min-width: 993px) {
-  .hero-overlay {
-    width: 75%;
-    height: 75%;
-    border-radius: 60px;
-  }
-  .hero-heading {
-      font-size: 96px;
-    }
-  
-    .view-projects-button {
-      font-size: 24px;
-    }
-}
-
-
-
-
 
 .hero-content {
   position: absolute;
@@ -124,53 +85,11 @@ border: 1px solid #80fff2;
   transform: translate(-50%, -50%);
   text-align: center;
   color: #fff;
-
 }
-
-.hero-heading {
-  font-family: 'Clash Display Variable';
-font-style: normal;
-line-height: 110%;
-text-align: center;
-text-transform: uppercase;
-font-size: 6vw; /* Adjust font size responsively */
-
-  background: linear-gradient(180deg, #ba65ff 0%, rgb(204, 188, 255) 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-text-fill-color: transparent;
-animation: fadeIn 1s ease forwards;
-position: fixed; /* Ensure content stays fixed during animation */
-top: 50%; /* Adjust vertical position */
-left: 50%; /* Adjust horizontal position */
-transform: translate(-50%, -50%); /* Center the content */
-
-}
-
-
-.projects-heading-container{
-  flex: auto;
-  align-content: center;
-}
-
-
-
-
-
 
 .navbar {
   background-color: #130525;
   transition: top 0.3s; /* Add transition effect for smoother appearance */
-}
-
-/* Project List */
-.project-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
 }
 
 .project-container {
@@ -179,137 +98,107 @@ transform: translate(-50%, -50%); /* Center the content */
   justify-content: space-between;
 }
 
-.project-item {
+.project-list {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex: 1; /* Take up full width */
-  max-width: calc(50% - 1rem); /* Maximum width for two items per row */
-  background-color: #ffffff;
-  border: 1px solid #2d0064;
-  border-radius: 30px;
-  margin-bottom: 2rem; /* Adjust bottom margin as needed */
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  flex-wrap: wrap;
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
 }
 
-
-/* Media query for responsiveness */
-@media (max-width: 768px) {
-  .project-item {
-    flex-basis: calc(100% - 1rem); /* One card per row on smaller screens */
-  }
+.project-item3 {
+  align-items: flex-start;
+  background-color: #fff;
+  border: 1px solid #2d0064;
+  border-radius: 30px;
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  max-width: calc(50% - 1rem);
+  overflow: hidden;
 }
 
 .project-item-content {
-  flex: 1;
-  padding: 3rem;
-  padding-right: 1rem;
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight:regular;
+  box-sizing: border-box;
   color: #21003a;
-
-
-  /* size of project box */
+  flex: 1 1;
+  font-size: 1.5rem;
+  font-weight: regular;
+  padding: 2rem;
+  text-align: left;
+  width: 100%;
 }
 
-
-.project-item h3 {
+.project-item-content3 h3 {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 0.5rem;
   margin-top: 0;
 }
 
 .project-item p {
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  line-height: 1.4em;
   margin: 1rem 0;
-  line-height: 1.4em; /* Adjust the line height as needed */
-  max-height: 5.6em; /* Set the maximum height to 4 lines (4 * line-height) */
+  max-height: 5.6em;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* Limit the number of lines to 4 */
-  -webkit-box-orient: vertical;
 }
 
-.project-item .skills {
+.project-item.skills {
   display: flex;
 }
 
 .project-item .skills .badge {
   margin-left: 0.5rem;
   margin-top: 0.5rem;
-
 }
 
-.apply-btn-container {
+.apply-btn5-container {
   align-self: flex-start;
-  margin-top: auto;/* Align the button to the bottom */
+  margin-top: auto; /* Align the button to the bottom */
 }
 
 .apply-btn1 {
   background-color: #44008d;
-  color: #FFFFFF;
+  color: #ffffff;
   border: none;
   border-radius: 45px;
   padding: 1rem 3rem;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 50px;
   margin-bottom: 30px;
   margin-top: 30px;
-
+  margin-left: 30px;
 }
 
-
-
-
-  @media (max-width: 768px) {
-      .project-item {
-        flex-basis: 100%; /* Single card per row on smaller screens */
-        margin-left: 0; /* Reset margin on smaller screens */
-        margin-bottom: 2rem; /* Reduce bottom margin on smaller screens */
-      }
-    }
-  
-/* Styles for the search bar */
-/* .search-bar {
-  margin-bottom: 20px;
+.apply-btn1-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  
+  align-self: flex-start;
+  margin-top: auto;
 }
 
-
-
-.search-bar input[type="text"] {
-  box-sizing: border-box;
-  width: 624px;
-  height: 48px;
-  padding: 10px;
-  background: #FFFFFF;
-  mix-blend-mode: normal;
-  border: 2px solid #E4EBE4; 
-  border-radius: 160px;
-  margin-right: 10px;
-  font-size: 16px;
-} */
+.projects-heading-container {
+  flex: auto;
+  align-content: center;
+  padding: 40px;
+}
 
 .search-bar-container {
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
+
 .search-bar-container:hover .air3-input-group input[type="text"] {
   border-color: #ccc5d2;
 }
-
-
-
 
 .air3-input-group {
   display: flex;
@@ -319,17 +208,17 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .air3-input-group .icon {
   position: absolute;
-  left: 20px; /* Adjust as needed */
+  left: 20px;
 }
 
 .air3-input-group input[type="text"] {
   box-sizing: border-box;
-  width: 624px; /* Adjust width as needed */
+  width: 624px;
   height: 56px;
-  padding-left: 40px; /* Ensure space for the icon */
-  background: #FFFFFF;
+  padding-left: 40px;
+  background: #ffffff;
   mix-blend-mode: normal;
-  border: 2px solid #E4EBE4; 
+  border: 2px solid #e4ebe4;
   border-radius: 160px;
   margin-right: 10px;
   font-size: 16px;
@@ -337,23 +226,164 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .air3-input-group .clear-btn6 {
   position: absolute;
-  right: 30px; /* Adjust as needed */
-  color: #000000; /* Black color for the cross mark */
-  background-color: transparent; /* Transparent background */
-  border: 2px solid transparent; /* Transparent border initially */
-  border-radius: 50%; /* Make it a circle */
-  width: 30px; /* Set width and height to ensure a circle */
+  right: 30px;
+  color: #000000;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  width: 30px;
   height: 30px;
-  padding: 0; /* Remove padding */
+  padding: 0;
   cursor: pointer;
-  transition: border-color 0.3s ease; /* Smooth transition on border-color change */
+  transition: border-color 0.3s ease;
 }
 
 .air3-input-group .clear-btn6:hover {
-  border-color: black; /* Add a black border on hover */
+  border-color: black;
 }
 
+.filter-btn {
+  background-color: transparent;
+  color: #3b006f;
+  border: 1px solid #3b006f;
+  border-radius: 100px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+/* 
+@media screen and (max-width: 480px) {
+  .hero-container {
+    padding: 30px 10px;
+  }
 
+  .hero-overlay {
+    width: 100%;
+    min-height: 50vh;
+    padding: 20px;
+    border-radius: 15px;
+  }
+
+  .hero-content {
+    font-size: 14px;
+  }
+} */
+/* Media queries for mobile responsiveness */
+
+.projects-heading {
+  font-weight: 600;
+  font-family: "ClashDisplay-Variable";
+  font-size: 60px;
+}
+
+@media screen and (max-width: 768px) {
+  .view-projects-button {
+    margin-top: 400px;
+    font-size: 15px;
+    padding: 8px 16px;
+  }
+
+  .hero-container {
+    width: 100%;
+    height: auto;
+    padding: 50px;
+    box-sizing: border-box;
+  }
+
+  /* .hero-overlay {
+    width: 90%;
+    height: auto;
+    min-height: 60vh;
+    padding: 30px;
+    border-radius: 20px;
+  } */
+  .hero-overlay {
+    width: 90%;
+    height: 90%;
+    border-radius: 2%;
+    margin-top: 10vh;
+    height: auto;
+    min-height: 40vh;
+    padding: 50px 20px;
+  }
+
+  .hero-heading {
+    font-family: "Clash Display Variable";
+    font-style: normal;
+    line-height: 125%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 9vw; /* Adjust font size responsively */
+    background: linear-gradient(180deg, #ba65ff 0%, rgb(204, 188, 255) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeIn 1s ease forwards;
+    position: fixed; /* Ensure content stays fixed during animation */
+    top: 50%; /* Adjust vertical position */
+    left: 50%; /* Adjust horizontal position */
+    transform: translate(-50%, -50%); /* Center the content */
+  }
+
+  .projects-heading-container {
+    padding: 10px;
+    align-items: center;
+  }
+
+  .projects-heading-container h1 {
+    font-size: 50px;
+    margin: 10px;
+  }
+
+  .search-bar-container {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .air3-input-group {
+    width: 100%;
+  }
+
+  .air3-input-group input[type="text"] {
+    width: 100%;
+    height: 48px;
+    font-size: 14px;
+    padding-left: 35px;
+    border-radius: 24px;
+  }
+
+  .air3-input-group .icon {
+    left: 15px;
+  }
+
+  .air3-input-group .clear-btn6 {
+    right: 15px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .filter-btn {
+    background-color: transparent;
+    color: #3b006f;
+    border: 1px solid #3b006f;
+    border-radius: 100px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  .project-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
 
 .modal-close-btn,
 .modal-save-btn {
@@ -377,7 +407,7 @@ transform: translate(-50%, -50%); /* Center the content */
 
 .modal-close-btn:before,
 .modal-close-btn:after {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -405,21 +435,6 @@ transform: translate(-50%, -50%); /* Center the content */
 .modal-save-btn:hover {
   background-color: #44008d;
 }
-
-.filter-btn{
-  background-color: transparent;
-  color: #3b006f;
-  border: 1px solid #3b006f; 
-  border-radius: 100px;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  font-size: 20px;
-  margin-bottom:5px;
-}
-
-
-/* Add this CSS to your global.css or any other CSS file */
 
 /* Modal styles */
 .modal-content {
@@ -453,25 +468,6 @@ transform: translate(-50%, -50%); /* Center the content */
   background-color: #f7f7f7; /* Input group background color */
 }
 
-/* Slider styles */
-/* Slider styles */
-.multi-range-slider-track {
-  background-color: #007bff; /* Track color */
-  height: 6px; /* Track height */
-}
-
-.multi-range-slider-thumb {
-  background-color: #007bff; /* Thumb color */
-  border-color: #007bff; /* Thumb border color */
-  width: 20px; /* Thumb width */
-  height: 20px; /* Thumb height */
-}
-
-.multi-range-slider-thumb:focus {
-  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Thumb focus shadow */
-}
-
-
 /* Button styles */
 .btn-primary {
   background-color: #007bff; /* Primary button background color */
@@ -501,3 +497,80 @@ transform: translate(-50%, -50%); /* Center the content */
   color: #1b1b1b; /* Example text color */
 }
 
+.form-check {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+}
+
+.form-check .form-check-input {
+  margin-right: 1rem;
+}
+
+label {
+  display: inline-block;
+}
+
+@media (max-width: 480px) {
+  .project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: fit-content;
+  }
+
+  .project-item3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex: 1; /* Take up full width */
+    max-width: calc(100% - 2rem); /* Maximum width for two items per row */
+    background-color: #ffffff;
+    border: 1px solid #2d0064;
+    border-radius: 30px;
+    margin-bottom: 2rem; /* Adjust bottom margin as needed */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+  .project-item3 .skills .badge {
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  .project-item3-content {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+
+  .project-item3-content h3 {
+    font-size: 1.8rem;
+  }
+
+  .project-item3 p {
+    max-height: 4.2em;
+    -webkit-line-clamp: 2;
+  }
+
+  .apply-btn1 {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding: 0.6rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  .projects-heading {
+    font-size: 30px;
+  }
+}
+
+.project-item-content3 {
+  box-sizing: border-box;
+
+  color: #21003a;
+  flex: 1 1;
+  font-size: 1.5rem;
+  font-weight: regular;
+  padding: 2rem;
+  text-align: left;
+  width: 100%;
+}

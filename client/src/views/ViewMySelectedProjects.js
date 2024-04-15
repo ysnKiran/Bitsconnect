@@ -57,7 +57,7 @@ const ViewMySelectedProjects = () => {
         </div>    
         
         <h1 className="with-margin2">Your Current Projects</h1>
-        <div>
+        <div className='size2'>
           {loading ? ( // Render spinner while loading is true
             <div className="spinner-border" role="status">
               <span className="visually-hidden">Loading...</span>
@@ -68,6 +68,12 @@ const ViewMySelectedProjects = () => {
                 <div className="project-item-content2">
                   <h2>{prj.title}</h2>
                   <p>{prj.description}</p>
+                  <button
+                  className="btn2 btn-success" style={{ backgroundColor: 'transparent', color: 'black', border: '1px solid black', fontSize: '16px' }}          
+                  onClick={() => window.open(prj.jobDescription, '_blank')}
+                  >
+                  Job Description
+                  </button>
                   <p>
                     <b>Pay</b>: {prj.pay} &nbsp; <b>Duration</b>: {prj.duration} weeks
                   </p>
@@ -81,7 +87,7 @@ const ViewMySelectedProjects = () => {
                             backgroundColor: '#F5F2F7',
                             borderRadius: '30px',
                             color: '#64556D',
-                            fontSize: '1.5rem',
+                            fontSize: '1.2rem',
                             fontWeight: 'lighter',
                             display: 'inline-block',
                             marginRight: '0.5rem',

@@ -1,8 +1,5 @@
-
-
-
 .profile-container {
-  font-family: 'Gilroy', sans-serif; 
+  font-family: "Gilroy", sans-serif;
   font-size: medium;
   padding: 80px;
   position: absolute;
@@ -10,29 +7,26 @@
   height: 60vh; /* Adjust height as needed */
   background: linear-gradient(180deg, #4f24ac30 0%, rgba(14, 1, 42, 0) 100%);
   filter: drop-shadow(0px 4px 4px rgba(42, 3, 47, 0));
-  border-radius:60px; /* Adjust border-radius as needed */
+  border-radius: 60px; /* Adjust border-radius as needed */
   animation: fadeIn 1s ease forwards;
   top: 50%; /* Adjust vertical position */
   left: 50%; /* Adjust horizontal position */
   transform: translate(-50%, -50%); /* Center the overlay */
   margin-top: 3%;
-
 }
-
 
 .profile-container h2 {
   font-size: 48px;
   font-weight: bold;
   margin-bottom: 20px;
   color: #2c0157;
-
 }
 
 .profile-container label {
-  font-family: 'Gilroy', sans-serif; 
+  font-family: "Gilroy", sans-serif;
 
   font-size: 30px;
-   font-weight:600;
+  font-weight: 600;
   margin-right: 10px;
   color: #412c56;
 }
@@ -50,10 +44,9 @@
 .profile-container span {
   display: inline-block;
   margin-bottom: 20px;
-  font-size:24px;
-  color: #76608d;  }
-
-
+  font-size: 24px;
+  color: #76608d;
+}
 
 .profile-container button {
   padding: 16px 32px;
@@ -72,9 +65,6 @@
   background-color: #5100a2;
 }
 
-
-
-
 /* CSS for upload button */
 .file-input-container {
   display: flex;
@@ -91,7 +81,7 @@
 }
 
 .file-input {
-  display: none; 
+  display: none;
   padding: 16px 32px;
   margin-right: 40px;
   background-color: #bebebe;
@@ -103,15 +93,11 @@
   border: none;
   margin-top: 30px;
   font-size: 24px;
-
-
 }
 
-
-
 .resume-button {
-  color: #FFFFFF;
-  border:1px #2c0157;
+  color: #ffffff;
+  border: 1px #2c0157;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -123,14 +109,11 @@
   display: none; /* Hide the file input */
 }
 
-
-
 /* Styling for the upload success message */
 .upload-success-message {
   color: rgb(141, 249, 141);
   margin-top: 10px;
 }
-
 
 .button-container {
   color: #fff; /* Button text color */
@@ -150,6 +133,79 @@
   justify-content: flex-start;
 }
 
+/* Media query for mobile devices */
+@media (max-width: 767px) {
+  /* Adjust profile container styles */
+  .profile-container {
+    width: 80%; /* Take up the full width of the screen */
+    padding: 20px; /* Adjust padding as needed */
+    border-radius: 20px; /* Adjust border radius as needed */
+    /*THIS WAS BORDER-SIZING BEFORE*/
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
 
+  /* Adjust heading font size */
+  .profile-container h2 {
+    font-size: 24px; /* Adjust font size as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+  }
 
+  /* Adjust label font size */
+  .profile-container label {
+    font-size: 18px; /* Adjust font size as needed */
+  }
 
+  /* Adjust input styles */
+  .profile-container input[type="text"] {
+    font-size: 16px; /* Adjust font size as needed */
+    padding: 8px; /* Adjust padding as needed */
+    border-radius: 12px; /* Adjust border radius as needed */
+  }
+
+  /* Adjust span font size */
+  .profile-container span {
+    font-size: 18px; /* Adjust font size as needed */
+  }
+
+  /* Adjust button styles */
+  .profile-container button {
+    font-size: 14px; /* Adjust font size as needed */
+    padding: 8px 16px; /* Adjust padding as needed */
+    border-radius: 16px; /* Adjust border radius as needed */
+    margin-right: 20px; /* Adjust margin as needed */
+  }
+
+  /* Adjust file input container styles */
+  .file-input-container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align elements to the left */
+  }
+
+  /* Adjust file input styles */
+  .file-input {
+    width: 100%; /* Take up full width */
+    padding: 8px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    margin-top: 10px; /* Adjust margin as needed */
+  }
+
+  /* Adjust resume button styles */
+  .resume-button {
+    width: 100%; /* Take up full width */
+    font-size: 14px; /* Adjust font size as needed */
+    padding: 8px; /* Adjust padding as needed */
+    margin-bottom: 10px; /* Adjust margin as needed */
+  }
+
+  /* Adjust button container styles */
+  .button-container {
+    width: 100%; /* Take up full width */
+    max-width: none; /* Remove max width */
+    padding: 10px 0; /* Adjust padding as needed */
+  }
+
+  /* Center text for mobile */
+  .right {
+    justify-content: center; /* Center text */
+  }
+}

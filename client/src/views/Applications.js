@@ -277,7 +277,7 @@ const Applications = () => {
           </div>
         ) : projects.length > 0 ? (
           <div className="select-container">
-            <div>
+            <div className="size">
               <select className="form-select5 mt-3 custom-select" onChange={(e) => getApplications(e.target.value)}>
                 {projects.map((prj) => (
                   <option value={prj._id} key={prj._id} title={prj.title}>

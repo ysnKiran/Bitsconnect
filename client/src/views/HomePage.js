@@ -328,11 +328,16 @@ function Home() {
           className="container mt-4 text-center"
           id="projects-section"
           style={{
-            margin: "auto",
-            maxWidth: "1200px",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            margin: 'auto',
+            maxWidth: '1200px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: '0 20px',
+            '@media (max-width: 767px)': {
+              maxWidth: '100%',
+              padding: '0 10px',
+            },
           }}
         >
           <div
@@ -340,11 +345,7 @@ function Home() {
             style={{ padding: "40px" }}
           >
             <h1
-              style={{
-                fontWeight: 600,
-                fontFamily: "ClashDisplay-Variable",
-                fontSize: "60px",
-              }}
+              className="projects-heading"
             >
               PROJECTS
             </h1>
@@ -403,7 +404,7 @@ function Home() {
                       ></button>
                     </div>
                     <div className="modal-body">
-                      <label htmlFor="pay">Pay:</label>
+                      <label htmlFor="pay" style={{fontSize:'20px' ,marginBottom:'10px'}}>Pay:</label>
                       {payRanges.map((range) => (
                         <div key={range.value} className="form-check">
                           <input
@@ -422,7 +423,7 @@ function Home() {
                         </div>
                       ))}
                       <br />
-                      <label htmlFor="duration">Duration:</label>
+                      <label htmlFor="duration" style={{fontSize:'20px' ,marginBottom:'10px'}}>Duration:</label>
                       {durationRanges.map((range) => (
                         <div key={range.value} className="form-check">
                           <input
@@ -441,7 +442,7 @@ function Home() {
                         </div>
                       ))}
                       <br />
-                      <label htmlFor="skills">Skills:</label>
+                      <label htmlFor="skills" style={{fontSize:'20px' ,marginBottom:'10px'}}>Skills:</label>
                       <Select
                         isMulti
                         name="skills"
@@ -464,12 +465,12 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="project-container">
-            <ul className="project-list">
+          <div className="project-container3">
+            <ul className="project-list3">
               {copyProjects.length > 0 ? (
                 copyProjects.map((prj) => (
-                  <li key={prj._id} className="project-item">
-                    <div className="project-item-content">
+                  <li key={prj._id} className="project-item3">
+                    <div className="project-item-content3">
                       <h3>{prj.title}</h3>
                       <p>{prj.description}</p>
                       <p>
@@ -501,11 +502,11 @@ function Home() {
                       )}
                       {/* <p>Owner: <b>{prj.alumni_name}</b> </p><p>Id: {prj.alumni_email}</p> */}
                       <p style={{ marginTop: "60px" }}>
-                        Deadline:{" "}
+                        Deadline:
                         <b>{new Date(prj.deadline).toLocaleDateString()}</b>
                       </p>
                     </div>
-                    <div className="apply-btn-container">
+                    <div className="apply-btn1-container">
                       <button
                         className="apply-btn1"
                         onClick={() => apply(prj._id, prj.title)}

@@ -1,47 +1,103 @@
 #navbar {
-    background: #130525;
-    text-align: center;
-    position: fixed;
-    z-index: 999;
-    width: 100%;
-    font-family: 'ClashDisplay-Variable';
-    font-size: medium;
-    padding-left: 10vw; /* Example value, adjust as needed */
-    padding-right: 10vw; /* Example value, adjust as needed */
+  background: #130525;
+  text-align: center;
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  font-family: "ClashDisplay-Variable";
+  font-size: medium;
+  padding-left: 10vw;
+  padding-right: 10vw;
 }
 
-
 .navbar-brand {
-    font-family: 'Space Quest', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 36px;
-    line-height: 43px;
-    color: hsl(0, 0%, 100%);
-    display: flex;
-    align-items: center;
-    margin-left: 20px; /* Adjusted margin-left */
+  font-family: "Space Quest", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 43px;
+  color: hsl(0, 0%, 100%);
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.navbar > .container-fluid {
+  display: flex;
+  flex-wrap: inherit;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .navbar-nav .nav-item .nav-link {
-    background-color: transparent;
-    border: 1px solid transparent;
-    color: white;
-    border-radius: 15px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 15px;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
-    background-color: transparent;
-    border-color: white;
+  background-color: transparent;
+  border-color: white;
 }
 
 .navbar-toggler-icon {
-    color: #fff;
+  color: #fff;
 }
 
-/* Adjustments for collapsed navbar */
+/* Media queries for responsiveness */
+
+/* For screens smaller than 992px */
 @media (max-width: 991.98px) {
-    .navbar-brand {
-        margin-left: 0; /* Reset margin-left */
-    }
+  .navbar-brand {
+    margin-left: 0;
+    font-size: 28px;
+    line-height: 34px;
+  }
+
+  #navbar {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+}
+
+/* For screens smaller than 768px */
+@media (max-width: 767.98px) {
+  .navbar-brand {
+    font-size: 24px;
+    line-height: 28px;
+  }
+
+  #navbar {
+    padding-left: 3vw;
+    padding-right: 3vw;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* For screens smaller than 576px */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  #navbar {
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  .navbar-nav .nav-item .nav-link {
+    font-size: 10px;
+    padding: 5px 10px;
+  }
 }

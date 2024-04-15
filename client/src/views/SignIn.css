@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column; /* Change to column direction to stack items vertically */
   justify-content: center;
-  align-items:center;
+  align-items: center;
 }
 
 .signin-content {
@@ -52,4 +52,48 @@
 
 .google-button:hover img {
   filter: brightness(1); /* Reset brightness of icon on hover */
+}
+
+/* Media queries for mobile responsiveness */
+@media (max-width: 767px) {
+  .signin-container {
+    padding: 20px;
+  }
+
+  .logo {
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 40px;
+  }
+
+  .google-button {
+    max-width: 250px;
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .google-button img {
+    width: 35px;
+    height: 35px;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    max-width: 300px;
+    margin-bottom: 30px;
+  }
+
+  .google-button {
+    max-width: 200px;
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  .google-button img {
+    width: 25px;
+    height: 25px;
+    margin-right: 6px;
+  }
 }
