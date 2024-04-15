@@ -128,11 +128,9 @@ const Conversations = () => {
   }, [convo_id, id, oldMessagesLength]);
 
   const getConvo = (convo_id, recipientName) => {
-    if(!convo_id || !recipientName)
+    if(convo_id && recipientName)
     {
-      return;
-    }
-    console.log("Convo clicked: ", convo_id);
+      console.log("Convo clicked: ", convo_id);
     setLoadMsg(true);
     // Fetch messages for the selected conversation
     axios
@@ -155,6 +153,8 @@ const Conversations = () => {
       setLoadMsg(false); // Turn off loading spinner
     // navigate to Apply page with Id as params
     navigate(`/messages/${convo_id}/${recipientName}`);
+      
+    }
   };
 
   const postNewMessage = (e) => {
