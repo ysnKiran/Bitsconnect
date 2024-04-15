@@ -128,6 +128,10 @@ const Conversations = () => {
   }, [convo_id, id, oldMessagesLength]);
 
   const getConvo = (convo_id, recipientName) => {
+    if(!convo_id || !recipientName)
+    {
+      return;
+    }
     console.log("Convo clicked: ", convo_id);
     setLoadMsg(true);
     // Fetch messages for the selected conversation
