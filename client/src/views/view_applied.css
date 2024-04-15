@@ -4,64 +4,72 @@
   justify-content: space-between;
   margin: 0 5rem; /* Adjust the left and right margins as needed */
 
-/* @media (max-width: 767px) {
+
+
+
+
+  /* @media (max-width: 767px) {
     .project-item {
       flex-basis: calc(100% - 1rem); 
     }
   } */
+  
+  
+  .project-item3-content {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: regular;
+    color: #21003a;
+  }
+  
+  .project-item3-content h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .project-item3-content p {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+  }
+  
+  .project-item3-content .skills {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .project-item3 .skills .badge {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+  }
+  
+  .apply-btn-container {
+    align-self: flex-start;
+    margin-top: auto; /* Align the button to the bottom */
+  }
+  
+  h1.with-margin1{
+    text-align: center;
+    padding: 2%;
+    /* Adjust the value as needed */
+  }
+  
+  .spinner-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 20vh; /* Adjust as needed */
+  }
+  
+  
 
-.project-item3-content {
-  padding: 1rem;
-  text-align: left;
-  font-size: 1.5rem;
-  font-weight: regular;
-  color: #21003a;
-}
-
-.project-item3-content h3 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  margin-top: 0;
-}
-
-.project-item3-content p {
-  margin: 1rem 0;
-  font-size: 1.5rem;
-}
-
-.project-item3-content .skills {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.project-item3 .skills .badge {
-  margin-right: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.apply-btn-container {
-  align-self: flex-start;
-  margin-top: auto; /* Align the button to the bottom */
-}
-
-h1.with-margin1 {
-  text-align: center;
-  padding: 2%;
-  /* Adjust the value as needed */
-}
-
-.spinner-container {
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 20vh; /* Adjust as needed */
-}
 
 .project-container3 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
 .project-list3 {
@@ -74,27 +82,56 @@ h1.with-margin1 {
 }
 
 .project-item3 {
-  flex-basis: calc(50% - 1rem);
+  flex-basis: calc(50% - 1rem); 
+  max-width: calc(100% - 1rem); /* Maximum width for two items per row */
+  background-color: #ffffff;
+  border: 1px solid #2d0064;
+  border-radius: 30px;
+  margin-bottom: 2rem; 
+  box-sizing: border-box; 
+}
+.project-item4 {
+  flex-basis: calc(50% - 1rem); 
   max-width: calc(50% - 1rem); /* Maximum width for two items per row */
   background-color: #ffffff;
   border: 1px solid #2d0064;
   border-radius: 30px;
-  margin-bottom: 2rem;
-  box-sizing: border-box;
+  margin-bottom: 2rem; 
+  box-sizing: border-box; 
 }
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
-  .project-item3 {
-    flex-basis: calc(100% - 1rem); /* Single card per row on smaller screens */
-    flex: 0 0 calc(100% - 1rem);
-    max-width: calc(100% - 1rem); /* Maximum width for one item per row */
-  }
-}
+    .project-item3 {
+      flex-basis: calc(100% - 1rem); /* Single card per row on smaller screens */
+        flex: 0 0 calc(100% - 1rem);  
+        max-width: calc(90% - 1rem); /* Maximum width for one item per row */
+    }
 
-.apply-btn1 {
+    .project-item4 {
+      flex-basis: calc(100% - 1rem); /* Single card per row on smaller screens */
+        flex: 0 0 calc(100% - 1rem);  
+        max-width: calc(70% - 4rem); /* Maximum width for one item per row */
+
+  }
+
+  .apply-btn4 {
+    background-color: #44008d;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 45px;
+    padding: 1rem 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px;
+  
+  }
+
+}
+.apply-btn4 {
   background-color: #44008d;
-  color: #ffffff;
+  color: #FFFFFF;
   border: none;
   border-radius: 45px;
   padding: 1rem 3rem;
@@ -103,4 +140,52 @@ h1.with-margin1 {
   margin-bottom: 30px;
   margin-top: 30px;
   margin-left: 30px;
+
 }
+  
+  .apply-btn1 {
+    background-color: #44008d;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 45px;
+    padding: 1rem 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
+  
+  }
+
+/*  
+  .project-item4-content {
+    padding: 1rem;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: regular;
+    color: #21003a;
+  }
+  
+  .project-item4-content h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+  }
+  
+  .project-item4-content p {
+    margin: 1rem 0;
+    font-size: 1.5rem;
+  }*/
+  
+  .project-item4-content .skills {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .project-item4 .skills .badge {
+    margin-right: 0.5rem;
+    margin-top: 0.5rem;
+  } 
+
+ 
