@@ -275,7 +275,7 @@ const MyProjects = () => {
         </div>
         <h1 className="with-margin1">My Projects</h1>
         <div className="project-container2">
-          <ul className="project-list2">
+          <ul className="project-list6">
             {loadingProjects ? (
               <div className="text-center mt-4">
                 <div
@@ -288,8 +288,8 @@ const MyProjects = () => {
               </div>
             ) : projects.length > 0 ? (
               projects.map((project) => (
-                <li key={project._id} className="project-item2">
-                  <div className="project-item-content2">
+                <li key={project._id} className="project-item6">
+                  <div className="project-item-content">
                     {project.editing ? (
                       <>
                         <div className="form-group">
@@ -396,13 +396,13 @@ const MyProjects = () => {
                     {project.editing ? (
                       <>
                         <button
-                          className="apply-btn1"
+                          className="apply-btn4"
                           onClick={() => saveChanges(project._id)}
                         >
                           Save
                         </button>
                         <button
-                          className="apply-btn1"
+                          className="apply-btn4"
                           onClick={() => cancelEdit(project._id)}
                         >
                           Cancel
@@ -411,13 +411,13 @@ const MyProjects = () => {
                     ) : (
                       <>
                         <button
-                          className="apply-btn1"
+                          className="apply-btn4"
                           onClick={() => editProject(project._id)}
                         >
                           Edit
                         </button>
                         <button
-                          className="apply-btn1"
+                          className="apply-btn4"
                           onClick={() => deleteProject(project._id)}
                         >
                           Delete
