@@ -1,110 +1,14 @@
 BACKEND URL: https://se-project-backend-fard.onrender.com
 
-PROBLEMS:
+TO DO:
 
-SPRINT 2-1:
+---------------------------------------------------------------------------------
 
-SignIn:
-- Sign-in failed: popup (Location: handleClick)
-- sendUserDataToBackend: popup (Location: sendUserDataToBackend)
+Sprint 3:
 
-
-
-HomePage.js
-- Need loader for projects list
-- Additional info for projects (Owner,email)
-- Popup for errors
-
-
-Create.js
-
-- Popup
-
-
-Applications.js
-- Loading spinner
-- Select Bar change
-- Popup 
-
-
-AppliedProject.js
-- spinner
-
-
-Profile.js
-- spinner
-
-
-
-
-SPRINT 2-2
-
-
-Profile.js/Register.js/Create.js:
-- - (((?????))) Upload button changes [SANJANA]
-- Add deadline and JD field to Projects
-- - Add deadline field for application
-
-- Add JD PDF field for Create.js
-- Add more info about projects
-
-- Reject Applications
-- Pending/Rejected/Selected
-
-- Update Project Details
-- Delete Projects
-- Delete/retract Application
-
-
-SPRINT 2-3
-
-- Add Notifs for selection/rejection of application and successfull application
-
---------------------------------------------------------
-
-- Add Search/Filter for projects in frontend 
-- Add Search/Filter for projects in backend 
-
-
-SPRINT 2-4
-
-- Add Chat Feature
-
-Twilio: H46JN94PBSDRHY28ZNBD3LN6
-
-
-Project Created -> 1) PO ----------------- done
-Application -> 1) Applicant gets a mail 2) PO gets a mail -------------- done
-Selection -> 1) Applicant -- done
-Rejection -> 1) Applicant -- done
-
-
-
-
-
---------------------------------------
-
-To do:
-
--> Add spinner in:
-
-1) Apply to a project
-2) Selection in a project
-3) Rejection in a project
-
--> Make changes in email body 
-
--> Change Project Card and include JD (in Apply) as well in both Homepage and MyProjects
-
--> Change Names in Navbar
-
--> Report
-
--> Messages
-
----------------------------------------------
-Fetching of messages in real-time
-Notifs
-Style the pages
-
-Sprint 3 work shuru karna hai: Admin, Rate/Review, Group Application
+0) Create Mock data
+1) Admin Dashboard - Stats (Project,User,Applications,Selections)
+2) Report Issuse to Admin along with Stats with Delete button on completion
+3) Logs related to what each user did in a given timestamp
+4) Report Submission
+5) Making video
