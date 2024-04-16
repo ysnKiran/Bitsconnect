@@ -199,7 +199,7 @@ const ViewMyAppliedProjects = () => {
 
         <h1 className="with-margin1">Your Rejected Applications</h1>
 
-        <div>
+        <div className="size2">
           {rejLoad ? ( // Render spinner while loading is true
             <div className="spinner-container">
               <div className="spinner-border" role="status">
