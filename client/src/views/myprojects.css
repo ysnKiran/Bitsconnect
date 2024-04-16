@@ -42,11 +42,35 @@
   gap: 2rem;
   justify-content: center;
 }
+.project-list6 {
+  list-style: none;
+  display: flex;
+  flex-direction: column; 
+   gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 .project-container2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+
+.project-item6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1; /* Take up full width */
+  min-width: 600px;
+  max-width: calc(50% - 2rem);
+  background-color: #ffffff;
+  border: 1px solid #2d0064;
+  border-radius: 30px;
+  margin-bottom: 2rem; /* Adjust bottom margin as needed */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
 .project-item2 {
@@ -87,7 +111,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items:center;
   flex: 1; /* Take up full width */
   max-width: calc(50% - 1rem); /* Maximum width for two items per row */
   background-color: #ffffff;
@@ -105,7 +129,8 @@ p {
   font-size: 1.5rem;
   font-weight: regular;
   color: #21003a;
-  width: 100%; /* Make the content take up full width of the project item */
+
+  max-width:100% ;
   box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
@@ -124,6 +149,13 @@ p {
 
   /* Mobile styles for project item 2 */
   .project-item2 {
+    flex-basis: calc(100% - 1rem); /* Take up the full width of the container */
+    min-width: 100%; /* Ensure minimum width covers the full screen */
+    padding: 0.5rem; /* Adjust padding as needed */
+    margin: 0.5rem 0; /* Add margin for spacing */
+  }
+
+  .project-item6 {
     flex-basis: calc(100% - 1rem); /* Take up the full width of the container */
     min-width: 100%; /* Ensure minimum width covers the full screen */
     padding: 0.5rem; /* Adjust padding as needed */
@@ -150,7 +182,7 @@ p {
     padding-right: 20px;
     padding-top: 50px;
   }
-
+  
   /* Adjust font size and padding for form labels */
   .form-label3 {
     font-size: 14px;

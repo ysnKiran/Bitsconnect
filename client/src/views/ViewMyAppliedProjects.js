@@ -134,10 +134,9 @@ const ViewMyAppliedProjects = () => {
                   projects.map((prj) => (
                     <div
                       key={prj._id}
-                      className="project-item3"
-                      style={{ minWidth: "350px" }}
+                      className="project-item4"
                     >
-                      <div className="project-item-content">
+                      <div className="project-item-content3">
                         <h3>{prj.title}</h3>
                         <p style={{ fontSize: "1.2rem" }}>{prj.description}</p>
                         <p style={{ fontSize: "1.2rem" }}>
@@ -213,10 +212,9 @@ const ViewMyAppliedProjects = () => {
                   rejects.map((prj) => (
                     <div
                       key={prj._id}
-                      className="project-item3"
-                      style={{ minWidth: "350px" }}
+                      className="project-item4"
                     >
-                      <div className="project-item-content">
+                      <div className="project-item-content3">
                         <h3>{prj.title}</h3>
                         <p style={{ fontSize: "1.2rem" }}>{prj.description}</p>
                         <p style={{ fontSize: "1.2rem" }}>

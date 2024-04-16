@@ -84,8 +84,16 @@ const Message = () => {
                     className="form-select text-uppercase listing"
                     multiple
                     aria-label="multiple select example"
-                    onDoubleClick={(e) => navigate(`/messages/${e.target.value}/${e.target.title}`)}
-                    onClick={(e) => navigate(`/messages/${e.target.value}/${e.target.title}`)}
+                    onDoubleClick={(e) => {
+                        if (e.target.value && e.target.title) {
+                          navigate(`/messages/${e.target.value}/${e.target.title}`);
+                        }
+                      }}
+                    onClick={(e) => {
+                        if (e.target.value && e.target.title) {
+                          navigate(`/messages/${e.target.value}/${e.target.title}`);
+                        }
+                      }}
                   >
                     {convos.map((talk) => (
                       <option
