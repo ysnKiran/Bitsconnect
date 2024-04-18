@@ -10,6 +10,8 @@ const serviceAccount = require("../auth.json");
 const userRoutes = require("../routes/userRoutes");
 const projRoutes = require("../routes/projectRoutes");
 const convoRoutes = require("../routes/conversationRoutes");
+const reportRoutes = require("../routes/reportRoutes");
+const adminRoutes = require("../routes/adminRoutes");
 app.use(express.json());
 const AWS = require("aws-sdk");
 
@@ -39,6 +41,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authRoutes);
+app.use("/", adminRoutes);
+app.use("/", reportRoutes);
 app.use("/", isAuthenticated, userRoutes);
 app.use("/", isAuthenticated, projRoutes);
 app.use("/", isAuthenticated, convoRoutes);

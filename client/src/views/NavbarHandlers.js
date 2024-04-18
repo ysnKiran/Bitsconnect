@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faBell } from "@fortawesome/free-solid-svg-icons"; // Add faBell for the notification icon
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate, useLocation } from "react-router-dom";
 import "../views/styles.css";
 import "../views/global.css";
@@ -189,6 +190,14 @@ const Navbar = () => {
                 onClick={logout}
               >
                 Logout
+              </button>
+            </li>
+            <li className="nav-item">
+              <button
+                className="nav-link btn btn-primary mx-2"
+                onClick={() => navigate("/report")}
+              >
+                <FontAwesomeIcon icon={faCircleExclamation} style={{ width: "25px", height: "25px" }} />
               </button>
             </li>
           </ul>

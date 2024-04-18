@@ -15,6 +15,9 @@ import { Slide} from 'react-toastify';
 import MyProjects from './views/MyProjects';
 import Message from './views/Message';
 import Conversations from './views/Conversations';
+import Report from './views/Report';
+import LoginAdmin from './views/LoginAdmin';
+import HomeAdmin from './views/HomeAdmin';
 
 const App = () => {
   return (
@@ -46,6 +49,9 @@ const App = () => {
         <Route exact path='/my-projects' element={<MyProjects/>}/>
         <Route exact path='/messages' element={<Message/>}/>
         <Route exact path='/messages/:convo_id/:recipientName' element={<Conversations/>}/>
+        <Route exact path='/report' element={<Report/>}/>
+        <Route exact path='/admin-login' element={<LoginAdmin/>}/>
+        <Route exact path='/dashboard' element={<HomeAdmin/>}/>
         {/* Other routes */}
       </Routes>
       

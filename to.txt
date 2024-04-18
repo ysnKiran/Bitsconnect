@@ -12,3 +12,16 @@ Sprint 3:
 3) Logs related to what each user did in a given timestamp
 4) Report Submission
 5) Making video
+
+
+
+---------TODAY---------------
+
+Admin Login - Done
+Admin Backend functions
+User Rate/Review - Done
+
+
+
+
+STING LEKE AANI HAI
