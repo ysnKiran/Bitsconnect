@@ -18,6 +18,8 @@ import Conversations from './views/Conversations';
 import Report from './views/Report';
 import LoginAdmin from './views/LoginAdmin';
 import HomeAdmin from './views/HomeAdmin';
+import "./shards-dashboard/styles/shards-dashboards.1.1.0.min.css";
+
 
 const App = () => {
   return (

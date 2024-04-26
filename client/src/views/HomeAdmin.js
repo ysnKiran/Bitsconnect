@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Container, Row, Col } from "shards-react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -13,6 +15,13 @@ import "react-toastify/dist/ReactToastify.css";
 import Select from "react-select";
 import { BsSliders } from "react-icons/bs";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
+import UsersByDevice from "../components/UsersByDevice.js";
+
+
+
+
+
+
 
 const HomeAdmin = () => {
   const navigate = useNavigate();
@@ -91,11 +100,26 @@ const HomeAdmin = () => {
     
   };
 
+  const [chartData, setChartData] = useState({
+    datasets: [
+      {
+        hoverBorderColor: "#ffffff",
+        data: [2, 3, 1],
+        backgroundColor: [
+          "rgba(0,123,255,0.9)",
+          "rgba(0,123,255,0.5)",
+          "rgba(0,123,255,0.3)",
+        ],
+      },
+    ],
+    labels: ["Desktop", "Tablet", "Mobile"],
+  });
+
   return (
     <div>
       <Navbar />
       <div className="apply-form3">
-        <h1 className="with-margin1">Your Pending Applications</h1>
+        <h1 className="with-margin1">Project Analytics </h1>
 
         <div className="size2">
           {loading ? ( // Render spinner while loading is true
@@ -129,18 +153,21 @@ const HomeAdmin = () => {
                     </div>
                   ))
                 ) : (
-                  <p>
-                    Yayyy! No more naggers :)
-                  </p>
+                  <h1>
+                    </h1>
                 )}
               </ul>
             </div>
           )}
         </div>
-        
+        <div className="chart-container">
+        <UsersByDevice chartData={chartData} />
+
+      </div>
       </div>
     </div>
   );
 };
 
 export default HomeAdmin;
+ 

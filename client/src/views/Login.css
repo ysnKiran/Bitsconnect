@@ -1,5 +1,6 @@
 .login-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -7,14 +8,14 @@
   
   .login-form {
     width: 300px;
-    padding: 20px;
+    padding: 40px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
+    border-radius: 25px;
+    background-color:transparent;
   }
   
   .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 30px;
   }
   
   label {
@@ -26,14 +27,14 @@
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 8px;
   }
   
   .login-button {
     width: 100%;
     padding: 10px;
     border: none;
-    border-radius: 3px;
+    border-radius: 25px;
     background-color: #007bff;
     color: #fff;
     font-size: 16px;
@@ -44,3 +45,10 @@
     background-color: #0056b3;
   }
   
+  h2 {
+    color: #fff;
+  }
+
+  label {
+    color: #fff;
+  }
