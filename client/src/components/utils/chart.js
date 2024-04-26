@@ -1,8 +1,4 @@
-import { Chart, PieController, LineController, CategoryScale, LinearScale, PointElement, LineElement, Tooltip,Legend,ArcElement } from 'chart.js';
-
-
-Chart.register(PieController, ArcElement, Tooltip, Legend);
-
+import { Chart, PieController, LineController, CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend, ArcElement } from 'chart.js';
 
 class LineWithLineController extends LineController {
   draw(ease) {
@@ -33,7 +29,10 @@ LineWithLineController.defaults = {
   // Define any default options for the LineWithLine controller
 };
 
-// Register the controller, scales, and elements
-Chart.register(LineWithLineController, CategoryScale, LinearScale, PointElement, LineElement, Tooltip);
+// Register the custom controller
+Chart.register(LineWithLineController);
+
+// Register other controllers, elements, and plugins
+Chart.register(PieController, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement, LineElement);
 
 export default Chart;
