@@ -43,7 +43,7 @@ import UsersOverview from "../components/UsersOverview.js";
           ],
         },
       ],
-      labels: ["Desktop", "Tablet", "Mobile"],
+      labels: ["below 10000", "10000-50000", "above 50000"],
     });
   
     const chartOptions = {
@@ -101,7 +101,7 @@ import UsersOverview from "../components/UsersOverview.js";
     const smallStats = [
       {
         label: "Project Listings",
-        value: "2,390",
+        value: "2,39",
         percentage: "4.7%",
         increase: true,
         chartLabels: [null, null, null, null, null, null, null],
@@ -118,8 +118,8 @@ import UsersOverview from "../components/UsersOverview.js";
         ],
       },
       {
-        label: "Pages",
-        value: "182",
+        label: "Avg Applications per project",
+        value: "24",
         percentage: "12.4",
         increase: true,
         chartLabels: [null, null, null, null, null, null, null],
@@ -136,8 +136,8 @@ import UsersOverview from "../components/UsersOverview.js";
         ],
       },
       {
-        label: "Comments",
-        value: "8,147",
+        label: "Avg Duration of a project",
+        value: "4 weeks",
         percentage: "3.8%",
         increase: false,
         decrease: true,
@@ -155,8 +155,8 @@ import UsersOverview from "../components/UsersOverview.js";
         ],
       },
       {
-        label: "New Customers",
-        value: "29",
+        label: "Avg selections per project",
+        value: "3",
         percentage: "2.71%",
         increase: false,
         decrease: true,
@@ -174,8 +174,8 @@ import UsersOverview from "../components/UsersOverview.js";
         ],
       },
       {
-        label: "Subscribers",
-        value: "17,281",
+        label: "Avg Pay range for projects",
+        value: "15,400",
         percentage: "2.4%",
         increase: false,
         decrease: true,
@@ -187,7 +187,7 @@ import UsersOverview from "../components/UsersOverview.js";
             fill: "start",
             borderWidth: 1.5,
             backgroundColor: "rgb(0,123,255,0.1)",
-            borderColor: "rgb(0,123,255)",
+            borderColor: "rgb(0,0,0)",
             data: [3, 2, 3, 2, 4, 5, 4],
           },
         ],
